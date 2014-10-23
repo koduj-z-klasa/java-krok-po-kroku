@@ -1,0 +1,1 @@
+Search.setIndex({titles:["Welcome to Java krok po kroku&#8217;s documentation!"],titleterms:{welcom:0,kroku:0,krok:0,tabl:0,indic:0,document:0,java:0},filenames:["index"],objtypes:{},objects:{},objnames:{},envversion:43,terms:{content:0,page:0,index:0,search:0,modul:0}})
