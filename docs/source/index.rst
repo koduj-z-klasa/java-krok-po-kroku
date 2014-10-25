@@ -1,20 +1,20 @@
 Kurs Java krok po kroku
 ========================
 
-Kurs ten powsta³ w ramach projektu Koduj z Klas¹ prowadzonego przez `Centrum Edukacji Obywatelskiej`_ pod patronatem Ministerstwa Administracji i Cyfryzacji.
+Kurs ten powstaÅ‚ w ramach projektu Koduj z KlasÄ… prowadzonego przez `Centrum Edukacji Obywatelskiej`_ pod patronatem Ministerstwa Administracji i Cyfryzacji.
 
-Materia³y stanowi¹ scenariusze 8 lekcji wprowadzaj¹cych do programowania w jêzyku Java i zak³adaj¹ brak wczeœniejszej znajomoœci tej technologii.
+MateriaÅ‚y stanowiÄ… scenariusze 8 lekcji wprowadzajÄ…cych do programowania w jÄ™zyku Java i zakÅ‚adajÄ… brak wczeÅ›niejszej znajomoÅ›ci tej technologii.
 
-Zak³adamy interaktyw¹ wspó³pracê pomiêdzy uczniami oraz nauczycielem w trakcie zajêæ
+ZakÅ‚adamy interaktywÄ… wspÃ³Å‚pracÄ™ pomiÄ™dzy uczniami oraz nauczycielem w trakcie zajÄ™Ä‡
 
-Jêzyk Java
+JÄ™zyk Java
 ------------------------
-Wprowadzenie i omówienie
+Wprowadzenie i omÃ³wienie
 
 Wprowadzenie i konfiguracja
 ------------------------------
 
-Przed rozpoczêciem kursu sugerujemy wczeœniejsze przygotowanie komputerów do pracy. Pozwoli to znacznie zaoszczêdziæ czas podczas zajêæ.
+Przed rozpoczÄ™ciem kursu sugerujemy wczeÅ›niejsze przygotowanie komputerÃ³w do pracy. Pozwoli to znacznie zaoszczÄ™dziÄ‡ czas podczas zajÄ™Ä‡.
 
 ..  toctree::
     :maxdepth: 1
@@ -23,6 +23,8 @@ Przed rozpoczêciem kursu sugerujemy wczeœniejsze przygotowanie komputerów do pra
 	
 Kurs
 --------------------------
+Kurs wÅ‚aÅ›ciwy
+
 ..  toctree::
     :maxdepth: 2
 	
