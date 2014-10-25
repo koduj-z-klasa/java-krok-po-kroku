@@ -27,15 +27,14 @@ Kurs właściwy
 
 ..  toctree::
     :maxdepth: 2
-	:numbered:
 	
-	01_wprowadzenie
-	02_obiekty
-	03_sterowanie
-	04_komunikacja
-	05_kolekcje
-	06_gui
-	07_kontrolery
-	08_podsumowanie
+	wprowadzenie
+	obiekty
+	sterowanie
+	komunikacja
+	kolekcje
+	gui
+	kontrolery
+	podsumowanie
 	
 .. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/
