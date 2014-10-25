@@ -27,6 +27,7 @@ Kurs właściwy
 
 ..  toctree::
     :maxdepth: 2
+	:numbered:
 	
 	01_wprowadzenie
 	02_obiekty
