@@ -26,7 +26,7 @@ Kurs
 Kurs właściwy
 
 ..  toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 	
 	wprowadzenie
 	obiekty
