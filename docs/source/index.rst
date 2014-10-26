@@ -7,43 +7,27 @@ Materiały stanowią scenariusze 8 lekcji wprowadzających do programowania w j�
 
 Zakładamy interaktywą współpracę pomiędzy uczniami oraz nauczycielem w trakcie zajęć
 
+.. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/
+
 Język Java
 ------------------------
 Wprowadzenie i omówienie
 
 Wprowadzenie i konfiguracja
-------------------------------
-
-Przed rozpoczęciem kursu sugerujemy wcześniejsze przygotowanie komputerów do pracy. Pozwoli to znacznie zaoszczędzić czas podczas zajęć.
-
-..  toctree::
-    :maxdepth: 1
-
-    config
-	wprowadzenie.rst
-	obiekty.rst
-	sterowanie.rst
-	komunikacja.rst
-	kolekcje.rst
-	gui.rst
-	kontrolery.rst
-	podsumowanie.rst
-	
-Kurs
---------------------------
-Kurs właściwy
+---------------------------
 
 .. toctree::
-   :maxdepth: 1
-	
-	wprowadzenie.rst
-	obiekty.rst
-	sterowanie.rst
-	komunikacja.rst
-	kolekcje.rst
-	gui.rst
-	kontrolery.rst
-	podsumowanie.rst
+  :maxdepth: 2
+
+  config
+  wprowadzenie
+  obiekty
+  sterowanie
+  komunikacja
+  kolekcje
+  gui
+  kontrolery
+  summary
 	
 Indices and tables
 ==================
@@ -51,5 +35,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-	
-.. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/
