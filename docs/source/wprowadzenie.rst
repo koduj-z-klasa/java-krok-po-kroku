@@ -67,12 +67,12 @@ W naszym przypadku nazwą klasy jest **FirstClass**.
 W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:
 
     public class FirstClass {
-
+    
       public static void main(String[] args) {
         // TODO Auto-generated method stub
-
+    
       }
-
+    
     }
 
 asdf
