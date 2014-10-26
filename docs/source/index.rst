@@ -20,6 +20,14 @@ Przed rozpoczęciem kursu sugerujemy wcześniejsze przygotowanie komputerów do 
     :maxdepth: 1
 
     config
+	wprowadzenie.rst
+	obiekty.rst
+	sterowanie.rst
+	komunikacja.rst
+	kolekcje.rst
+	gui.rst
+	kontrolery.rst
+	podsumowanie.rst
 	
 Kurs
 --------------------------
