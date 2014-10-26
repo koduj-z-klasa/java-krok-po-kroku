@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Kurs Java krok po kroku &mdash; Java krok po kroku 0.1 documentation</title>
+    <title>Wprowadzenie do języka Java &mdash; Java krok po kroku 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" /> 
+    <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
+    <link rel="next" title="Programowanie obiektowe" href="obiekty.html" />
+    <link rel="prev" title="Instalacja i wymagania systemowe" href="config.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="obiekty.html" title="Programowanie obiektowe"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Instalacja i wymagania systemowe"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -41,13 +49,64 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="kurs-java-krok-po-kroku">
-<h1>Kurs Java krok po kroku<a class="headerlink" href="#kurs-java-krok-po-kroku" title="Permalink to this headline">¶</a></h1>
-<p>Kurs ten powstał w ramach projektu Koduj z Klasą prowadzonego przez <a class="reference external" href="http://www.ceo.org.pl/">Centrum Edukacji Obywatelskiej</a> pod patronatem Ministerstwa Administracji i Cyfryzacji.</p>
-<p>Materiały stanowią scenariusze 8 lekcji wprowadzających do programowania w języku Java i zakładają brak wcześniejszej znajomości tej technologii.</p>
-<div class="section" id="wprowadzenie-i-konfiguracja">
-<h2>Wprowadzenie i konfiguracja<a class="headerlink" href="#wprowadzenie-i-konfiguracja" title="Permalink to this headline">¶</a></h2>
-<p>Przed rozpoczęciem kursu sugerujemy wcześniejsze przygotowanie komputerów do pracy. Pozwoli to znacznie zaoszczędzić czas podczas zajęć.</p>
+  <div class="section" id="wprowadzenie-do-jezyka-java">
+<h1>Wprowadzenie do języka Java<a class="headerlink" href="#wprowadzenie-do-jezyka-java" title="Permalink to this headline">¶</a></h1>
+<p>W lekcji tej dowiesz się:
+* jak używać środowiska eclipse
+* co powstaje w wyniku kompilacji kodu źródłowego napisanego w języku Java
+* jak uruchamiać swoje programy
+* czym są zmienne
+* jakie są podstawowe typy danych w Javie
+* jak wykonywać podstawowe operacje arytmetyczne</p>
+<p>Podczas lekcji nauczyciel powinien krótko omawiać daną sekcję pod względem teoretycznym, a następnie omawiać prezentowane przykłady, prosząc z wyprzedzeniem uczniów o sugestie tego jak zapisać dalszy fragment kodu źródłowego. Uczniowie powinni pisać kod jednocześnie na swoich komputerach, aby móc obserwować wynik działania aplikacji. Lekcja kończy się zadaniem do samodzielnego wykonania, które należy wykonać na zajęciach lub dokończyć samodzielnie w domu.</p>
+<div class="section" id="eclipse-ide">
+<h2>Eclipse IDE<a class="headerlink" href="#eclipse-ide" title="Permalink to this headline">¶</a></h2>
+<p>Eclipse to najpopularniejsze środowisko programistyczne wśród programistów Java. Jego głównymi zaletami z punktu widzenia osoby początkującej jest wykrywanie błędów w trakcie pisania kodu a także podpowiadanie składni wraz z możliwością generowania i prostej modyfikacji (refaktoryzacji) kodu źródłowego. Wszystko to składa się przede wszystkim na znaczną oszczędność czasu.</p>
+<p>Przy pierwszym uruchomieniu środowiska zostaniemy zapytani o wskazanie folder &#8220;workspace&#8221; - jest to folder, w którym przechowywane będą tworzone przez nas projekty. Zalecamy zostawić tę lokalizację domyślną.</p>
+<img alt="_images/eclipse_overview.png" src="_images/eclipse_overview.png" />
+<p>Na powyższym zrzucie ekranu widać domyślny widok, który zastaniemy po uruchomieniu środowiska eclipse. Można w nim wyróżnić 4 główne obszary:</p>
+<ol class="arabic simple">
+<li>Package Explorer - w tym miejscu będziemy widzieli wszystkie projekty, które zapisane są w folderze <strong>workspace</strong> oraz ich strukturę w postaci rozwijanego drzewa</li>
+<li>Obszar oznaczony numerem 2 to główna część robocza - w tym miejscu będziemy edytowali kod źródłowy aplikacji</li>
+<li>Outline - to skrótowy podgląd danego pliku i elementów w nim zawartych (zmienne, metody/funkcje)</li>
+<li>W dolnej części ekranu znajduje się kilka zakładek. Najważniejsza z nich to <strong>Problems</strong>, która pokazuje wszelkie błędy i ostrzeżenia występujące w kodzie źródłowym. W tym miejscu zobaczymy także dodatkową zakładkę <strong>Console</strong> z wydrukami generowanymi przez nasze aplikacje.</li>
+</ol>
+</div>
+<div class="section" id="pierwszy-projekt">
+<h2>Pierwszy Projekt<a class="headerlink" href="#pierwszy-projekt" title="Permalink to this headline">¶</a></h2>
+<p>W celu utworzenia nowego projektu wybieramy opcje <strong>File -&gt; New -&gt; Java Project</strong></p>
+<img alt="_images/eclipse_first_project.png" src="_images/eclipse_first_project.png" />
+<p>Wpisujemy dowolną nazwę projektu w polu <strong>Project name</strong> a także wybieramy wersję maszyny wirtualnej (JRE), na jakiej ma być uruchomiony nasz program (domyślnie JavaSE-1.8). Klikamy Finish.</p>
+<p>W obszarze Project Explorer pojawi się nowo utworzony projekt:</p>
+<img alt="_images/hello_world.png" src="_images/hello_world.png" />
+<p>Widzimy tu folder <strong>src</strong>, w którym umieszczane będą pliki z kodem źródłowym, a także dołączoną wirtualną maszynę, na której nasz projekt będzie uruchamiany.</p>
+<p>Teraz należy utworzyć plik, w którym będziemy edytowali kod źródłowy. W dalszej częściu kursu będziemy mówili krótko o tworzeniu nowej <strong>klasy</strong>. Klasa jest pojęciem związanym z programowaniem obiektowym, które będzie głównym zagadnieniem kolejnej lekcji.</p>
+<p>Kliknij prawym przyciskiem na folderze src i wybierz opcję <strong>New -&gt; Class</strong>. Można także posłużyć się wygodnym skrótem i skorzystać z przycisku z symbolem C, który znajdziemy na górnym pasku nawigacyjnym.</p>
+<img alt="_images/new_class.png" src="_images/new_class.png" />
+<p>W kreatorze klasy wymagane jest podanie jedynie nazwy klasy. My jednak zaznaczymy także opcję przy <strong>public static void main(String[] args)</strong>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Nazwy klas rozpoczynaj zawsze wielką literą a jeżeli nazwa składa się z kilku wyrazów to je także rozpoczynaj wielką literą, np. NazwaTwojejKlasy albo ThisIsMyClass</p>
+</div>
+<img alt="_images/class.png" src="_images/class.png" />
+<p>W naszym przypadku nazwą klasy jest <strong>FirstClass</strong>.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Zapamiętaj, że w Javie nazwy klasy, ale także zmiennych, czy metod o których niebawem się dowiesz mają znaczenie. &#8220;NazwaKlasy&#8221; i &#8220;nazwaKlasy&#8221; będą potraktowane jako dwa zupełnie różne elementy.</p>
+</div>
+<p>W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:</p>
+<blockquote>
+<div><p>public class FirstClass {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>public static void main(String[] args) {</dt>
+<dd>// TODO Auto-generated method stub</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>asdf</p>
 </div>
 </div>
 
@@ -59,12 +118,19 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Kurs Java krok po kroku</a><ul>
-<li><a class="reference internal" href="#wprowadzenie-i-konfiguracja">Wprowadzenie i konfiguracja</a></li>
+<li><a class="reference internal" href="#">Wprowadzenie do języka Java</a><ul>
+<li><a class="reference internal" href="#eclipse-ide">Eclipse IDE</a></li>
+<li><a class="reference internal" href="#pierwszy-projekt">Pierwszy Projekt</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="config.html"
+                        title="previous chapter">Instalacja i wymagania systemowe</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="obiekty.html"
+                        title="next chapter">Programowanie obiektowe</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/wprowadzenie.txt"
@@ -93,6 +159,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="obiekty.html" title="Programowanie obiektowe"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Instalacja i wymagania systemowe"
+             >previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
