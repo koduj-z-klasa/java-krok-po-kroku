@@ -63,7 +63,7 @@
 <h2>Eclipse IDE<a class="headerlink" href="#eclipse-ide" title="Permalink to this headline">¶</a></h2>
 <p>Eclipse to najpopularniejsze środowisko programistyczne wśród programistów Java. Jego głównymi zaletami z punktu widzenia osoby początkującej jest wykrywanie błędów w trakcie pisania kodu a także podpowiadanie składni wraz z możliwością generowania i prostej modyfikacji (refaktoryzacji) kodu źródłowego. Wszystko to składa się przede wszystkim na znaczną oszczędność czasu.</p>
 <p>Przy pierwszym uruchomieniu środowiska zostaniemy zapytani o wskazanie folder &#8220;workspace&#8221; - jest to folder, w którym przechowywane będą tworzone przez nas projekty. Zalecamy zostawić tę lokalizację domyślną.</p>
-<img alt="_images/eclipse_overview.png" src="_images/eclipse_overview.png" />
+<img alt="_images/eclipse_overview.png" class="align-center" src="_images/eclipse_overview.png" />
 <p>Na powyższym zrzucie ekranu widać domyślny widok, który zastaniemy po uruchomieniu środowiska eclipse. Można w nim wyróżnić 4 główne obszary:</p>
 <ol class="arabic simple">
 <li>Package Explorer - w tym miejscu będziemy widzieli wszystkie projekty, które zapisane są w folderze <strong>workspace</strong> oraz ich strukturę w postaci rozwijanego drzewa</li>
@@ -75,38 +75,265 @@
 <div class="section" id="pierwszy-projekt">
 <h2>Pierwszy Projekt<a class="headerlink" href="#pierwszy-projekt" title="Permalink to this headline">¶</a></h2>
 <p>W celu utworzenia nowego projektu wybieramy opcje <strong>File -&gt; New -&gt; Java Project</strong></p>
-<img alt="_images/eclipse_first_project.png" src="_images/eclipse_first_project.png" />
+<img alt="_images/eclipse_first_project.png" class="align-center" src="_images/eclipse_first_project.png" />
 <p>Wpisujemy dowolną nazwę projektu w polu <strong>Project name</strong> a także wybieramy wersję maszyny wirtualnej (JRE), na jakiej ma być uruchomiony nasz program (domyślnie JavaSE-1.8). Klikamy Finish.</p>
 <p>W obszarze Project Explorer pojawi się nowo utworzony projekt:</p>
-<img alt="_images/hello_world.png" src="_images/hello_world.png" />
+<img alt="_images/hello_world.png" class="align-center" src="_images/hello_world.png" />
 <p>Widzimy tu folder <strong>src</strong>, w którym umieszczane będą pliki z kodem źródłowym, a także dołączoną wirtualną maszynę, na której nasz projekt będzie uruchamiany.</p>
 <p>Teraz należy utworzyć plik, w którym będziemy edytowali kod źródłowy. W dalszej częściu kursu będziemy mówili krótko o tworzeniu nowej <strong>klasy</strong>. Klasa jest pojęciem związanym z programowaniem obiektowym, które będzie głównym zagadnieniem kolejnej lekcji.</p>
 <p>Kliknij prawym przyciskiem na folderze src i wybierz opcję <strong>New -&gt; Class</strong>. Można także posłużyć się wygodnym skrótem i skorzystać z przycisku z symbolem C, który znajdziemy na górnym pasku nawigacyjnym.</p>
-<img alt="_images/new_class.png" src="_images/new_class.png" />
+<img alt="_images/new_class.png" class="align-center" src="_images/new_class.png" />
 <p>W kreatorze klasy wymagane jest podanie jedynie nazwy klasy. My jednak zaznaczymy także opcję przy <strong>public static void main(String[] args)</strong>.</p>
+<img alt="_images/class.png" class="align-center" src="_images/class.png" />
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Nazwy klas rozpoczynaj zawsze wielką literą a jeżeli nazwa składa się z kilku wyrazów to je także rozpoczynaj wielką literą, np. NazwaTwojejKlasy albo ThisIsMyClass</p>
+<p class="last">Nazwy klas rozpoczynaj zawsze wielką literą a jeżeli nazwa składa się z kilku wyrazów to je także rozpoczynaj wielką literą, np. NazwaTwojejKlasy albo ThisIsMyClass. Pamiętaj także, że nazwa klasy musi być identyczna z nazwą pliku, w którym ta klasa się znajduje (eclipse zadba o to automatycznie).</p>
 </div>
-<img alt="_images/class.png" src="_images/class.png" />
 <p>W naszym przypadku nazwą klasy jest <strong>FirstClass</strong>.</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">Zapamiętaj, że w Javie nazwy klasy, ale także zmiennych, czy metod o których niebawem się dowiesz mają znaczenie. &#8220;NazwaKlasy&#8221; i &#8220;nazwaKlasy&#8221; będą potraktowane jako dwa zupełnie różne elementy.</p>
+<p class="last">Zapamiętaj, że w Javie nazwy klas i wielkość używanych liter, mają znaczenie. &#8220;NazwaKlasy&#8221; i &#8220;nazwaKlasy&#8221; będą potraktowane jako dwa zupełnie różne elementy.</p>
 </div>
 <p>W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:</p>
-<blockquote>
-<div><p>public class FirstClass {</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>public static void main(String[] args) {</dt>
-<dd>// TODO Auto-generated method stub</dd>
-</dl>
-<p>}</p>
-</div></blockquote>
-<p>}</p>
-</div></blockquote>
-<p>asdf</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FirstClass</span> <span class="o">{</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// TODO Auto-generated method stub</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Witaj Świecie!&quot;</span><span class="o">);</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W linii 1 widzimy definicję klasy. Klasę definiujemy za pomocą słowa kluczowego <strong>class</strong>, po którym następuje nazwa klasy. Eclipse automatycznie oznacza klasę jako publiczną za pomocą słowa kluczowego <strong>public</strong>, co najprościej można wytłumaczyć jako możliwość jej wykorzystania z dowolnego miejsca w naszym projekcie.</p>
+<p>W wierszu 3 widzimy zapis <em>public static void main(String[] args)</em>, czyli publiczną, statyczną metodę o nazwie <strong>main</strong>, która nie zwraca żadnego wyniku (void). Element umieszczony w nawiasie, czyli <em>String[] args</em> to argument metody main w postaci tablicy - więcej na ten temat powiemy w 3 lekcji.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Zapamiętaj, że od metody main rozpoczyna się działanie każdej aplikacji napisanej w języku Java. Jeżeli nie zdefiniujesz takiej metody w swojej klasie, to nie będziesz w stanie uruchomić aplikacji.</p>
+</div>
+<p>Zauważ, że zarówno definicja klasy jak i metody rozpoczyna się i końcy nawiasami klamrowymi. Nawiasy klamrowe znacznie podnoszą czytelność kodu, szczególnie, gdy klasa składa się z kilkuset, czy nawet kilku tysięcy wierszy.</p>
+<p>W metodzie main znajduje się jeden wiersz komentarza poprzedzony znakiem podwójnego ukośnika.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Komentarze w języku Java można zapisywać na dwa sposoby. Jeżeli komentarz ma zajmować jedynie jeden wiersz poprzedź go znakiem podwójnego ukośnika. Jeżeli będzie dłuższy umieść komentarz w bloku /* komentarz <a href="#id1"><span class="problematic" id="id2">*</span></a>/ Komentarze są pomijane w trakcie kompilacji programu i nie mają wpływu na działanie aplikacji.</p>
+</div>
+<p>Po komentarzu dopisaliśmy także linijkę o treści <strong>System.out.print(&#8220;Witaj Świecie&#8221;);</strong>, która wydrukuje na ekranie tekst podany w nawiasie, czyli Witaj Świecie.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Zapamiętaj, że każda linijka z wyrażeniem (np. drukowaniem tekstu) w języku Java musi kończyć się średnikiem.</p>
+</div>
+<p>W celu uruchomienia programu wybierz z górnego paska nawigacyjnego charakterystyczny przycisk z symbolem strzałki (Run) lub po prostu użyj skrótu klawiaturowego <strong>Ctrl+F11</strong>.</p>
+<p>W tym momencie w dolnej części eclipse powinno się pojawić okno konsoli (Console) z wydrukiem naszego tekstu.</p>
+<img alt="_images/run.png" class="align-center" src="_images/run.png" />
+</div>
+<div class="section" id="typy-danych">
+<h2>Typy danych<a class="headerlink" href="#typy-danych" title="Permalink to this headline">¶</a></h2>
+<p>W Javie tak jak w praktycznie każdym języku programowania istnieją różne typy danych. <strong>Typ danych</strong> to opis tego co reprezentuje dana wartość. Z powodu budowy komputera rozróżnia się liczby całkowite, liczby zmiennoprzecinkowe, znaki, ciągi znaków.</p>
+<ul class="simple">
+<li>boolean - typ logiczny. Może przyjmować jedynie dwie wartości - true (prawda) lub false (fałsz).</li>
+<li>byte, short, int, long - typy całkowitoliczbowe. Różnią się zakresem wielkości liczby jakie mogą przechowywać (od najmniejszego do największego) - np. 1, 5, 10, 3456.</li>
+<li>float, double - typy zmiennoprzecinkowe o różnym zakresie (double może przechowywać większe liczby). Separatorem dziesiętnym jest kropka, np. 3.14, 276.24563.</li>
+<li>char - typ znakowy, reprezentuje pojedyncze litery lub znaki. Wartości tego typu umieszczamy pomiędzy znakami pojedynczego cudzysłowu, np. &#8216;a&#8217;, &#8216;&amp;&#8217;.</li>
+<li>String - (pisany z wielkie litery) - specjalny typ, który służy do przechowywania ciągów znaków. Ciągi znaków zapisujemy pomiędzy podwójnymi cudzysłowami, np. &#8220;Ania&#8221;, &#8220;Jakiś dowolny tekst&#8221;.</li>
+</ul>
+<p><strong>Ćwiczenie</strong>
+Napisz program, który wydrukuje na ekranie następujące wartości (wykorzystaj różne typy danych):</p>
+<div class="highlight-python"><div class="highlight"><pre>245
+123.456
+a
+Java jest cool
+</pre></div>
+</div>
+<p><em>plik DataTypes.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FirstClass</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">245</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">123.456</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="sc">&#39;a&#39;</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Java jest cool&quot;</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="zmienne">
+<h2>Zmienne<a class="headerlink" href="#zmienne" title="Permalink to this headline">¶</a></h2>
+<p>Drukowanie danych, na których nie możemy wykonywać żadnych działań, czy po prostu zapamiętać w pamięci komputera nie byłoby zbyt użyteczne. Na szczęście w Javie możemy tworzyć tzw. <strong>zmienne</strong>, czyli takie elementy, które pozwalają na przechowywanie wartości różnych typów danych. Java w odróżnieniu od np. PHP jest językiem statycznie typowanym co oznacza, że zmienna musi mieć określony typ - jeżeli chcesz przechowywać w niej wartość zmiennoprzecinkową, to nie możesz jej zadeklarować jako int, ponieważ spowoduje to błąd kompilacji.</p>
+<p>Tworzenie zmiennej możemy podzielić na dwa etapy:</p>
+<ul class="simple">
+<li>deklarację - w tym momencie następuje zaalokowanie pamięci w komputerze</li>
+<li>inicjalizację (inicjację) - w tym momencie następuje przypisanie konkretnej wartości do zmiennej</li>
+</ul>
+<p>Dwa wyżej wspomniane etapy mogą być od siebie oddzielone lub też można je połączyć ze sobą.</p>
+<p><em>plik Variables.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Variables</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// deklaracja zmiennych różnego typu</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">num</span><span class="o">;</span>
+    <span class="kt">char</span> <span class="n">letter</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">napis</span><span class="o">;</span>
+
+    <span class="c1">// inicjalizacja zmiennych</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mf">12.67</span><span class="o">;</span>
+    <span class="n">letter</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span><span class="o">;</span>
+    <span class="n">napis</span> <span class="o">=</span> <span class="s">&quot;To może być bardzo długie zdanie&quot;</span><span class="o">;</span>
+
+    <span class="c1">// deklaracja połączona z inicjalizacją</span>
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">zdanie</span> <span class="o">=</span> <span class="s">&quot;To jest przykładowe zdanie&quot;</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Ćwiczenie</strong>
+Napisz program podobny do tego z poprzedniego zadania - wydrukuj na ekranie kilka wartości różnego typu, ale tym razem skorzystaj także ze zmiennych.</p>
+<p><em>plik DataTypesVars.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DataTypesVars</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">num1</span> <span class="o">=</span> <span class="mi">123</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">num2</span> <span class="o">=</span> <span class="mf">567.123</span><span class="o">;</span>
+    <span class="kt">char</span> <span class="n">b</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Jan Kowalski&quot;</span><span class="o">;</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num2</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="operacje-arytmetyczne-i-logiczne">
+<h2>Operacje arytmetyczne i logiczne<a class="headerlink" href="#operacje-arytmetyczne-i-logiczne" title="Permalink to this headline">¶</a></h2>
+<p>Jednymi z najważniejszych elementów w jakich wykorzystujemy komputery są obliczenia. Nie zawsze muszą to być skomplikowane rachunki matematyczne - czasami chcemy coś po prostu przesunąć o 1 piksel w prawo na ekranie (np. w grach), a innym razem zwiększyć wiek użytkownika o 1, gdy ma urodziny.</p>
+<p>W języku Java znajdziemy wszystkie najpopularniejsze operatory arytmetyczno logiczne:</p>
+<ul class="simple">
+<li><strong>+, -</strong> - dodawanie i odejmowanie liczb</li>
+<li><strong>*, /</strong> - mnożenie i dzielenie całkowite liczb</li>
+<li><strong>%</strong> - dzielenie modulo (reszta z dzielenia)</li>
+<li><strong>&amp;&amp;</strong> - alternatywa logiczna. Tylko PRAWDA &amp;&amp; PRAWDA da w wyniku PRAWDA</li>
+<li><strong>||</strong> - alternatywa logiczna. Co najmniej jedna składowa musi być PRAWDĄ, aby wynik całego wyrażenia był prawdą. PRAWDA||PRAWDA lub PRAWDA||FAŁSZ lub FAŁSZ||PRAWDA ale nie FAŁSZ||FAŁSZ</li>
+<li><strong>&gt;, &gt;=, &lt;, &lt;=</strong> - porównania. Większe, większe lub równe, mniejsze, mniejsze lub równe.</li>
+</ul>
+<p>Wyniki wyrażeń arytmetyczno logicznych mogą być obliczane na podstawie zmiennych lub wartości, a także przypisywane do innych zmiennych.</p>
+<p><em>plik Arithmetic.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Arithmetic</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">num1</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">num2</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="c1">//jaki jest wynik działania num1*num2 ?</span>
+    <span class="kt">int</span> <span class="n">num3</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">*</span> <span class="n">num2</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num3</span><span class="o">);</span>
+
+    <span class="c1">//czy zmienna num1 jest większa od 3 ?</span>
+    <span class="kt">boolean</span> <span class="n">validate</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">validate</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Znak dodawania (+) ma również specjalne zastosowanie w przypadku ciągów znaków (typ String). Powoduje on złączenie (konkatenację) dwóch ciągów znaków i utworzenie na ich podstawie nowego napisu.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">napis</span> <span class="o">=</span> <span class="s">&quot;Jan&quot;</span> <span class="o">+</span> <span class="s">&quot;Kowalski&quot;</span><span class="o">;</span>
+</pre></div>
+</div>
+<p><strong>Ćwiczenie</strong>
+Napisz prosty kalkulator. Zadeklaruj i zainicjuj dwie liczby typu zmiennoprzecinkowego a następnie wyświetl na ekranie wynik ich dodawania, odejmowania, mnożenia i dzielenia. Dodatkowo wyświetl na ekranie, czy pierwsza z liczb jest większa od drugiej, a także, czy ich iloczyn jest większy od 100.
+Przykładowy wydruk programu:</p>
+<div class="highlight-python"><div class="highlight"><pre>a + b = 28.3
+a - b = 18.7
+a * b = 112.8
+a / b = 4.895833333333334
+A &gt; B ?true
+A * B &gt; 100 ? true
+</pre></div>
+</div>
+<p><em>plik SimpleCalculator.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleCalculator</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">23.5</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">4.8</span><span class="o">;</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;a + b = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">));</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;a - b = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">));</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;a * b = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">));</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;a / b = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="o">));</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A &gt; B ?&quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">));</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A * B &gt; 100 ? &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 </div>
 
@@ -121,6 +348,9 @@
 <li><a class="reference internal" href="#">Wprowadzenie do języka Java</a><ul>
 <li><a class="reference internal" href="#eclipse-ide">Eclipse IDE</a></li>
 <li><a class="reference internal" href="#pierwszy-projekt">Pierwszy Projekt</a></li>
+<li><a class="reference internal" href="#typy-danych">Typy danych</a></li>
+<li><a class="reference internal" href="#zmienne">Zmienne</a></li>
+<li><a class="reference internal" href="#operacje-arytmetyczne-i-logiczne">Operacje arytmetyczne i logiczne</a></li>
 </ul>
 </li>
 </ul>
