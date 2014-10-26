@@ -1,15 +1,15 @@
-Komunikacja cz硂wiek - komputer
-========================
+Komunikacja cz艂owiek - komputer
+================================
 
-Odbieranie danych od u縴tkownika
+Odbieranie danych od u偶ytkownika
 --------------------------------
-Om體ienie odbierania danych od u縴tkownika, klasa Scanner
+Om贸wienie odbierania danych od u偶ytkownika, klasa Scanner
 
 
-Zapis i odczyt plik體
------------------------
-Om體ienie sposob體 na zapis i odczyt plik體
+Zapis i odczyt plik贸w
+------------------------------
+Om贸wienie sposob贸w na zapis i odczyt plik贸w
 Pliki txt
-Zapis obiekt體 i Serializacja
+Zapis obiekt贸w i Serializacja
 
 

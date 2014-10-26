@@ -1,4 +1,4 @@
 Praktyczna aplikacja
-========================
+=============================
 
 Praktyczna aplikacja

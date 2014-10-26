@@ -1,8 +1,8 @@
 Instalacja i wymagania systemowe
-=============================
+================================
 
 System operacyjny
----------------------
+------------------------
 Ponieważ programy w języku Java kompilowane są do kodu pośrednioego a następnie uruchamiane na wirtualnej maszynie, to programowanie w tej technologii jest tak samo wygodne na dowolnym systemie operacyjnym. Z racji swojej popularności przykłady będą jednak obrazowane na systemie operacyjnym Windows 7.
 
 Java Development Kit

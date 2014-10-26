@@ -1,5 +1,5 @@
 Programowanie obiektowe
-========================
+==============================
 
 Programowanie obiektowe
 
@@ -14,15 +14,15 @@ Omówienie metod i konstruktorów
 
 
 Dziedziczenie
------------------------
+----------------------------
 Czym jest dziedziczenie - podstawy
 
 
 Zadanie
--------------------
+--------------------------
 Zadanie podsumowuj¹ce lekcjê z rozwi¹zaniem
 
 
 Podsumowanie
--------------------
+--------------------------
 Podsumowanie lekcji i najwa¿niejszych pojêæ

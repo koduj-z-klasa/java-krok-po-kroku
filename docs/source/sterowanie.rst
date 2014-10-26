@@ -1,31 +1,31 @@
-Tablice i struktury steruj¹ce
-========================
+Tablice i struktury sterujÄ…ce
+================================
 
 Tablice jednowymiarowe
--------------------------
-Omówienie tablic jednowymiarowych
+-----------------------------
+OmÃ³wienie tablic jednowymiarowych
 
 
 Tablice wielowymiarowe
-----------------------------
-Omówienie tablic wielowymiarowych
+-------------------------------
+OmÃ³wienie tablic wielowymiarowych
 
 
-Pêtle while, do while, for
+PÄ™tle while, do while, for
 -----------------------------
-Omówienie wszystkich rodzajów pêtli
+OmÃ³wienie wszystkich rodzajÃ³w pÄ™tli
 
 
-Struktury steruj¹ce
+Struktury sterujÄ…ce
 ----------------------------
 Struktury if oraz switch
 
 
 Zadanie
-----------------------
-Zadanie podsumowuj¹ce lekcjê z rozwi¹zaniem
+-----------------------------
+Zadanie podsumowujÄ…ce lekcjÄ™ z rozwiÄ…zaniem
 
 
 Podsumowanie
-----------------------
-Podsumowanie lekcji i najwa¿niejszych pojêæ
+-----------------------------
+Podsumowanie lekcji i najwaÅ¼niejszych pojÄ™Ä‡

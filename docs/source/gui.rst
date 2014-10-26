@@ -1,12 +1,12 @@
-Graficzny interfejs u¿ytkownika
-==========================
+Graficzny interfejs uÅ¼ytkownika
+================================
 
 JavaFX Scene builder
------------------------------
+---------------------------------
 Integracja z eclipse
-Omówienie poszczególnych elementów
+OmÃ³wienie poszczegÃ³lnych elementÃ³w
 
 
 Struktura widoku
-Jêzyk FXML
-Prosty przyk³ad aplikacji
+JÄ™zyk FXML
+Prosty przykÅ‚ad aplikacji

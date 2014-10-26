@@ -26,15 +26,22 @@ Kurs
 Kurs właściwy
 
 ..  toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 	
-	wprowadzenie
-	obiekty
-	sterowanie
-	komunikacja
-	kolekcje
-	gui
-	kontrolery
-	podsumowanie
+	wprowadzenie.rst
+	obiekty.rst
+	sterowanie.rst
+	komunikacja.rst
+	kolekcje.rst
+	gui.rst
+	kontrolery.rst
+	podsumowanie.rst
+	
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 	
 .. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/
