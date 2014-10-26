@@ -25,8 +25,8 @@ Kurs
 --------------------------
 Kurs właściwy
 
-..  toctree::
-    :maxdepth: 2
+.. toctree::
+   :maxdepth: 1
 	
 	wprowadzenie.rst
 	obiekty.rst
