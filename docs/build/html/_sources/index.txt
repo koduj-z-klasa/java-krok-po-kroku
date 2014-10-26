@@ -1,22 +1,55 @@
-.. Java krok po kroku documentation master file, created by
-   sphinx-quickstart on Thu Oct 23 21:51:14 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Kurs Java krok po kroku
+========================
 
-Welcome to Java krok po kroku's documentation!
-==============================================
+Kurs ten powstał w ramach projektu Koduj z Klasą prowadzonego przez `Centrum Edukacji Obywatelskiej`_ pod patronatem Ministerstwa Administracji i Cyfryzacji.
 
-Contents:
+Materiały stanowią scenariusze 8 lekcji wprowadzających do programowania w języku Java i zakładają brak wcześniejszej znajomości tej technologii.
+
+Zakładamy interaktywą współpracę pomiędzy uczniami oraz nauczycielem w trakcie zajęć
+
+Język Java
+------------------------
+Wprowadzenie i omówienie
+
+Wprowadzenie i konfiguracja
+------------------------------
+
+Przed rozpoczęciem kursu sugerujemy wcześniejsze przygotowanie komputerów do pracy. Pozwoli to znacznie zaoszczędzić czas podczas zajęć.
+
+..  toctree::
+    :maxdepth: 1
+
+    config
+	wprowadzenie.rst
+	obiekty.rst
+	sterowanie.rst
+	komunikacja.rst
+	kolekcje.rst
+	gui.rst
+	kontrolery.rst
+	podsumowanie.rst
+	
+Kurs
+--------------------------
+Kurs właściwy
 
 .. toctree::
-   :maxdepth: 2
-
-
-
+   :maxdepth: 1
+	
+	wprowadzenie.rst
+	obiekty.rst
+	sterowanie.rst
+	komunikacja.rst
+	kolekcje.rst
+	gui.rst
+	kontrolery.rst
+	podsumowanie.rst
+	
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
+	
+.. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/
