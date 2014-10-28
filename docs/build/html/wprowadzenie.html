@@ -258,7 +258,7 @@ Napisz program podobny do tego z poprzedniego zadania - wydrukuj na ekranie kilk
 <li><strong>+, -</strong> - dodawanie i odejmowanie liczb</li>
 <li><strong>*, /</strong> - mnożenie i dzielenie całkowite liczb</li>
 <li><strong>%</strong> - dzielenie modulo (reszta z dzielenia)</li>
-<li><strong>&amp;&amp;</strong> - alternatywa logiczna. Tylko PRAWDA &amp;&amp; PRAWDA da w wyniku PRAWDA</li>
+<li><strong>&amp;&amp;</strong> - koniunkcja logiczna. Tylko PRAWDA &amp;&amp; PRAWDA da w wyniku PRAWDA</li>
 <li><strong>||</strong> - alternatywa logiczna. Co najmniej jedna składowa musi być PRAWDĄ, aby wynik całego wyrażenia był prawdą. PRAWDA||PRAWDA lub PRAWDA||FAŁSZ lub FAŁSZ||PRAWDA ale nie FAŁSZ||FAŁSZ</li>
 <li><strong>&gt;, &gt;=, &lt;, &lt;=</strong> - porównania. Większe, większe lub równe, mniejsze, mniejsze lub równe.</li>
 </ul>
@@ -334,6 +334,245 @@ A * B &gt; 100 ? true
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
+<p>Zauważ, że w powyższym przykładzie konkatenacji a nawet obliczeń dokonujemy bezpośrednio w metodzie drukującej wynik na ekranie. Warto zwrócić także uwagę na to, że wartość typu String możemy łączyć z wartościami innego typu i zostaną one automatycznie dołączone do naszego napisu.</p>
+</div>
+<div class="section" id="tablice-jednowymiarowe">
+<h2>Tablice jednowymiarowe<a class="headerlink" href="#tablice-jednowymiarowe" title="Permalink to this headline">¶</a></h2>
+<p>Zmienne nadają się świetnie do przechowywania pojedynczych wartości, jednak jeżeli w swoim programie posiadasz pewien zbiór danych, niezbędne będzie zastosowanie czegoś bardziej wygodnego. W końcu zapisywanie 100 liczb w postaci:</p>
+<div class="highlight-python"><div class="highlight"><pre>int x1 = 1;
+int x2 = 2;
+int x3 = 3;
+//itd.
+</pre></div>
+</div>
+<p>nie byłoby zbyt wygodne, prawda?
+Podstawowym elementem, który pozwala rozwiązać ten problem w programowaniu są tablice.
+.. note:</p>
+<div class="highlight-python"><div class="highlight"><pre>Tablica to specjalny typ danych, który pozwala przechowywać duże ilości wartości tego samego typu.
+</pre></div>
+</div>
+<p>Deklaracja i inicjalizacja tablic jest bardzo podobna do zwykłych zmiennych:</p>
+<p>Powyżej zadeklarowano i utworzono tablicę 5 liczb całkowitych typu int, która może przechowywać 5 wartości oraz tablicę typu String, która może przechowywać 10 napisów.</p>
+<p>W przypadku, gdy z góry znasz wartości, którymi chcesz uzupełnić tablicę, istnieje szybki sposób na jej inicjalizację poprzez wymienienie wszystkich wartości w trakcie tworzenia tablicy:</p>
+<div class="highlight-python"><div class="highlight"><pre>int[] numbers = new int[]{1, 2, 3, 4, 5};
+</pre></div>
+</div>
+<p>Zauważ, że w takim przypadku nie jest konieczne określanie rozmiaru tablicy w nawiasach kwadratowych, ponieważ maszyna wirtualna wywnioskuje to sama na podstawie ilości podanych elementów.</p>
+<p>W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy znali rozmiaru tablicy. W takiej sytuacji możemy jednak skorzystać z wartości <strong>length</strong>, którą posiada każda tablica niezależnie od tego jakiego jest typu.</p>
+<div class="highlight-python"><div class="highlight"><pre>int[] tab = new int[5];
+int size = tab.length;
+System.out.print(size);
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Zapamiętaj jednak, że właściwość length zwraca całkowity rozmiar tablicy, a nie to ile rzeczywiście elementów jest do niej wpisanych.</p>
+</div>
+<p>W celu przypisania lub odwołania się do poszczególnych komórek takich tablic należy odwołać się do nich poprzez indeksy:</p>
+<p><em>plik Tabs.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tabs</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+
+        <span class="c1">// tablice posiadają indeksy numerowane od 0</span>
+        <span class="n">tab</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">tab</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+        <span class="c1">// ale elementów nie musimy uzupełniać w określonym porządku</span>
+        <span class="n">words</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s">&quot;Ala&quot;</span><span class="o">;</span>
+        <span class="n">words</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="s">&quot;kot&quot;</span><span class="o">;</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Pierwszy element tablicy tab[] = &quot;</span> <span class="o">+</span> <span class="n">tab</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Czwarty element tablicy words[] = &quot;</span> <span class="o">+</span> <span class="n">words</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Zapamiętaj, że tablice tak jak i praktycznie wszystkie inne struktury danych w Javie są indeksowane zaczynając od 0, a nie od 1.</p>
+</div>
+<p>Rozmiaru tablic niestety nie da się zmienić, więc jeżeli uznasz, że zabrakło Ci w niej miejsca, będziesz musiał utworzyć nową, większą tablicę.</p>
+<p><strong>Ćwiczenie</strong>
+Napisz program, w którym utworzysz tablicę 10 losowo wybranych przez siebie liczb zmiennoprzecinkowych. Wydrukuj na ekranie:</p>
+<ul class="simple">
+<li>wszystkie wartości,</li>
+<li>sumę wartości zapisanych na pozycjach nieparzystych tablicy(pierwszy, trzeci, piąty ... element tablicy)</li>
+<li>ostatni element tablicy (wykorzystaj właściwość length)</li>
+</ul>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TabCalculator</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span><span class="o">[]</span> <span class="n">nums</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[]</span> <span class="o">{</span> <span class="mf">2.5</span><span class="o">,</span> <span class="mf">15.7</span><span class="o">,</span> <span class="mf">1024.6</span><span class="o">,</span> <span class="mi">33</span><span class="o">,</span> <span class="mf">56.82</span><span class="o">,</span> <span class="mf">1.1</span><span class="o">,</span>
+                <span class="mf">23.90</span><span class="o">,</span> <span class="mf">999.25</span><span class="o">,</span> <span class="mf">550.6</span><span class="o">,</span> <span class="mf">15.7</span> <span class="o">};</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Elementy tablicy: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span>
+                <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span>
+                <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">7</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">8</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">9</span><span class="o">]);</span>
+
+        <span class="kt">double</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="mi">8</span><span class="o">];</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Suma elementów na indeksach nieparzystych: &quot;</span> <span class="o">+</span> <span class="n">sum</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Ostatni element tablicy: &quot;</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W ćwiczeniu można było napotkać na kilka problemów. Zarówno w pierwszym jak i drugim podpunkcie należy pamiętać o indeksowaniu tablic zaczynając od 0. Do nieparzystych elementów tablicy odwołujemy się poprzez parzyste indeksy (bo zaczynają się od 0). Z kolei w trzecim punkcie należy pamiętać o tym, że właściwość length zwraca rzeczywisty rozmiar tablicy, a ponieważ indeksy numerowane są od 0, to ostatnim indeksem, do którego możemy się odwołać jest <strong>length-1</strong>.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">W przypadku, gdy spróbujesz odwołać się do indeksu tablicy większego od <strong>length-1</strong> otrzymasz wyjątek ArrayIndexOutOfBoundsException. Jest to jeden z częściej popełnianych błędów przez młodych programistów. Może on sprawiać początkowo problemy, ponieważ jest błędem fazy wykonania aplikacji, a nie kompilacji - eclipse nie powiadomi nas więc o tym problemie w trakcie pisania kodu.</p>
+</div>
+</div>
+<div class="section" id="tablice-wielowymiarowe">
+<h2>Tablice wielowymiarowe<a class="headerlink" href="#tablice-wielowymiarowe" title="Permalink to this headline">¶</a></h2>
+<p>Tablice jednowymiarowe znacząco usprawniają przechowywanie danych w naszej aplikacji, ponieważ nie musimy już deklarować dużej ilości zmiennych. Wyobraź sobie jednak sytuację, gdy tworzysz <a class="reference external" href="http://pl.wikipedia.org/wiki/Okr%C4%99ty">grę w okręty</a>:</p>
+<img alt="_images/ships.png" class="align-center" src="_images/ships.png" />
+<p>Możliwe, że przychodzi Ci teraz do głowy pomysł, aby wykorzystać w niej kilka tablic jednowymiarowych, które będą reprezentowały kolejne wiersze planszy. Słusznie, jednak w sytuacji, gdy będziemy chcieli utworzyć planszę o rozmiarze 20x20 komórek, niezbędne będzie zadeklarowanie 20 tablic, np.:</p>
+<div class="highlight-python"><div class="highlight"><pre>int[] w0 = new int[20];
+int[] w1 = new int[20];
+//...
+int[] w19 = new int[20];
+</pre></div>
+</div>
+<p>Przy tablicach jednowymiarowych stwierdziliśmy jednak, że tablica to taki typ danych, który pozwala przechowywać większe ilości wartości tego samego typu. Nic więc nie stoi na przeszkodzie, żeby w tablicy przechowywać inne tablice, a tym samym utworzyć <strong>tablicę wielowymiarową</strong>.</p>
+<p>Tablicę taką najłatwiej wyobrazić sobie jako siatkę o rozmiarze x na y:</p>
+<img alt="_images/multiarray.png" class="align-center" src="_images/multiarray.png" />
+<p>Zauważ kilka rzeczy:</p>
+<ul class="simple">
+<li>tablica wielowymiarowa nie musi mieć takiej samej liczby wierszy co kolumn</li>
+<li>poszczególne wiersze mogą przechowywać różne ilości elementów</li>
+</ul>
+<p>Przykład:</p>
+<p><em>plik MultiArray.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultiArray</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// tablica liczb całkowitych o rozmiarze 2x2</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">multiArray</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
+
+        <span class="c1">// tablica liczb zmiennoprzecinkowych, która składa się z tablic o</span>
+        <span class="c1">// różnych rozmiarach</span>
+        <span class="kt">double</span><span class="o">[][]</span> <span class="n">multiArray2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">3</span><span class="o">][];</span>
+        <span class="n">multiArray2</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+        <span class="n">multiArray2</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+        <span class="n">multiArray2</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="c1">// W wyniku tablica multiArray2 ma następującą strukturę:</span>
+        <span class="cm">/*</span>
+<span class="cm">         * XXX</span>
+<span class="cm">         * XX</span>
+<span class="cm">         * X</span>
+<span class="cm">         */</span>
+
+        <span class="c1">//lub na konkretnych liczbach:</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">multiArray3</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">][];</span>
+        <span class="n">multiArray</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">};</span>
+        <span class="n">multiArray</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">};</span>
+        <span class="n">multiArray</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">5</span><span class="o">};</span>
+
+        <span class="c1">//co daje w wyniku:</span>
+        <span class="cm">/*</span>
+<span class="cm">         * 0 1 2</span>
+<span class="cm">         * 3 4</span>
+<span class="cm">         * 5</span>
+<span class="cm">         */</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Ćwiczenie</strong>
+Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean. Wypełnij jej przekątną wartościami typu true a na końcu wyświetl elementy przechowywane w lewym górnym oraz prawym dolnym jej krańcu.</p>
+</div>
+<div class="section" id="praca-z-eclipse-porady">
+<h2>Praca z eclipse - porady<a class="headerlink" href="#praca-z-eclipse-porady" title="Permalink to this headline">¶</a></h2>
+<p>Całkiem możliwe, że już na tym etapie zacząłeś zauważać, że pisanie powtarzającego się kodu (np. nazw zmiennych, czy powtarzanie co chwilę System.out.print()) potrafi doprowadzić do lekkiej frustracji i odbiera chęci do pisania kodu &#8220;bo przecież wiadomo jak to ma wyglądać&#8221;.</p>
+<p>W tym miejscu pokażemy Ci kilka użytecznych skrótów, które w eclipse znacząco podnoszą efektywność pracy oraz oszczędzają Twój cenny czas.</p>
+<div class="section" id="ctrl-spacja">
+<h3>CTRL + SPACJA<a class="headerlink" href="#ctrl-spacja" title="Permalink to this headline">¶</a></h3>
+<p>Skrót, który wykorzystuje się zdecydowanie najczęściej. Pozwala na autouzupełnianie kodu i wystarczy, że wpiszesz jedynie kilka pierwszych liter zmiennej, a reszta zostanie uzupełniona automatycznie.</p>
+<p>Mając zmienną o długiej nazwie:</p>
+<img alt="_images/ctrlspace_1.png" class="align-center" src="_images/ctrlspace_1.png" />
+<p>Wystarczy, że przy kolejnym użyciu wpiszesz fragment nazwy i wciśniesz Ctrl+Spacja, a długa nazwa zostanie uzupełniona:</p>
+<img alt="_images/ctrlspace_2.png" class="align-center" src="_images/ctrlspace_2.png" />
+<p>W początkowej fazie nauki Javy równie często wykorzystuje się instrukcję <em>System.out.println()</em> - jej wpisywanie również można uprościć. Wystarczy, że wpiszesz <em>syso</em> i wciśniesz Ctrl+Spację, a reszta zostanie uzupełniona.</p>
+<img alt="_images/syso_1.png" class="align-center" src="_images/syso_1.png" />
+<img alt="_images/syso_2.png" class="align-center" src="_images/syso_2.png" />
+</div>
+<div class="section" id="ctrl-1">
+<h3>CTRL + 1<a class="headerlink" href="#ctrl-1" title="Permalink to this headline">¶</a></h3>
+<p>Skrót, który przydaje się szczególnie wtedy, gdy dużo pracujemy na klawiaturze i nie przepadamy za sięganiem po mysz. Jeżeli przykładowo widzisz ostrzeżenie (podkreślenie na żółto) wystarczy, że najedziesz w dany obszar kursorem i wciśniesz Ctrl+1 a eclipse podpowie Ci sugerowane rozwiązania.</p>
+<img alt="_images/number_1.png" class="align-center" src="_images/number_1.png" />
+<p>W powyższym przykładzie widzimy ostrzeżenie, któe informuje nas o tym, że utworzyliśmy zmienną, której nigdzie nie wykorzystujemy - w podpowiedziach pojawia się m.in. możliwość jej usunięcia.</p>
+</div>
+<div class="section" id="alt-shift-r">
+<h3>Alt + Shift + R<a class="headerlink" href="#alt-shift-r" title="Permalink to this headline">¶</a></h3>
+<p>Jeżeli w swoim kodzie chcesz zmienić nazwę zmiennej lub zauważyłeś błąd typu literówka, to poprawienie tego może być problematyczne, ponieważ zmiennej tej prawdopodobnie używasz co najmniej w kilku innych miejscach. Wciskając skrót Ctrl+Shift+R na nazwie zmiennej, czy też nazwie klasy, możesz zmienić ich nazwę, a eclipse zadba o to, aby zaktualizować jej nazwę również we wszystkich innych jej wystąpieniach w kodzie źródłowym.</p>
+<img alt="_images/refactor.png" class="align-center" src="_images/refactor.png" />
+</div>
 </div>
 </div>
 
@@ -351,6 +590,14 @@ A * B &gt; 100 ? true
 <li><a class="reference internal" href="#typy-danych">Typy danych</a></li>
 <li><a class="reference internal" href="#zmienne">Zmienne</a></li>
 <li><a class="reference internal" href="#operacje-arytmetyczne-i-logiczne">Operacje arytmetyczne i logiczne</a></li>
+<li><a class="reference internal" href="#tablice-jednowymiarowe">Tablice jednowymiarowe</a></li>
+<li><a class="reference internal" href="#tablice-wielowymiarowe">Tablice wielowymiarowe</a></li>
+<li><a class="reference internal" href="#praca-z-eclipse-porady">Praca z eclipse - porady</a><ul>
+<li><a class="reference internal" href="#ctrl-spacja">CTRL + SPACJA</a></li>
+<li><a class="reference internal" href="#ctrl-1">CTRL + 1</a></li>
+<li><a class="reference internal" href="#alt-shift-r">Alt + Shift + R</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

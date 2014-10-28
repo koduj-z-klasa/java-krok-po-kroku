@@ -209,7 +209,7 @@ W języku Java znajdziemy wszystkie najpopularniejsze operatory arytmetyczno log
 * **+, -** - dodawanie i odejmowanie liczb
 * **\*, /** - mnożenie i dzielenie całkowite liczb
 * **%** - dzielenie modulo (reszta z dzielenia)
-* **&&** - alternatywa logiczna. Tylko PRAWDA && PRAWDA da w wyniku PRAWDA
+* **&&** - koniunkcja logiczna. Tylko PRAWDA && PRAWDA da w wyniku PRAWDA
 * **||** - alternatywa logiczna. Co najmniej jedna składowa musi być PRAWDĄ, aby wynik całego wyrażenia był prawdą. PRAWDA||PRAWDA lub PRAWDA||FAŁSZ lub FAŁSZ||PRAWDA ale nie FAŁSZ||FAŁSZ
 * **>, >=, <, <=** - porównania. Większe, większe lub równe, mniejsze, mniejsze lub równe.
 
@@ -270,6 +270,228 @@ Przykładowy wydruk programu:
       }
     }
 
+Zauważ, że w powyższym przykładzie konkatenacji a nawet obliczeń dokonujemy bezpośrednio w metodzie drukującej wynik na ekranie. Warto zwrócić także uwagę na to, że wartość typu String możemy łączyć z wartościami innego typu i zostaną one automatycznie dołączone do naszego napisu.
 
+
+Tablice jednowymiarowe
+-----------------------
+Zmienne nadają się świetnie do przechowywania pojedynczych wartości, jednak jeżeli w swoim programie posiadasz pewien zbiór danych, niezbędne będzie zastosowanie czegoś bardziej wygodnego. W końcu zapisywanie 100 liczb w postaci:
+::
+  int x1 = 1;
+  int x2 = 2;
+  int x3 = 3;
+  //itd.
+
+nie byłoby zbyt wygodne, prawda?
+Podstawowym elementem, który pozwala rozwiązać ten problem w programowaniu są tablice.
+.. note::
+    Tablica to specjalny typ danych, który pozwala przechowywać duże ilości wartości tego samego typu.
+    
+Deklaracja i inicjalizacja tablic jest bardzo podobna do zwykłych zmiennych:
+
+.. code-block:: java
+    :linenos:
+  int[] tab = new int[5];
+  String[] words = new String[10];
+
+Powyżej zadeklarowano i utworzono tablicę 5 liczb całkowitych typu int, która może przechowywać 5 wartości oraz tablicę typu String, która może przechowywać 10 napisów.
+
+W przypadku, gdy z góry znasz wartości, którymi chcesz uzupełnić tablicę, istnieje szybki sposób na jej inicjalizację poprzez wymienienie wszystkich wartości w trakcie tworzenia tablicy:
+::
+  int[] numbers = new int[]{1, 2, 3, 4, 5};
+
+Zauważ, że w takim przypadku nie jest konieczne określanie rozmiaru tablicy w nawiasach kwadratowych, ponieważ maszyna wirtualna wywnioskuje to sama na podstawie ilości podanych elementów.
+
+W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy znali rozmiaru tablicy. W takiej sytuacji możemy jednak skorzystać z wartości **length**, którą posiada każda tablica niezależnie od tego jakiego jest typu.
+::
+  int[] tab = new int[5];
+  int size = tab.length;
+  System.out.print(size);
+
+.. note::
+    Zapamiętaj jednak, że właściwość length zwraca całkowity rozmiar tablicy, a nie to ile rzeczywiście elementów jest do niej wpisanych.
+
+W celu przypisania lub odwołania się do poszczególnych komórek takich tablic należy odwołać się do nich poprzez indeksy:
+
+*plik Tabs.java*
+
+.. code-block:: java
+    :linenos:
+
+    public class Tabs {
+        public static void main(String[] args) {
+            int[] tab = new int[5];
+            String[] words = new String[10];
+
+            // tablice posiadają indeksy numerowane od 0
+            tab[0] = 1;
+            tab[1] = 2;
+
+            // ale elementów nie musimy uzupełniać w określonym porządku
+            words[0] = "Ala";
+            words[3] = "kot";
+            
+            System.out.println("Pierwszy element tablicy tab[] = " + tab[0]);
+            System.out.println("Czwarty element tablicy words[] = " + words[3]);
+        }
+    }
+
+.. attention::
+    Zapamiętaj, że tablice tak jak i praktycznie wszystkie inne struktury danych w Javie są indeksowane zaczynając od 0, a nie od 1.
+
+Rozmiaru tablic niestety nie da się zmienić, więc jeżeli uznasz, że zabrakło Ci w niej miejsca, będziesz musiał utworzyć nową, większą tablicę.
+
+**Ćwiczenie**
+Napisz program, w którym utworzysz tablicę 10 losowo wybranych przez siebie liczb zmiennoprzecinkowych. Wydrukuj na ekranie:
+
+* wszystkie wartości,
+* sumę wartości zapisanych na pozycjach nieparzystych tablicy(pierwszy, trzeci, piąty ... element tablicy)
+* ostatni element tablicy (wykorzystaj właściwość length)
+
+.. code-block:: java
+    :linenos:
+
+    public class TabCalculator {
+        public static void main(String[] args) {
+            double[] nums = new double[] { 2.5, 15.7, 1024.6, 33, 56.82, 1.1,
+                    23.90, 999.25, 550.6, 15.7 };
+
+            System.out.println("Elementy tablicy: ");
+            System.out.println(nums[0] + " " + nums[1] + " " + nums[2] + " "
+                    + nums[3] + " " + nums[4] + " " + nums[5] + " " + nums[6] + " "
+                    + nums[7] + " " + nums[8] + " " + nums[9]);
+            
+            double sum = nums[0] + nums[2] + nums[4] + nums[6] + nums[8];
+            System.out.println("Suma elementów na indeksach nieparzystych: " + sum);
+            
+            System.out.println("Ostatni element tablicy: " + nums[nums.length-1]);
+        }
+    }
+
+W ćwiczeniu można było napotkać na kilka problemów. Zarówno w pierwszym jak i drugim podpunkcie należy pamiętać o indeksowaniu tablic zaczynając od 0. Do nieparzystych elementów tablicy odwołujemy się poprzez parzyste indeksy (bo zaczynają się od 0). Z kolei w trzecim punkcie należy pamiętać o tym, że właściwość length zwraca rzeczywisty rozmiar tablicy, a ponieważ indeksy numerowane są od 0, to ostatnim indeksem, do którego możemy się odwołać jest **length-1**.
+
+.. attention::
+    W przypadku, gdy spróbujesz odwołać się do indeksu tablicy większego od **length-1** otrzymasz wyjątek ArrayIndexOutOfBoundsException. Jest to jeden z częściej popełnianych błędów przez młodych programistów. Może on sprawiać początkowo problemy, ponieważ jest błędem fazy wykonania aplikacji, a nie kompilacji - eclipse nie powiadomi nas więc o tym problemie w trakcie pisania kodu.
+
+    
+Tablice wielowymiarowe
+-----------------------
+Tablice jednowymiarowe znacząco usprawniają przechowywanie danych w naszej aplikacji, ponieważ nie musimy już deklarować dużej ilości zmiennych. Wyobraź sobie jednak sytuację, gdy tworzysz `grę w okręty`_:
+
+.. image:: 01_wprowadzenie/ships.png
+    :align: center
+
+Możliwe, że przychodzi Ci teraz do głowy pomysł, aby wykorzystać w niej kilka tablic jednowymiarowych, które będą reprezentowały kolejne wiersze planszy. Słusznie, jednak w sytuacji, gdy będziemy chcieli utworzyć planszę o rozmiarze 20x20 komórek, niezbędne będzie zadeklarowanie 20 tablic, np.:
+::
+  int[] w0 = new int[20];
+  int[] w1 = new int[20];
+  //...
+  int[] w19 = new int[20];
+
+Przy tablicach jednowymiarowych stwierdziliśmy jednak, że tablica to taki typ danych, który pozwala przechowywać większe ilości wartości tego samego typu. Nic więc nie stoi na przeszkodzie, żeby w tablicy przechowywać inne tablice, a tym samym utworzyć **tablicę wielowymiarową**.
+
+Tablicę taką najłatwiej wyobrazić sobie jako siatkę o rozmiarze x na y:
+
+.. image:: 01_wprowadzenie/multiarray.png
+    :align: center
+    
+Zauważ kilka rzeczy:
+
+* tablica wielowymiarowa nie musi mieć takiej samej liczby wierszy co kolumn
+* poszczególne wiersze mogą przechowywać różne ilości elementów
+
+Przykład:
+
+*plik MultiArray.java*
+
+.. code-block:: java
+    :linenos:
+
+    public class MultiArray {
+        public static void main(String[] args) {
+            // tablica liczb całkowitych o rozmiarze 2x2
+            int[][] multiArray = new int[2][2];
+
+            // tablica liczb zmiennoprzecinkowych, która składa się z tablic o
+            // różnych rozmiarach
+            double[][] multiArray2 = new double[3][];
+            multiArray2[0] = new double[3];
+            multiArray2[1] = new double[2];
+            multiArray2[2] = new double[1];
+
+            // W wyniku tablica multiArray2 ma następującą strukturę:
+            /*
+             * XXX
+             * XX
+             * X
+             */
+            
+            //lub na konkretnych liczbach:
+            int[][] multiArray3 = new int[3][];
+            multiArray[0] = new int[]{0, 1, 2};
+            multiArray[1] = new int[]{3, 4};
+            multiArray[2] = new int[]{5};
+            
+            //co daje w wyniku:
+            /*
+             * 0 1 2
+             * 3 4
+             * 5
+             */
+        }
+    }
+
+**Ćwiczenie**
+Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean. Wypełnij jej przekątną wartościami typu true a na końcu wyświetl elementy przechowywane w lewym górnym oraz prawym dolnym jej krańcu.
+
+
+.. _grę w okręty: http://pl.wikipedia.org/wiki/Okr%C4%99ty
+
+
+Praca z eclipse - porady
+-------------------------
+Całkiem możliwe, że już na tym etapie zacząłeś zauważać, że pisanie powtarzającego się kodu (np. nazw zmiennych, czy powtarzanie co chwilę System.out.print()) potrafi doprowadzić do lekkiej frustracji i odbiera chęci do pisania kodu "bo przecież wiadomo jak to ma wyglądać".
+
+W tym miejscu pokażemy Ci kilka użytecznych skrótów, które w eclipse znacząco podnoszą efektywność pracy oraz oszczędzają Twój cenny czas.
+
+CTRL + SPACJA
+^^^^^^^^^^^^^^
+Skrót, który wykorzystuje się zdecydowanie najczęściej. Pozwala na autouzupełnianie kodu i wystarczy, że wpiszesz jedynie kilka pierwszych liter zmiennej, a reszta zostanie uzupełniona automatycznie.
+
+Mając zmienną o długiej nazwie:
+
+.. image:: 01_wprowadzenie/ctrlspace_1.png
+    :align: center
+
+Wystarczy, że przy kolejnym użyciu wpiszesz fragment nazwy i wciśniesz Ctrl+Spacja, a długa nazwa zostanie uzupełniona:
+
+.. image:: 01_wprowadzenie/ctrlspace_2.png
+    :align: center
+
+W początkowej fazie nauki Javy równie często wykorzystuje się instrukcję *System.out.println()* - jej wpisywanie również można uprościć. Wystarczy, że wpiszesz *syso* i wciśniesz Ctrl+Spację, a reszta zostanie uzupełniona.
+
+.. image:: 01_wprowadzenie/syso_1.png
+    :align: center
+    
+.. image:: 01_wprowadzenie/syso_2.png
+    :align: center
+
+    
+CTRL + 1
+^^^^^^^^^^
+Skrót, który przydaje się szczególnie wtedy, gdy dużo pracujemy na klawiaturze i nie przepadamy za sięganiem po mysz. Jeżeli przykładowo widzisz ostrzeżenie (podkreślenie na żółto) wystarczy, że najedziesz w dany obszar kursorem i wciśniesz Ctrl+1 a eclipse podpowie Ci sugerowane rozwiązania.
+
+.. image:: 01_wprowadzenie/number_1.png
+    :align: center
+
+W powyższym przykładzie widzimy ostrzeżenie, któe informuje nas o tym, że utworzyliśmy zmienną, której nigdzie nie wykorzystujemy - w podpowiedziach pojawia się m.in. możliwość jej usunięcia.
+
+
+Alt + Shift + R
+^^^^^^^^^^^^^^^^
+Jeżeli w swoim kodzie chcesz zmienić nazwę zmiennej lub zauważyłeś błąd typu literówka, to poprawienie tego może być problematyczne, ponieważ zmiennej tej prawdopodobnie używasz co najmniej w kilku innych miejscach. Wciskając skrót Ctrl+Shift+R na nazwie zmiennej, czy też nazwie klasy, możesz zmienić ich nazwę, a eclipse zadba o to, aby zaktualizować jej nazwę również we wszystkich innych jej wystąpieniach w kodzie źródłowym.
+
+.. image:: 01_wprowadzenie/refactor.png
+    :align: center
 
 .. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/
