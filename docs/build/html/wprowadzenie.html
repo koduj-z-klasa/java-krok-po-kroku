@@ -545,7 +545,55 @@ int[] w19 = new int[20];
 </pre></div>
 </td></tr></table></div>
 <p><strong>Ćwiczenie</strong>
-Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean. Wypełnij jej przekątną wartościami typu true a na końcu wyświetl elementy przechowywane w lewym górnym oraz prawym dolnym jej krańcu.</p>
+Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean (załóżmy maksymalny rozmiar jako 5x5). Wypełnij jej przekątną wartościami typu true a na końcu wyświetl wartość elementu przechowywanego w prawym dolnym wierzchołku tablicy. Przy wyświetlaniu wartości wykorzystaj właściwość length tak, aby po zmianie rozmiaru tablicy nie było konieczne modyfikowanie kodu wyświetlającego tę wartość.</p>
+<p><em>plik Matrix.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Matrix</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">//rozmiar tablicy</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+        <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+        <span class="c1">//uzupełniamy przekątną</span>
+        <span class="n">array</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="n">array</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="n">array</span><span class="o">[</span><span class="mi">2</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * Wyświetlamy element w prawym dolnym krańcu tablicy</span>
+<span class="cm">         * array[array.length-1] - indeks ostatniego wiersza</span>
+<span class="cm">         * array[array.length - 1].length - 1 - indeks ostatniej kolumny w ostatnim wierszu</span>
+<span class="cm">         */</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span>
+                <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Prawy dolny array[array.length-1][array[length-1].length-1] &quot;</span>
+                        <span class="o">+</span> <span class="n">array</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">array</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="praca-z-eclipse-porady">
 <h2>Praca z eclipse - porady<a class="headerlink" href="#praca-z-eclipse-porady" title="Permalink to this headline">¶</a></h2>

@@ -442,8 +442,36 @@ Przykład:
     }
 
 **Ćwiczenie**
-Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean. Wypełnij jej przekątną wartościami typu true a na końcu wyświetl elementy przechowywane w lewym górnym oraz prawym dolnym jej krańcu.
+Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean (załóżmy maksymalny rozmiar jako 5x5). Wypełnij jej przekątną wartościami typu true a na końcu wyświetl wartość elementu przechowywanego w prawym dolnym wierzchołku tablicy. Przy wyświetlaniu wartości wykorzystaj właściwość length tak, aby po zmianie rozmiaru tablicy nie było konieczne modyfikowanie kodu wyświetlającego tę wartość.
 
+*plik Matrix.java*
+
+.. code-block:: java
+    :linenos:
+
+    public class Matrix {
+        public static void main(String[] args) {
+
+            //rozmiar tablicy
+            int n = 3;
+
+            boolean[][] array = new boolean[n][n];
+
+            //uzupełniamy przekątną
+            array[0][0] = true;
+            array[1][1] = true;
+            array[2][2] = true;
+
+            /*
+             * Wyświetlamy element w prawym dolnym krańcu tablicy
+             * array[array.length-1] - indeks ostatniego wiersza
+             * array[array.length - 1].length - 1 - indeks ostatniej kolumny w ostatnim wierszu
+             */
+            System.out
+                    .println("Prawy dolny array[array.length-1][array[length-1].length-1] "
+                            + array[array.length - 1][array[array.length - 1].length - 1]);
+        }
+    }
 
 .. _grę w okręty: http://pl.wikipedia.org/wiki/Okr%C4%99ty
 
