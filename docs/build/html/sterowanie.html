@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tablice i struktury sterujące &mdash; Java krok po kroku 0.1 documentation</title>
+    <title>Struktury sterujące i pętle &mdash; Java krok po kroku 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" /> 
+    <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
+    <link rel="next" title="Komunikacja człowiek - komputer" href="komunikacja.html" />
+    <link rel="prev" title="Programowanie obiektowe" href="obiekty.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="komunikacja.html" title="Komunikacja człowiek - komputer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="obiekty.html" title="Programowanie obiektowe"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -41,31 +49,596 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="tablice-i-struktury-sterujace">
-<h1>Tablice i struktury sterujące<a class="headerlink" href="#tablice-i-struktury-sterujace" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="tablice-jednowymiarowe">
-<h2>Tablice jednowymiarowe<a class="headerlink" href="#tablice-jednowymiarowe" title="Permalink to this headline">¶</a></h2>
-<p>Omówienie tablic jednowymiarowych</p>
-</div>
-<div class="section" id="tablice-wielowymiarowe">
-<h2>Tablice wielowymiarowe<a class="headerlink" href="#tablice-wielowymiarowe" title="Permalink to this headline">¶</a></h2>
-<p>Omówienie tablic wielowymiarowych</p>
-</div>
-<div class="section" id="petle-while-do-while-for">
-<h2>Pętle while, do while, for<a class="headerlink" href="#petle-while-do-while-for" title="Permalink to this headline">¶</a></h2>
-<p>Omówienie wszystkich rodzajów pętli</p>
-</div>
+  <div class="section" id="struktury-sterujace-i-petle">
+<h1>Struktury sterujące i pętle<a class="headerlink" href="#struktury-sterujace-i-petle" title="Permalink to this headline">¶</a></h1>
+<p>W tej lekcji dowiesz się:</p>
+<ul class="simple">
+<li>W jaki sposób sterować wykonaniem programu</li>
+<li>Czym są pętle while, do while, for i for each oraz jak ich używać</li>
+</ul>
 <div class="section" id="struktury-sterujace">
 <h2>Struktury sterujące<a class="headerlink" href="#struktury-sterujace" title="Permalink to this headline">¶</a></h2>
-<p>Struktury if oraz switch</p>
+<p>Struktury sterujące to specjalne elementy języka, które pozwalają na wybór odpowiedniej ścieżki w aplikacji. Przykładowo jeżeli chcemy porównać ze sobą dwie liczby całkowite, musimy sprawdzić warunek, a następnie podjąć decyzję, co w wyniku tego porównania wyświetlić na ekranie:</p>
+<img alt="_images/algo.png" class="align-center" src="_images/algo.png" />
+<p>Co więcej warunki takie mogą być bardziej rozgałęzione, czyli np. możemy sprawdzić, czy wczytana liczba jest większa, mniejsza, czy równa 0 itd.</p>
 </div>
-<div class="section" id="zadanie">
-<h2>Zadanie<a class="headerlink" href="#zadanie" title="Permalink to this headline">¶</a></h2>
-<p>Zadanie podsumowujące lekcję z rozwiązaniem</p>
+<div class="section" id="instrukcja-if-else">
+<h2>Instrukcja if else<a class="headerlink" href="#instrukcja-if-else" title="Permalink to this headline">¶</a></h2>
+<p>Podstawową strukturą sterującą w większości języków programowania, w tym także w Javie jest instrukcja if. W swojej najprostszej formie odpowiada ona sytuacji, którą widzisz na wcześniejszym diagramie - pozwala sprawdzić prosty warunek, który w wyniku powinien zwrócić wartość typu boolean, czyli true lub false i na podstawie tego zadecydować, co nasz program dalej zrobi.</p>
+<p>Ogólna konstrukcja bloku if wygląda następująco:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span><span class="n">warunek</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">//działania, gdy warunek zwraca true</span>
+<span class="o">}</span> <span class="n">ele</span> <span class="o">{</span>
+  <span class="c1">//działania, gdy warunek zwraca false</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Ćwiczenie</strong>
+Zaimplementuj program, który służy do porównywania dwóch liczb całkowitych zgodny z przedstawionym wyżej diagramem. Wyświetl na ekranie komunikat o tym, która liczba jest większa od której. Liczby wczytaj do wcześniej zadeklarowanych zmiennych.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">11</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A jest większe od B &quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;B jest większe od A &quot;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W nawiasie występującym po instrukcji if musi znajdować się wyrażenie, które w wyniku zwraca true lub false. Nie musi to być jedynie porównanie dwóch liczb tak jak w powyższym przykładzie, ale także bardziej złożony warunek np. wykorzystujący operatory logiczne &amp;&amp; lub ||.</p>
+<p>W przypadku kodu tak prostego jak ten powyżej, gdzie w bloku if oraz else pomiędzy nawiasami klamrowymi znajduje się jedynie jedna instrukcja (np. System.out.print()), nawiasy klamrowe można pominąć, czyli uprościć nasz kod do postaci:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">11</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A jest większe od B &quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+        <span class="k">else</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;B jest większe od A &quot;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W praktyce jednak stosowanie klamer podnosi czytelność kodu, więc warto je stosować nawet w najbardziej trywialnych sytuacjach.</p>
+<p>Możliwe, że zauważyłeś, że powyższy kod ma jedną poważną wadę. W przypadku, gdy liczby a i b będą identyczne, to ich porównanie za pomocą znaku ostrej nierówności zwróci false. W takiej sytuacji wyświetlony zostanie komunikat o tym, że liczba B jest większa od A, a to oczywiście nie jest prawdą.</p>
+<p>W takim przypadku możemy zastosować np. zagnieżdżone instrukcje if.</p>
+<p><strong>Ćwiczenie</strong>
+Popraw wcześniejszy kod w taki sposób, aby najpierw sprawdzić, czy liczby są równe, a dopiero gdy nie są, porównaj je operatorem nierówności. Wykorzystaj zagnieżdżone warunki if i w każdej sytuacji wyświetl na ekranie stosowny komunikat.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">11</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Liczby A i B są równe &quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&quot; = &quot;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A jest większe od B &quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;B jest większe od A &quot;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Powyższy kod posiada jedną, aczkolwiek istotną wadę. Nawet pojedynczo zagnieżdżone bloki instrukcji if wpływają w znaczącym stopniu na zmniejszenie czytelności kodu i w ogólności dobrą praktyką jest unikanie takich sytuacji. Najprościej jest to zrobić korzystając z nieco bardziej złożonej instrukcji if else:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">warunek1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//instrukcje gdy warunek1 jest true</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">warunek2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//instrukcje gdy warunek2 jest true</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">warunek3</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//instrukcje gdy warunek3 jest true</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="c1">//instrukcje gdy żadny z warunków nie był true</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Korzystając z dodatkowych warunków w postaci <em>else if</em> możemy w dowolny sposób rozgałęzić działanie naszej aplikacji bez konieczności zagnieżdżania warunków if i obniżania czytelności kodu. Pamiętaj, że blok z warunkiem2 wykona się tylko wtedy, gdy warunek1 zwróci false, analogicznie warunek3, gdzy warunek2 oraz warunek1 będą nieprawdziwe.</p>
+<p><strong>Ćwiczenie</strong>
+Przerób wcześniejszy kod z porównywaniem liczb w taki sposób, aby wyeliminować zagnieżdżone warunki if.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">12</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">11</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Liczby A i B są równe &quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&quot; = &quot;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A jest większe od B &quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;B jest większe od A &quot;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s">&quot; &gt; &quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Zauważ, że ponieważ wiemy, że ponieważ wiemy, że istnieją tylko trzy możliwe wyniki porównania dwóch liczb, to w ostatnim bloku nie musimy zapisywać <em>else if(a&lt;b)</em> a wystarczy jedynie samo <em>else</em>, ponieważ jest to jedyny możliwy wynik jaki pozostał.</p>
 </div>
-<div class="section" id="podsumowanie">
-<h2>Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permalink to this headline">¶</a></h2>
-<p>Podsumowanie lekcji i najważniejszych pojęć</p>
+<div class="section" id="struktura-sterujaca-switch">
+<h2>Struktura sterująca switch<a class="headerlink" href="#struktura-sterujaca-switch" title="Permalink to this headline">¶</a></h2>
+<p>Powyżej pokazana struktura if-else-if pomimo iż bardziej czytelna od zagnieżdżonych warunków, to jednak w sytuacji, gdy mamy np. menu aplikacji składające się z 10 możliwych opcji, nie wydaje się najlepszym rozwiązaniem. W większości języków programowania rozwiązaniem tego problemu jest bardziej złożona struktura <strong>switch</strong>.</p>
+<p>W odróżnieniu od instrukcji if, w strukturze switch operujemy nie na warunkach zwracających wartość true lub false, ale na liczbach całkowitych. Od Javy w wersji 7 możliwe jest także stosowanie w miejsce liczb także napisów typu String.</p>
+<p>Schematyczna budowa switch wygląda jak poniżej:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre>//wybrana opcja musi być typu całkowitoliczbowego lub być wartością typu String
+switch (wybrana_opcja) {
+    case wartość1:
+        //instrukcje, gdy wartość1 jest równa wartości wybrana_opcja
+        break;
+    case wartość2:
+         //instrukcje, gdy wartość2 jest równa wartości wybrana_opcja
+        break;
+    case ...
+    default:
+        //instrukcje, gdy żaden z wcześniejszych warunków nie pasuje do wybrana_opcja
+        //odpowiednik ostatniego bloku else z instrukcji if-else-if
+}
+</pre></div>
+</td></tr></table></div>
+<p>Istotne w powyższym kodzie jest zastosowanie instrukcji break. Jeżeli jej nie zastosujesz w danym bloku case, wtedy wykonane zostaną także instrukcje z innych bloków case znajdujących się poniżej (aż do napotkania break). W bloku default nie jest to wymagane, ponieważ jest on ostatnim w całej konstrukcji i nie musimy niczego przerywać.
+Dzięki instrukcji switch możemy zbudować w wygodny sposób proste menu w swojej aplikacji w stylu:</p>
+<img alt="_images/library.png" class="align-center" src="_images/library.png" />
+<p><strong>Ćwiczenie</strong>
+Napisz prostą aplikację, w której utworzysz jedną zmienną całkowitoliczbową i przypiszesz do niej wartość z zakresu od 1 do 10. Następnie stwórz blok switch, w którym na podstawie wybranej opcji wyświetlisz wcześniej zainicjowaną zmienną podniesioną do 1, 2, 3 lub 4 potęgi.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Exponential</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+        <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span> <span class="o">+</span> <span class="s">&quot; do potęgi 1 = &quot;</span> <span class="o">+</span> <span class="n">number</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span> <span class="o">+</span> <span class="s">&quot; do potęgi 2 = &quot;</span> <span class="o">+</span> <span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span> <span class="o">+</span> <span class="s">&quot; do potęgi 3 = &quot;</span> <span class="o">+</span> <span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span> <span class="o">+</span> <span class="s">&quot; do potęgi 4 = &quot;</span> <span class="o">+</span> <span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">*</span><span class="n">number</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wybrano niepoprawną opcję&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="petle-while-i-do-while">
+<h2>Pętle while i do while<a class="headerlink" href="#petle-while-i-do-while" title="Permalink to this headline">¶</a></h2>
+<p>W pierwszej części szkolenia dowiedziałeś się, że w Javie istnieją specjalne struktury danych, które pozwalają przechowywać wiele wartości tego samego typu, które nazwaliśmy tablicami. W tym miejscu powrócimy do nich na chwilę, aby pokazać, że ich przetwarzanie, czy wyświetlanie może być znacznie krótsze i do każdego elementu tablicy nie musimy odwoływać się osobno tak jak do zwykłych zmiennych.</p>
+<p>Dwa pierwsze rodzaje pętli, które omówimy to <strong>while</strong> oraz <strong>do while</strong>. Różnica między nimi jest subtelna, aczkolwiek wpływa w znaczący sposób na to co dzieje się w naszym programie. Ogólna postać oby pętli wygląda jak poniżej:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">//pętla while</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">warunek</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//instrukcje, które będą powtarzane tak długo, dopóki warunek zwraca true</span>
+<span class="o">}</span>
+
+<span class="c1">//pętla do while</span>
+<span class="k">do</span><span class="o">{</span>
+    <span class="c1">//instrukcje, które będą się wykonywały tak długo, dopóki warunek zwraca true</span>
+<span class="o">}</span> <span class="k">while</span><span class="o">(</span><span class="n">warunek</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Różnica pomiędzy dwoma wyżej pokazanymi rodzajami pętli polega na tym, że w przypadku zwykłej pętli while warunek jest sprawdzany przed rozpoczęciem ciała pętli, więc jeżeli warunek nie będzie prawdziwy, to zawartość pętli nie wykona się ani razu. W przypadku pętli do while mamy pewność, że instrukcje w jej ciele wykonają się co najmniej raz, ponieważ warunek sprawdzany jest dopiero na końcu.
+W miejscu wyrażenia, które w powyższym kodzie nazwaliśmy jako <em>warunek</em> należy wstawić dowolną zmienną typu boolean lub wyrażenie logiczne zwracające true lub false.</p>
+<p><strong>Ćwiczenie</strong>
+Napisz program, w którym zadeklarujesz tablicę 50 liczb całkowitych. Wypełnij ją przy pomocy pętli while wartościami od 1 do 50, a następnie wyświetl jej kolejne elementy za pomocą pętli do while.</p>
+<p><em>plik Loobs1.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Loops1</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">50</span><span class="o">];</span>
+
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// licznik pętli</span>
+
+        <span class="c1">// wypełniamy tablicę</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// zerujemy licznik</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="c1">//wyświetlamy wartości</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot;; &quot;</span><span class="o">);</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Do rozwiązania należało zastosować scenariusz, który będzie się często powtarzał w niemal każdej aplikacji, która korzysta z tablic:</p>
+<ol class="arabic simple">
+<li>Utworzenie tablicy</li>
+<li>Zainicjowanie licznika pętli</li>
+<li>Wypełnienie kolejnych komórek tablicy wartościami (while)</li>
+<li>Wykonanie operacji na danych w tablicy (pętla do while)</li>
+</ol>
+<p>W praktyce dużo częściej stosuje się pętle while, ponieważ są po prostu bardziej intuicyjne</p>
+</div>
+<div class="section" id="inkrementacja-i-dekrementacja">
+<h2>Inkrementacja i dekrementacja<a class="headerlink" href="#inkrementacja-i-dekrementacja" title="Permalink to this headline">¶</a></h2>
+<p>Operacją, która w przypadku pętli będzie się bardzo często powtarzała jest zwiększanie lub zmniejszanie zmiennej reprezentującej licznik o 1. W programowaniu jest to tak często wykorzystywane, że powstały specjalne operatory, które skracają zapis, a po pewnym czasie stają się nawykiem przy pisaniu pętli.</p>
+<p><strong>Inkrementacja</strong> to zwiększenie wartości zmiennej o 1, natomiast <strong>dekrementacja</strong> to zmniejszenie o 1. Inkrementację oznaczamy znakiem podwójnego plusa (++), natomiast dekrementację podwójnego minusa (&#8211;).</p>
+<p>W praktyce wygląda to następująco:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">a</span><span class="o">++;</span>
+<span class="c1">//a ma teraz wartość 2</span>
+<span class="n">a</span><span class="o">--;</span>
+<span class="c1">//a ma teraz znowu wartość 1</span>
+</pre></div>
+</td></tr></table></div>
+<p>Dodatkowo istnieją dwa rodzaje powyższych operatorów. W formie przyrostkowej, czyli np. a++ oraz przedrostkowej, czyli ++a. Różnica polega na tym, kiedy wykonywane jest faktyczne zwiększenie, czy zmniejszenie wartości o 1. W przypadku inkrementacji przyrostkowej wartość zmiennej jest zwiększana dopiero po wykonaniu operacji, w której zmienna ta występuje.</p>
+<p>Najłatwiej zobrazować to prostym przykładem:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">);</span> <span class="c1">//wyświetla 1</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">++);</span> <span class="c1">//również wyświetla 1, ale po wyświetleniu zwiększa wartość x do 2</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">);</span> <span class="c1">//wyświetla 2</span>
+</pre></div>
+</td></tr></table></div>
+<p>Analogicznie dla inkrementacji przedrostkowej:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">);</span> <span class="c1">//wyświetla 1</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(++</span><span class="n">x</span><span class="o">);</span> <span class="c1">//najpierw zwiększa wartość x do 2 i wyświetla 2</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">);</span> <span class="c1">//wyświetla 2</span>
+</pre></div>
+</td></tr></table></div>
+<p>W pętlach znajduje to takie zastosowanie, że możemy pominąć ręczne zwiększanie licznika w postaci <em>i = i+1</em> i zapisać <em>i++</em>, dodatkowo w niektórych sytuacjach bezpośrednio przy sprawdzaniu warunku, np.:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+<span class="k">while</span><span class="o">(</span><span class="n">i</span><span class="o">++</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Ćwiczenie</strong>
+Przerób poprzedni przykład z wypełnianiem tablicy w taki sposób, aby wykorzystać operator inkrementacji. Dodatkowo wartości w tablicy wyświetl od końca wykorzystując dekrementację.</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Loops1Increment</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">50</span><span class="o">];</span>
+
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// licznik pętli</span>
+
+        <span class="c1">// wypełniamy tablicę</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">i</span><span class="o">++;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// przypisujemy do licznika ostatni indeks tablicy</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+        <span class="c1">//wyświetlamy wartości</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot;; &quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Pętla while nie zmieniła się znacząco, jedynie zamieniliśmy sposób zwiększania zmiennej i. W pętli do while zastosowaliśmy dekrementacją, a dodatkowo zmieniliśmy warunek, na taki, który pozwala nam wyświetlać wartości od ostatniego indeksu tablicy, do pierwszego (czyli 0 zgodnie z indeksowaniem tablic).</p>
+</div>
+<div class="section" id="petle-for-i-for-each">
+<h2>Pętle for i for each<a class="headerlink" href="#petle-for-i-for-each" title="Permalink to this headline">¶</a></h2>
+<p>Pętle for i for each to dwa kolejne rodzaje pętli, które idealnie znajdują zastosowanie w przypadku kolekcji danych o znanych z góry rozmiarach, czyli np. pętlach. Ich specyficzna konstrukcja sprawia, że powinniśmy je stosować przede wszystkim w sytuacjach, gdy chcemy przeglądnąć całą kolekcję elementów.</p>
+<p>Schematyczna budowa pętli for:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span><span class="o">(</span><span class="n">inicjalizacja_licznika</span><span class="o">;</span> <span class="n">warunek_stopu</span><span class="o">;</span> <span class="n">zmiana_licznika</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//operacje</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Zwróć uwagę, że w nawiasach okrągłych znajdują się trzy elementy, które są oddzielone od siebie srednikami. W sytuacji, gdy chcielibyśmy uzupełnić tablicę o rozmiarze 10 liczbami 10, 20, 30, ..., 100, można to zrobić w następujący sposób:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForLoop</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)*</span><span class="mi">10</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W porównaniu do pętli while i do while zapis taki staje się bardziej czytelny, ponieważ wszystkie elementy bezpośrednio związane z pętlą, czyli zmienna licznika i warunek końca pętli są zawarte bezpośrednio w deklaracji pętli obok siebie. Będzie to przydatne, gdy kod w pętli będzie nieco bardziej rozbudowany.</p>
+<p>Istnieje także odmiana pętli for, która przeznaczona jest wyłącznie do operacji na kolekcjach, gdzie znacząco uproszczono kwestie związane z licznikiem, czy jakimikolwiek warunkami stopu. Jedynym zadaniem pętli for each, o której mowa, jest przejście po wszystkich elementach kolekcji.</p>
+<p>Schematyczna budowa pętli for each:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">for</span><span class="o">(</span><span class="n">typ_zmiennej</span> <span class="nl">zmienna:</span> <span class="n">kolekcja</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">operacje</span> <span class="n">na</span> <span class="n">zmiennej</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Typ zmiennej musi być zgodny z typem kolekcji (czyli np. tablicy), ponieważ w kolejnych iteracjach przypisywana będzie do niej kolejna jej wartość.</p>
+<p>Przykładowo dodajmy do poprzedniego przykładu opcję wydruku danych na ekranie z użyciem pętli for each:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForLoop</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)*</span><span class="mi">10</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">number:</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">number</span> <span class="o">+</span> <span class="s">&quot;; &quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Ponieważ nasza tablica byłą typu int[] to zmienna <em>number</em> została zadeklarowana jako int. Możemy ją wykorzystać następnie w naszej pętli.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Pamiętaj, że pętlę for each najlepiej jest stosować wyłącznie do operacji odczytu kolekcji, a nie jej modyfikacji. Do zmiennej deklarowanej w pętli przypisywana jest w rzeczywistości kopia wartości (lub referencji obiektu) przechowywanej w kolekcji, więc modyfikując ją nie modyfikujesz oryginalnej wartości.</p>
+</div>
+</div>
+<div class="section" id="cwiczenie-podsumowujace-1">
+<h2>Ćwiczenie podsumowujące 1<a class="headerlink" href="#cwiczenie-podsumowujace-1" title="Permalink to this headline">¶</a></h2>
+<p>Napisz program w którym wyświetlisz na ekranie zawartość tablicy dwuwymiarowej o rozmiarach NxN (gdzie rozmiar N jest wartością przechowywaną w zmiennej, którą można modyfikować). Tablica powinna być wypełniona znakami &#8220;0&#8221; (zero), jedynie na krawędziach oraz przekątnych powinny znajdować się znaki &#8220;X&#8221;. Do wypełnienia tablicy zastosuj pętle for, natomiast do wyświetlenia jej zawartości pętle while. Używaj w kodzie tam gdzie to możliwe operatorów inkrementacji.
+Przykładowy wydruk programu:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
+<span class="n">X</span> <span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span> <span class="n">X</span>
+<span class="n">X</span> <span class="mi">0</span> <span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span> <span class="mi">0</span> <span class="n">X</span>
+<span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span> <span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span>
+<span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span> <span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span>
+<span class="n">X</span> <span class="mi">0</span> <span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span> <span class="mi">0</span> <span class="n">X</span>
+<span class="n">X</span> <span class="n">X</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">X</span> <span class="n">X</span>
+<span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
+</pre></div>
+</div>
+<p><em>plik Zad1.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Zad1</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="kt">char</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+        <span class="c1">//wypełniamy tablicę</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="c1">//wypełnienie X na krawędziach tablicy</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
+                <span class="c1">//wypełnienie X na przekątnych</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="o">||</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
+                <span class="c1">//wypełnienie 0 w pozostałych miejscach</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="c1">//liczniki pętli</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="c1">//wyświetlanie tablicy</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span> <span class="c1">//nowa linia na końcu wiersza</span>
+            <span class="n">i</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 </div>
 
@@ -77,17 +650,24 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tablice i struktury sterujące</a><ul>
-<li><a class="reference internal" href="#tablice-jednowymiarowe">Tablice jednowymiarowe</a></li>
-<li><a class="reference internal" href="#tablice-wielowymiarowe">Tablice wielowymiarowe</a></li>
-<li><a class="reference internal" href="#petle-while-do-while-for">Pętle while, do while, for</a></li>
+<li><a class="reference internal" href="#">Struktury sterujące i pętle</a><ul>
 <li><a class="reference internal" href="#struktury-sterujace">Struktury sterujące</a></li>
-<li><a class="reference internal" href="#zadanie">Zadanie</a></li>
-<li><a class="reference internal" href="#podsumowanie">Podsumowanie</a></li>
+<li><a class="reference internal" href="#instrukcja-if-else">Instrukcja if else</a></li>
+<li><a class="reference internal" href="#struktura-sterujaca-switch">Struktura sterująca switch</a></li>
+<li><a class="reference internal" href="#petle-while-i-do-while">Pętle while i do while</a></li>
+<li><a class="reference internal" href="#inkrementacja-i-dekrementacja">Inkrementacja i dekrementacja</a></li>
+<li><a class="reference internal" href="#petle-for-i-for-each">Pętle for i for each</a></li>
+<li><a class="reference internal" href="#cwiczenie-podsumowujace-1">Ćwiczenie podsumowujące 1</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="obiekty.html"
+                        title="previous chapter">Programowanie obiektowe</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="komunikacja.html"
+                        title="next chapter">Komunikacja człowiek - komputer</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/sterowanie.txt"
@@ -116,11 +696,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="komunikacja.html" title="Komunikacja człowiek - komputer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="obiekty.html" title="Programowanie obiektowe"
+             >previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, SL.
+        &copy; Copyright 2014, Slawomir Ludwiczak.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>

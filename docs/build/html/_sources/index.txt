@@ -17,7 +17,7 @@ Uniwersalność ta sprawia, że od wielu lat Java pozostaje w czołówce najpopu
 
 Wprowadzenie i konfiguracja
 ---------------------------
-Przed rozpoczęciem szkolenia zalecamy skonfigurować wszystkie komputery zgodnie z poniższą instrukcją.
+Przed rozpoczęciem szkolenia zalecamy skonfigurować wszystkie komputery zgodnie z poniższą instrukcją. 
 
 .. toctree::
   :maxdepth: 2
