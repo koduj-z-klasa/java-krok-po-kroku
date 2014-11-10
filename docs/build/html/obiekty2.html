@@ -1,0 +1,914 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Programowanie obiektowe 2 &mdash; Java krok po kroku 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
+    <link rel="next" title="Komunikacja człowiek - komputer" href="komunikacja.html" />
+    <link rel="prev" title="Struktury sterujące i pętle" href="sterowanie.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="komunikacja.html" title="Komunikacja człowiek - komputer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sterowanie.html" title="Struktury sterujące i pętle"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="programowanie-obiektowe-2">
+<h1>Programowanie obiektowe 2<a class="headerlink" href="#programowanie-obiektowe-2" title="Permalink to this headline">¶</a></h1>
+<p>W tej lekcji dowiesz się:</p>
+<ul class="simple">
+<li>W jaki sposób odczytywać dane od użytkownika</li>
+<li>Na czym polega dziedziczenie</li>
+<li>Do czego wykorzystujemy słowo kluczowe super</li>
+<li>Czym jest przesłanianie metod</li>
+<li>Co to jest polimorfizm</li>
+<li>Do czego służy operator instanceof</li>
+<li>Czym są klasy abstrakcyjne i interfejsy</li>
+</ul>
+<div class="section" id="odbieranie-danych-od-uzytkownika">
+<h2>Odbieranie danych od użytkownika<a class="headerlink" href="#odbieranie-danych-od-uzytkownika" title="Permalink to this headline">¶</a></h2>
+<p>W naszych dotychczasowych programach skupialiśmy się na poznawaniu podstawowych mechanizmów języka Java, jednak brakowało w nich interakcji z użytkownikiem. Biblioteka wejścia/wyjścia w Javie jest dosyć rozbudowana i w tej części kursu poznamy podstawowe sposoby interakcji człowieka z komputerem.</p>
+<p>Najprostszą klasą, która pozwoli odczytywać dane od użytkownika jest <strong>Scanner</strong>. Posiada ona zestaw użytecznych metod, które pozwolą nam wczytać zarówno liczby jak i napisy. Klasa ta jest dosyć uniwersalna, więc w zależności od tego co przekażemy w konstruktorze podczas inicjalizacji możemy za pomocą jej obiektu zarówno odczytywać dane od użytkownika, które będą wprowadzane z klawiatury, ale także odczytywać informacje zawarte w plikach.</p>
+<p>Inicjalizacja obiektu Scanner w przypadku, gdy chcemy odczytać dane od użytkownika wygląda następująco:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
+    <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Przede wszystkim, aby korzystać z klasy Scanner w swoim kodzie, musisz ją najpierw zaimportować (np. wykorzystując skrót Ctrl+Shift+O w eclipse). Obiekt tworzony jest przez przekazanie w konstruktorze standardowego strumienia wejścia, którym jest <em>System.in</em>.</p>
+<p>Następnie do odczytu danych należy skorzystać z jednej z metod zawartych w klasie Scanner:</p>
+<ul class="simple">
+<li>nextInt() - odczytanie kolejnej liczby typu int</li>
+<li>nextDouble() - odczytanie kolejnej liczby typu double</li>
+<li>nextLine() - wczytanie kolejnego wiersza tekstu (String) zakończonego znakiem nowej linii</li>
+<li>analogicznie dla innych typów danych istnieją metody takie jak nextBoolean(), nextLong() itp.</li>
+</ul>
+<p>Ważne jest to, że w przypadku, gdy odczytywać będziemy liczby, w buforze nadal pozostanie znak nowej linii, który należy wczytać za pomocą metody nextLine(). Przykład:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleInput</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj pierwszą liczbę: &quot;</span><span class="o">);</span>
+        <span class="c1">//wczytujemy wartość zmiennej z klawiatury</span>
+        <span class="kt">int</span> <span class="n">num1</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+        <span class="c1">//usuwamy znak nowej linii z bufora</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj drugą liczbę: &quot;</span><span class="o">);</span>
+        <span class="c1">//wczytujemy drugą liczbę</span>
+        <span class="kt">int</span> <span class="n">num2</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+        <span class="c1">//usuwamy znak nowej linii z bufora</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Suma podanych liczb to: &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="o">));</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Jak masz na imię? &quot;</span><span class="o">);</span>
+        <span class="c1">//wczytujemy napis</span>
+        <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Witaj &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span><span class="o">);</span>
+
+        <span class="c1">//po zakończonym odczycie zamykamy strumień wejścia</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Pamiętaj, że po zakończeniu pracy ze strumieniami wejścia, szczególnie odczytu z plików należy je zamykać za pomocą metody close(). Analogicznie będzie należało postępować z operacjami wyjścia, czyli np. zapisem danych do plików.</p>
+</div>
+<p><strong>Ćwiczenie</strong> <em>(10 min)</em></p>
+<p>Napisz prosty program do zarządzania książkami biblioteki. Powinien się on składać z dwóch klas:</p>
+<ul class="simple">
+<li>Book - klasa reprezentująca pojedynczą książkę. Powinna posiadać pola reprezentujące numer ISBN, tytuł oraz autora</li>
+<li>BookManager - główna klasa aplikacji, w której wczytasz od użytkownika dotyczące 1 książki, utworzysz na ich podstawie obiekt klasy Book i wyświetlisz odpowiednie informacje na ekranie. Zadbaj o utworzenie odpowiednich konstruktorów.</li>
+</ul>
+<img alt="_images/library1_project.png" class="align-center" src="_images/library1_project.png" />
+<p><em>plik Book.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Book</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">author</span><span class="o">;</span>
+
+    <span class="n">Book</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">author</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getBookInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">isbn</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">author</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>plik BookManager.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//tworzymy obiekt do odczytu danych</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+        <span class="c1">//prosimy użytkownika o podanie odpowiednich danych</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj autora: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">author</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="c1">//zamykamy strumień wejścia</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+        <span class="c1">//tworzymy obiekt Book i wyświetlamy informacje na ekranie</span>
+        <span class="n">Book</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">author</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">getBookInfo</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Przykładowy wynik działania programu:</p>
+<img alt="_images/output1.png" class="align-center" src="_images/output1.png" />
+</div>
+<div class="section" id="dziedziczenie">
+<h2>Dziedziczenie<a class="headerlink" href="#dziedziczenie" title="Permalink to this headline">¶</a></h2>
+<p>W naszej aplikacji możemy teraz przechowywać i wczytywać od użytkownika informacje o książkach, jednak warto zauważyć, że przecież w bibliotece oprócz książek są także komiksy, gazety, ogólnie rzecz ujmując magazyny. W tym momencie należałoby stworzyć osobną klasę Magazine, która przechowywać będzie również numer ISBN, tytuł, oraz np. wydawnictwo. Problemem jest to, że pewne dane zaczynają się tutaj powielać, a tego w programowaniu zdecydowanie powinniśmy unikać.</p>
+<p>W celu rozwiązania m.in. tego problemu powstał paradygmat programowania obiektowego, które pozwala budować hierarchię klas, dającą możliwość tworzenia kodu, który może być wykorzystywany wielokrotnie i być bazą do tworzenia jeszcze kolejnych klas.</p>
+<img alt="_images/inheritance.png" class="align-center" src="_images/inheritance.png" />
+<p>Na powyższym programie widać bazową klasę <strong>Publication</strong>, po której dziedziczą dwie kolejne klasy: <strong>Book</strong> oraz <strong>Magazine</strong>. Różnią się one tym, że autor posiada najczęściej jednego autora (np. Henryk Sienkiewicz), natomiast w przypadku gazety w tym miejscu pojawi się wydawnictwo (np. Ringier Axel Springer).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Jeżeli istnieje pewna klasa <strong>A</strong>, a poniej dziedziczy pewna klasa <strong>B</strong>, to klasa <strong>B</strong> przejmuje wszystkie widoczne cechy klasy <strong>A</strong>.</p>
+</div>
+<p>Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram, klasa <strong>Book</strong>, czy <strong>Magazine</strong> będą posiadały także pola klasy <strong>Publication</strong>, czyli isbn oraz title. W Javie dziedziczenie można osiągnąć stosując słowo kluczowe <strong>extends</strong> w definicji klasy, np.:</p>
+<img alt="_images/library1_project.png" class="align-center" src="_images/library1_project.png" />
+<p><em>plik Publication.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="n">Publication</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>plik Book.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Book</span> <span class="kd">extends</span> <span class="n">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">author</span><span class="o">;</span>
+
+    <span class="n">Book</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">author</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getInfo</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">author</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>plik Book.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Magazine</span> <span class="kd">extends</span> <span class="n">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">publisher</span><span class="o">;</span>
+
+    <span class="n">Magazine</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">publisher</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">publisher</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getInfo</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">publisher</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Zwróć uwagę, że pomimo iż w klasach <em>Book</em> oraz <em>Magazine</em> nie zadeklarowaliśmy pól <em>isbn</em> oraz <em>title</em> to mamy do nich dostęp w konstruktorze, czy metodach getBookInfo() i getMagazineInfo(), ponieważ dziedziczą one te cechy z klasy Publication.</p>
+<p>Kolejną nowością jest zastosowanie specjalnej konstrukcji <strong>super()</strong>. Działa ona w sposób podobny do słowa kluczowego this, którego używaliśmy w przypadku, gdy posiadaliśmy kilka przeciążonych wersji konstruktora z tą różnicą, że wywołuje konstruktor nadklasy z odpowiednimi parametrami.</p>
+<p>Ostatnia rzecz dotyczy <strong>przesłaniania</strong> metod. W klasie Publication zdefiniowaliśmy metodę getInfo(). Jeżeli w klasie dziedzicząsej (Book lub Magazine) zdefiniujemy metodę o takiej samej sygnaturze, to powiemy, że przesłania ona oryginalną metodę getInfo(). W celu wywołania metody nadklasy należy posłużyć się w takiej sytuacji zapisem <strong>super.getInfo()</strong>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Pierwszą, niejawną instrukcją jaka jest wykonywana w podklasie pewnej klasy bazowej jest wywołanie konstruktora nadklasy poprzez <strong>super()</strong>. Jeżeli w klasie bazowej nie jest zdefiniowany konstruktor bezparametrowy to należy jawnie wywołać konstruktor z odpowiednimi argumentami poprzez zapis <strong>super(lista_parametrow)</strong>. Jeżeli chcesz natomiast wywołać w którejś z metod metodę z nadklasy wykorzystaj zapis <strong>super.nazwaMetody(parametry)</strong>.</p>
+</div>
+<p><strong>Ćwiczenie</strong> <em>(10 min)</em>
+W klasie BookManager utwórz tablice do przechowywania książek oraz magazynów. W każdej tablicy utwórz przynajmniej po jednym obiekcie danego typu, a następnie wyświetl je na ekranie.</p>
+<p><em>plik BookManager.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// tworzymy obiekt do odczytu danych</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+        <span class="c1">// tworzymy tablice</span>
+        <span class="n">Book</span><span class="o">[]</span> <span class="n">books</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+        <span class="n">Magazine</span><span class="o">[]</span> <span class="n">magazines</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Magazine</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+
+        <span class="c1">// prosimy użytkownika o podanie informacji o książce</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN książki: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł książi: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj autora książki: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">author</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">books</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">author</span><span class="o">);</span>
+
+        <span class="c1">// prosimy użytkownika o podanie informacji o magazynie</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj wydawcę magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">publisher</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">magazines</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Magazine</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">publisher</span><span class="o">);</span>
+
+        <span class="c1">// zamykamy strumień wejścia</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+        <span class="c1">// tworzymy obiekt Book i wyświetlamy informacje na ekranie</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">books</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">getInfo</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">magazines</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">getInfo</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W porównaniu do wcześniejszego kodu zyskaliśmy teraz możliwosć przechowywania informacji zarówno o ksiażkach jak i innego rodzaju publikacjach. Ponieważ przechowujemy je w tablicach to dodatkowo dane są teraz bardziej spójne.</p>
+</div>
+<div class="section" id="polimorfizm">
+<h2>Polimorfizm<a class="headerlink" href="#polimorfizm" title="Permalink to this headline">¶</a></h2>
+<p>Wcześniej wspomnieliśmy, że dziedziczenia warto używać między innymi po to, żeby zaoszczędzić konieczności powielania tego samego kodu. Problem w tym, że gdy tak jak w powyższym przykładzie stosujemy tablice oddzielnych typów to operacje na nich i tak będą powielane, np:</p>
+<div class="highlight-python"><div class="highlight"><pre>System.out.println(&quot;Książki: &quot;);
+for(int i=0; i &lt; books.length; i++) {
+    if(books[1] != null)
+        System.out.println(books[i].getInfo());
+}
+
+System.out.println(&quot;Magazyny: &quot;);
+for(int i=0; i &lt; magazines.length; i++) {
+    if(magazines[1] != null)
+        System.out.println(magazines[i].getInfo());
+}
+</pre></div>
+</div>
+<p>Lepiej by było tak naprawdę przechowywać wszystkie te dane w jednej wspólnej tablicy typu <em>Publication</em>, a następnie ewentualnie rozpoznać, czy dany element tablicy jest typu Book, czy Magazine.</p>
+<p>Efekt taki można osiągnąć dzięki zastosowaniu tzw. <strong>polimorfizmu</strong> lub inaczej mówiąc wielopostaciowości. Polega to na tym, że do ogólnej, wspólnej referencji można przypisać obiekty różnych typów, które po typie tej referencji dziedziczą.</p>
+<p>W naszym przypadku klasy Book i Magazine dziedziczą po klasie Publication, więc jak najbardziej możliwe jest zapisanie:</p>
+<div class="highlight-python"><div class="highlight"><pre>Publication pub1 = new Book(argumenty_konstruktora);
+Publication pub2 = new Magazine(argumenty_konstruktora);
+</pre></div>
+</div>
+<p>W podobny sposób możemy także utworzyć tablicę typu Publication, która będzie przechowywała zarówno książki jak i magazyny. Pamiętać należy jednak o dwóch rzeczach:</p>
+<ol class="arabic simple">
+<li>Zawsze mamy dostęp jedynie do metod z typu referencji. Jeżeli w klasie Book zdefiniujemy dodatkową metodę changeBookTitle(), a referencja będzie typu Publication, to nie będziemy mieli dostępu do takiej metody</li>
+<li>Metody będą wywoływane na rzecz typu obiektu, a nie typu referencji. Jeżeli zapisaliśmy <em>Publication pub1 = new Book(argumenty_konstruktora);</em> to wywołując metodę pub1.getInfo() wywołamy jej wersję z klasy Book, a nie Publication.</li>
+</ol>
+<p><strong>Ćwiczenie</strong> <em>(5 min)</em>
+Przerób klasę BookManager w taki sposób, aby przechowywać książki oraz magazyny w jednej wspólnej tablicy typu Publication[].</p>
+<p><em>plik BookManager.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// tworzymy obiekt do odczytu danych</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+        <span class="c1">// tworzymy tablice</span>
+        <span class="n">Publication</span><span class="o">[]</span> <span class="n">publications</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Publication</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+
+        <span class="c1">// prosimy użytkownika o podanie informacji o książce</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN książki: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł książi: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj autora książki: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">author</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">publications</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">author</span><span class="o">);</span>
+
+        <span class="c1">// prosimy użytkownika o podanie informacji o magazynie</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj wydawcę magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">publisher</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">publications</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Magazine</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">publisher</span><span class="o">);</span>
+
+        <span class="c1">// zamykamy strumień wejścia</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+        <span class="c1">// wyświetlamy informacje na ekranie</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Książki i magazyny: &quot;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Publication</span> <span class="nl">p:</span> <span class="n">publications</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Dzięki uproszczeniu sposobu przechowywania danych wyświetlanie danych odbywa się w jednej tylko pętli, dane są bardziej spójne, a kod bardziej przejrzysty.</p>
+</div>
+<div class="section" id="operator-instanceof">
+<h2>Operator instanceof<a class="headerlink" href="#operator-instanceof" title="Permalink to this headline">¶</a></h2>
+<p>W poprzednim przykładzie brakuje w tej chwili trochę informacji o tym, czy dana pozycja w tablicy <em>publications</em> jest typu Book, czy Magazine. W niektórych sytuacjach chcielibyśmy mieć taką informację w celu zwiększenia przejrzystości. W Javie możemy sprawdzić rzeczywisty typ obiektu (nie typ referencji) za pomocą operatora <strong>instanceof</strong>. Jego składnia jest następująca:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">obiekt</span> <span class="k">instanceof</span> <span class="n">NazwaKlasy</span>
+</pre></div>
+</div>
+<p>np.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Publication</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="s">&quot;123456789&quot;</span><span class="o">,</span> <span class="s">&quot;W pustyni i w puszczy&quot;</span><span class="o">,</span> <span class="s">&quot;Henryk Sienkiewicz&quot;</span><span class="o">);</span>
+<span class="k">if</span><span class="o">(</span><span class="n">book</span> <span class="k">instanceof</span> <span class="n">Book</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;To jest książka&quot;</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Sprawdzenie obiektu za pomocą operatora instanceof zwraca w wyniku true lub false, więc jak widać w powyższym przykładzie, może on być zastosowany jako warunek w instrukcji if.</p>
+<p><strong>Ćwiczenie</strong> <em>(5 min)</em>
+Przerób kod klasy BookManager w taki sposób, aby dane były wyświetlane w formie:</p>
+<div class="highlight-python"><div class="highlight"><pre>Książka: 123456789 - W pustyni i w puszczy - Henryk Sienkiewicz
+Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
+</pre></div>
+</div>
+<p><em>plik BookManager.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// tworzymy obiekt do odczytu danych</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+        <span class="c1">// tworzymy tablice</span>
+        <span class="n">Publication</span><span class="o">[]</span> <span class="n">publications</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Publication</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+
+        <span class="c1">// prosimy użytkownika o podanie informacji o książce</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN książki: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł książi: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj autora książki: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">author</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">publications</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">author</span><span class="o">);</span>
+
+        <span class="c1">// prosimy użytkownika o podanie informacji o magazynie</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj ISBN magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj Tytuł magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Podaj wydawcę magazynu: &quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">publisher</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">publications</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Magazine</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="n">publisher</span><span class="o">);</span>
+
+        <span class="c1">// zamykamy strumień wejścia</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+        <span class="c1">// wyświetlamy informacje na ekranie</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Książki i magazyny: &quot;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Publication</span> <span class="nl">p:</span> <span class="n">publications</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">p</span> <span class="k">instanceof</span> <span class="n">Book</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Książka: &quot;</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">p</span> <span class="k">instanceof</span> <span class="n">Magazine</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Magazyn: &quot;</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getInfo</span><span class="o">());</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="klasy-abstrakcyjne-i-interfejsy">
+<h2>Klasy abstrakcyjne i interfejsy<a class="headerlink" href="#klasy-abstrakcyjne-i-interfejsy" title="Permalink to this headline">¶</a></h2>
+<p>Nasza aplikacja jest już prawie gotowa, jednak warto się zastanowić nad jeszcze jedną rzeczą. Stworzyliśmy klasę Publication, która jest klasą bazową dla dwóch konkretnych typó danych, które wykorzystujemy. Ponieważ nie chcemy używać obiektów klasy Publication bezpośrednio, powinniśmy z niej zrobić jedynie pewną warstwę abstrakcji, czyli klasę, która jest jedynie klasą bazową dla innych typów, ale nie można tworzyć jej obiektów bezpośrednio.</p>
+<p>W Javie można to osiągnąć wykorzystując <strong>klasę abstrakcyjną</strong>. Jeżeli jakaś klasa ma być abstrakcyjna, należy w jej sygnaturze dodać o tym informację za pomocą słowa kluczowego <strong>abstract</strong>.</p>
+<p><em>plik Publication.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="n">Publication</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Klasy abstrakcyjne mają dwie ważne właściwości, o których musisz pamiętać:</p>
+<ol class="arabic simple">
+<li>Nie można utworzyć obiektu klasy abstrakcyjnej za pomocą operatora new. Typ abstrakcyjny może być jedynie typem referencji dla typów bardziej sprecyzowanych (dziedziczących po tej klasie abstrakcyjnej).</li>
+<li>W klasie abstrakcyjnej mogą być zdefiniowane <strong>metody abstrakcyjne</strong>, czyli metody, które określają jedynie sygnaturę metody, ale nie posiadają implementacji. Jeżeli jakaś klasa posiada chociaż jedną metodę abstrakcyjną, to musi być oznaczona jako klasa abstrakcyjna. Każda klasa, która dziedziczy po klasie abstrakcyjnej musi posiadać konkretną implementację każdej metody abstrakcyjnej.</li>
+</ol>
+<p>Przykład metody abstrakcyjnej:</p>
+<p><em>plik Publication.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="n">Publication</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">isbn</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">printInfo</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Jak widzisz metoda printInfo() oznaczona jest słowek abstract. Nie posiada ona żadnej implementacji - nie posiada nawet nawiasów klamrowych i zakończona jest średnikiem.</p>
+<img alt="_images/abstract.png" class="align-center" src="_images/abstract.png" />
+<p>Jak widzisz dodanie metody abstrakcyjnej powoduje błędy w naszym projekcie w klasach dziedziczących po Publication. W celu ich wyeliminowania powinniśmy zaimplementować metodę printInfo() w tych klasach, np.:</p>
+<p><em>plik Book.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Book</span> <span class="kd">extends</span> <span class="n">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">author</span><span class="o">;</span>
+
+    <span class="n">Book</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">author</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getInfo</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">author</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kt">void</span> <span class="nf">printInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getInfo</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>analogicznie w klasie Magazine:</p>
+<p><em>plik Magazine.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Magazine</span> <span class="kd">extends</span> <span class="n">Publication</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">publisher</span><span class="o">;</span>
+
+    <span class="n">Magazine</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">publisher</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">isbn</span><span class="o">,</span> <span class="n">title</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">publisher</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">String</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getInfo</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">publisher</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">printInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getInfo</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W Javie istnieją także klasy, które są w pełni abstrakcyjne nazywane <strong>interfejsami</strong>, czyli posiadają jedynie metody abstrakcyjne oraz ewentualnie zdefiniowane stałe wartości (oznaczone jako public static). Interfejsy definiujemy za pomocą słowa kluczowego <strong>interface</strong>, a implementujemy je (analogia do dziedziczenia) za pomocą słowa kluczowego <strong>implements</strong>. Na tym etapie nie będziemy się zagłębiali w stosowanie interfejsów w swoich programach, spójrz jedynie na przykład i zapamiętaj kilka rzeczy zapisanych poniżej.</p>
+<p>Przykład interfejsu:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Moveable</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">move</span><span class="o">();</span>
+
+    <span class="kt">void</span> <span class="nf">stop</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Klasa implementująca interfejs Moveable:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="kd">implements</span> <span class="n">Moveable</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">move</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Samochód start&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Samochód stop&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Ponieważ wszystkie metody interfejsu muszą być abstrakcyjne, to nie jest konieczne jawne używanie słowa kluczowego abstract - jest ono niejawnie dodawane automatycznie.</p>
+<p><strong>Zapamiętaj</strong></p>
+<ol class="arabic simple">
+<li>W Javie można dziedziczyć tylko po jednej klasie (extends), nawet jeśli są to klasy abstrakcyjne.</li>
+<li>Możesz implementować dowolną liczbę interfejsów (implements).</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Programowanie obiektowe 2</a><ul>
+<li><a class="reference internal" href="#odbieranie-danych-od-uzytkownika">Odbieranie danych od użytkownika</a></li>
+<li><a class="reference internal" href="#dziedziczenie">Dziedziczenie</a></li>
+<li><a class="reference internal" href="#polimorfizm">Polimorfizm</a></li>
+<li><a class="reference internal" href="#operator-instanceof">Operator instanceof</a></li>
+<li><a class="reference internal" href="#klasy-abstrakcyjne-i-interfejsy">Klasy abstrakcyjne i interfejsy</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sterowanie.html"
+                        title="previous chapter">Struktury sterujące i pętle</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="komunikacja.html"
+                        title="next chapter">Komunikacja człowiek - komputer</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/obiekty2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="komunikacja.html" title="Komunikacja człowiek - komputer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sterowanie.html" title="Struktury sterujące i pętle"
+             >previous</a> |</li>
+        <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Slawomir Ludwiczak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

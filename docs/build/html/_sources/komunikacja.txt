@@ -1,9 +1,16 @@
 Komunikacja człowiek - komputer
 ================================
 
-Odbieranie danych od użytkownika
---------------------------------
-Omówienie odbierania danych od użytkownika, klasa Scanner
+W tej lekcji dowiesz się:
+
+* w jaki sposób odczytywać dane od użytkownika
+* jak wykonać operacje zapisu i odczytu plików
+
+
+
+
+
+
 
 
 Zapis i odczyt plików
@@ -13,3 +20,5 @@ Pliki txt
 Zapis obiektów i Serializacja
 
 
+Serializacja obiektów
+------------------------------

@@ -524,6 +524,12 @@ Popraw klasę Car z poprzedniego zadania w taki sposób, aby nazwy argumentów k
         }
     }
 
+Wartości domyślne i null
+--------------------------
+Istotnym elementem 
+
+
+
 
 Ćwiczenie podsumowujące
 --------------------------

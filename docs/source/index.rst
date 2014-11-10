@@ -34,8 +34,8 @@ Cały kurs podzielony jest na 8 lekcji.
   wprowadzenie
   obiekty
   sterowanie
+  obiekty2
   komunikacja
-  kolekcje
   gui
   kontrolery
   summary
