@@ -593,6 +593,7 @@ Ponieważ wszystkie metody interfejsu muszą być abstrakcyjne, to nie jest koni
 Do aplikacji
 
 
-
+Dodatek - metody dziedziczone z klasy Object
+----------------------------------------------
 
 

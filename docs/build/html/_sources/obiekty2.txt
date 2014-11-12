@@ -587,3 +587,13 @@ Ponieważ wszystkie metody interfejsu muszą być abstrakcyjne, to nie jest koni
 
 #. Możesz implementować dowolną liczbę interfejsów (implements).
 
+
+Ćwiczenie podsumowujące
+------------------------
+Do aplikacji
+
+
+Dodatek - metody dziedziczone z klasy Object
+----------------------------------------------
+
+

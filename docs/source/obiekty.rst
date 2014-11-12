@@ -530,6 +530,10 @@ Istotnym elementem
 
 
 
+Pakiety i modyfikatory dostępu
+-------------------------------
+
+
 
 Ćwiczenie podsumowujące
 --------------------------

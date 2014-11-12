@@ -212,6 +212,7 @@ W języku Java znajdziemy wszystkie najpopularniejsze operatory arytmetyczno log
 * **&&** - koniunkcja logiczna. Tylko PRAWDA && PRAWDA da w wyniku PRAWDA
 * **||** - alternatywa logiczna. Co najmniej jedna składowa musi być PRAWDĄ, aby wynik całego wyrażenia był prawdą. PRAWDA||PRAWDA lub PRAWDA||FAŁSZ lub FAŁSZ||PRAWDA ale nie FAŁSZ||FAŁSZ
 * **>, >=, <, <=** - porównania. Większe, większe lub równe, mniejsze, mniejsze lub równe.
+* **==** - porównanie równości
 
 Wyniki wyrażeń arytmetyczno logicznych mogą być obliczane na podstawie zmiennych lub wartości, a także przypisywane do innych zmiennych.
 
