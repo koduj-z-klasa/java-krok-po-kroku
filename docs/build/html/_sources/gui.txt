@@ -22,7 +22,7 @@ Głównym narzędziem, który posłuży nam do budowania GUI (graphical user int
 
 
 Scene Builder 2.0 - pierwszy rzut oka
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 .. image:: 06_fx/scenebuilder.png
     :align: center
@@ -301,17 +301,95 @@ Nadając fx:id pamiętaj, żeby były to znaczące nazwy, ponieważ będą to je
 .. image:: 06_fx/fxid2.png
     :align: center
 
+Teraz w klasie ustawionej jako fx:controller należy utworzyć zmienne odpowiadające odpowiednim typom kontrolek i nadać im nazwy zgodne z ustalonymi przed chwilą fx:id. Na szczęście nie trzeba tego robić ręcznie. Przejdź w Scene Builderze to sekcji **View -> Show sample controller skeleton** skopiuj przykładowy kod i wklej go do pliku EditorController w eclipse.
+
+W JavieFX ogólnie przyjętą praktyką jest także implementowanie interfejsu **Initializable** przez klasę kontrolera. Interfejs ten wymusi zaimplementowanie metody initialize(), która zostanie wywołana w momencie uruchamiania aplikacji przez FXMLLoadera.
+
+*plik EditorController.java*
+
+.. code-block:: java
+    :linenos:
+
+    package application;
+
+    import java.net.URL;
+    import java.util.ResourceBundle;
+
+    import javafx.fxml.FXML;
+    import javafx.fxml.Initializable;
+    import javafx.scene.control.Label;
+    import javafx.scene.control.TextArea;
+
+    public class EditorController implements Initializable {
+
+        @FXML
+        private TextArea mainTextArea;
+
+        @FXML
+        private Label wordsCountLabel;
+
+        @FXML
+        private Label lettersCountLabel;
+
+        @Override
+        public void initialize(URL arg0, ResourceBundle arg1) {
+            // TODO Auto-generated method stub
+            
+        }
+    }
 
 
+Odwołanie do kontrolek z kodu Javy
+-----------------------------------
+Ostatni etap w tej lekcji to odwoływanie się do kontrolek zdefiniowanych w FXMLu z poziomu klasy kontrolera w kodzie Javy. Tak jak wspomnieliśmy przy wprowadzeniu do Javy FX, kontrolki to tak naprawdę nic innego niż zwykłe klasy Javy. Stworzyliśmy je w sposób deklaratywny w kodzie XML, jednak następnie obiekty zostały wstrzyknięte do klasy kontrolera i tam mamy już do nich dostęp, więc możemy na nich wywoływać odpowiednie metody.
 
-fx:id i klasa kontrolera
--------------------------
-Pobranie wartości z kontrolki
-Ustawienie tekstów kontrolek
+W metodzie initialize() ustawmy tekst naszego głównego pola tekstowego oraz etykiet, aby zweryfikować, że ustawione przez nas fx:id zostały poprawnie powiązane ze zmiennymi.
+
+*plik EditorController.java*
+
+.. code-block:: java
+    :linenos:
+
+    package application;
+
+    import java.net.URL;
+    import java.util.ResourceBundle;
+
+    import javafx.fxml.FXML;
+    import javafx.fxml.Initializable;
+    import javafx.scene.control.Label;
+    import javafx.scene.control.TextArea;
+
+    public class EditorController implements Initializable {
+
+        @FXML
+        private TextArea mainTextArea;
+
+        @FXML
+        private Label wordsCountLabel;
+
+        @FXML
+        private Label lettersCountLabel;
+
+        @Override
+        public void initialize(URL arg0, ResourceBundle arg1) {
+            String mainText = "To jest długi tekst,\n"
+                    + "który zostanie wyświetlony\n"
+                    + "w głównym oknie aplikacji";
+            String letters = "Ilość liter: 50";
+            String words = "Ilość słów: 12";
+            
+            mainTextArea.setText(mainText);
+            lettersCountLabel.setText(letters);
+            wordsCountLabel.setText(words);
+        }
+    }
+
+W wierszach 30-32 ustawiamy teksty odpowiednich kontrolek za pomocą metod *setText()*. Analogicznie w celu odczytania tekstu, który wprowadzi użytkownik będziemy używali metody getText(), jednak tego nauczymy się już w kolejnej lekcji omawiając obsługę zdarzeń.
+
+.. image:: 06_fx/end.png
+    :align: center
 
 
-Struktura widoku
-Język FXML
-Prosty przykład aplikacji
 
 http://javafxports.org/page/What_is_JavaFXPorts
