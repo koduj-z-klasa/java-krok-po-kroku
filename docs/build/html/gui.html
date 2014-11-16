@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
     <link rel="next" title="GUI część 2" href="kontrolery.html" />
-    <link rel="prev" title="Kolekcje" href="kolekcje.html" /> 
+    <link rel="prev" title="Wyjątki i kolekcje" href="komunikacja.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +38,7 @@
           <a href="kontrolery.html" title="GUI część 2"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="kolekcje.html" title="Kolekcje"
+          <a href="komunikacja.html" title="Wyjątki i kolekcje"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -51,13 +51,312 @@
             
   <div class="section" id="graficzny-interfejs-uzytkownika">
 <h1>Graficzny interfejs użytkownika<a class="headerlink" href="#graficzny-interfejs-uzytkownika" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="javafx-scene-builder">
-<h2>JavaFX Scene builder<a class="headerlink" href="#javafx-scene-builder" title="Permalink to this headline">¶</a></h2>
-<p>Integracja z eclipse
-Omówienie poszczególnych elementów</p>
+<p>W tej lekcji dowiesz się:</p>
+<ul class="simple">
+<li>Czym jest JavaFX</li>
+<li>Jak stworzyć graficzny interfejs użytkownika wykorzystując Scene Buildera</li>
+<li>Co oznacza wzorzec MVC</li>
+<li>Jak wygląda język FXML</li>
+<li>Jak stworzyć prosty projekt w JavieFX</li>
+</ul>
+<div class="section" id="javafx">
+<h2>JavaFX<a class="headerlink" href="#javafx" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/javafx.png" class="align-center" src="_images/javafx.png" />
+<p>JavaFX jest technologią, która pozwala na tworzenie bogatych graficznie interfejsów użytkownika do aplikacji napisanych w Javie. W początkowym zamyśle miała to być technologia przeznaczona głównie do tworzenia tzw. Rich Internet Application, któe miałyby rywalizować z Adobe Flash, czy Microsoft Silverlight. Ostatecznie oprócz wspomnianej funkcji stała się także rekomendowaną biblioteką do tworzenia graficznego interfejsu użytkownika aplikacji desktopowych napisanych w języku Java. Trwają także prace nad tym, aby aplikacje napisane w JavieFX można portować na platformy Android oraz iOS (zasada write once run everywhere).</p>
+<p>Głównym narzędziem, który posłuży nam do budowania GUI (graphical user interface) będzie Scene Builder - oficjalne narzędzie rozwijane przez Oracle, które pozwala tworzyć interfejs użytkownika za pomocą przyjaznego edytora WYSIWYG.</p>
+<div class="section" id="scene-builder-2-0-pierwszy-rzut-oka">
+<h3>Scene Builder 2.0 - pierwszy rzut oka<a class="headerlink" href="#scene-builder-2-0-pierwszy-rzut-oka" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/scenebuilder1.png" class="align-center" src="_images/scenebuilder1.png" />
+<p>W Scene Builderze możemy wyróżnić kilka głównych obszarów roboczych, z których będziemy korzystali. Zgodnie z oznaczeniami na powyższym zrzucie ekranu są to:</p>
+<ol class="arabic simple">
+<li><strong>Library</strong> -</li>
+<li><strong>Document</strong> -</li>
+<li><strong>Podgląd</strong> -</li>
+<li><strong>Inspector</strong> -</li>
+</ol>
+<p><strong>Ćwiczenie</strong>
+Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć różne elementy z sekcji Library do obszaru roboczego lub bezpośrednio do sekcji Document. Kliknij na wybrane z przeciągniętych elementów i spróbuj pozmieniać ustawienia w sekcji Inspector po prawej stronie.</p>
+</div>
+</div>
+<div class="section" id="pierwszy-projekt-javafx">
+<h2>Pierwszy projekt JavaFX<a class="headerlink" href="#pierwszy-projekt-javafx" title="Permalink to this headline">¶</a></h2>
+<p>W celu utworzenia swojego pierwszego projektu w JavieFX przejdź do eclipse i utwórz nowy projekt JavaFX (PPM -&gt; New -&gt; Other -&gt; JavaFX Project).</p>
+<img alt="_images/fx1.png" class="align-center" src="_images/fx1.png" />
+<p>Następnie wpisz dowolną nazwę projektu i klikając przycisk Next przejdź do ostatniej zakładki kreatora projektu, gdzie wybierz Language jako <strong>FXML</strong>.</p>
+<img alt="_images/fx2.png" class="align-center" src="_images/fx2.png" />
+<p>Wybierz Finish, po czym projekt zostanie utworzony.</p>
+<div class="section" id="omowienie-domyslnego-projektu">
+<h3>Omówienie domyślnego projektu<a class="headerlink" href="#omowienie-domyslnego-projektu" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse domyślnie wygeneruje dla nas prosty szablon projektu JavaFX, który już na pierwszy rzut oka różni się od tego co znaliśmy do tej pory.</p>
+<img alt="_images/fxproject.png" class="align-center" src="_images/fxproject.png" />
+<ul class="simple">
+<li>Main.java to główna klasa, od której rozpoczyna się działanie aplikacji.</li>
+<li>Sample.fxml zawiera definicję tego z jakich layoutów oraz kontrolek zkłada się widok naszej aplikacji - w skrócie jak wygląda</li>
+<li>application.css to definicja stylów CSS dla naszej aplikacji. Z pewnością słyszałeś już o nich w przypadku stron internetowych</li>
+<li>SampleController.java to dodatkowa klasa, która występuje w architekturze MVC (Model View Controller)</li>
+</ul>
+<p><strong>Model View Controller</strong> jest najpopularniejszym wzorcem architektonicznym wykorzystywanym w tworzeniu aplikacji. Jego głównym zamysłem jest to, żeby oddzielić od siebie definicję tego jak aplikacja wygląda od tego co robi. W komunikacji pomiędzy tymi dwoma elementami występuje kontroler, który odpowiednio przekazuje informacje od użytkownika (GUI aplikacji) do modelu danych i w drugą stronę.</p>
+<p>Zaletą takiego podejścia jest to, że aplikacje można rozwijać równolegle i lepiej dzielić obowiązki w zespole programistów. Jeżeli ktoś jest silniejszy tworzeniu tzw. backendu może zająć się programowaniem logiki biznesowej, natomiast osoby o lepszym zmyśle estetycznym mogą się poświęcić stworzeniu frontendu aplikacji.</p>
+</div>
+</div>
+<div class="section" id="definiowanie-widoku">
+<h2>Definiowanie widoku<a class="headerlink" href="#definiowanie-widoku" title="Permalink to this headline">¶</a></h2>
+<p>Widok naszej aplikacji będziemy definiowali w języku XML i formie plików o rozszerzniu .fxml. Na szczęście nie musimy wszystkiego pisać ręcznie, bo kod zostanie wygenerowany na podstawie tego co zrobimy w Scene Builderze.</p>
+<p>Żeby przejść do edycji pliku fxml kliknij na niego prawym przyciskiem myszy w eclipse i wybierz opcję Open with SceneBuilder.</p>
+<img alt="_images/openwith.png" class="align-center" src="_images/openwith.png" />
+<p>Jeżeli nic nie zmieniałeś w ustawieniach projektu, to plik Sample.fxml powinien mieć następującą postać:</p>
+<p><em>plik Sample.fxml</em></p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
+<span class="cp">&lt;?import javafx.scene.layout.BorderPane?&gt;</span>
+
+<span class="nt">&lt;BorderPane</span> <span class="na">xmlns:fx=</span><span class="s">&quot;http://javafx.com/fxml&quot;</span> <span class="na">fx:controller=</span><span class="s">&quot;application.SampleController&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- TODO Add Nodes --&gt;</span>
+<span class="nt">&lt;/BorderPane&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>BorderPane</strong> to główny węzeł naszego widoku. Jest to zwyczajna klasa, którą możesz znaleźć w dokumentacji Javy i której obiekt możesz utworzyć także bezpośrednio w kodzie napisanym w Javie. Jak widzisz klasa ta jest najpierw zaimportowana z pakietu <em>javafx.scene.layout</em>. Warto zwrócić uwagę także na atrybut xmlns (skrót od XML Namespace), czyli przestrzeni nazw, z której korzystamy - jeżeli jej nie zdefiniujemy, nasza aplikacja się nie uruchomi, ponieważ kod zostanie uznany za niezgodny ze standardem. atrybut <em>fx:controller=&#8221;application.SampleController&#8221;</em> wskazuje klasę kontrolera powiązaną z tym konkretnym plikiem widoku - w tym przypadku jest to nasza klasa <em>SampleController</em>.</p>
+<p>W Scene builderze zauważysz, że kod XML ma odzwierciedlenie w sekcji Document Hierarchy, gdzie znajduje się struktura naszego widoku w postaci drzewa węzłów.</p>
+<img alt="_images/dochier.png" class="align-center" src="_images/dochier.png" />
+<div class="section" id="edytor-wysiwyg">
+<h3>Edytor WYSIWYG<a class="headerlink" href="#edytor-wysiwyg" title="Permalink to this headline">¶</a></h3>
+<p>Scene Builder to wygodny wdytor w stylu &#8220;przeciągnij i upuść&#8221;. Możesz w nim przeciągnąć kilka kontrolek na nasz główny layout, czyli BorderPane (bezpośrednio do sekcji Document Hierarchy) lub na obszar roboczy. Wszelkie zmiany będą aktualizowane automatycznie.</p>
+<p>Spróbujmy teraz zaprojektować bardzo prosty edytor tekstowy, w którym muszą znaleźć się takie elementy jak:</p>
+<ul class="simple">
+<li>pasek menu kontekstowego</li>
+<li>główne pole tekstowe</li>
+<li>pasek podliczający ilość wprowadzonych znaków oraz ilość słów w tekście</li>
+</ul>
+<p>Makieta aplikacji:</p>
+<img alt="_images/mockup.png" class="align-center" src="_images/mockup.png" />
+<p>Struktura projektu eclipse:</p>
+<img alt="_images/texteditor.png" class="align-center" src="_images/texteditor.png" />
+<p>Otwórz plik fxml w Scene Builderze i dobierz odpowiednie kontrolki, które umieścisz na głównym layoucie aplikacji (BorderPane). Kontrolki, które należy wykorzystać to:</p>
+<ul class="simple">
+<li>MenuBar - pasek nawigacyjny, na którym można umieszczać elementy typu MenuItem</li>
+<li>TextArea - pole tekstowe, w którym można wprowadzać wiele wierzy tekstu</li>
+<li>Label - etykiety tekstowe</li>
+<li>Separator - pozwala oddzielić kontrolki od siebie</li>
+</ul>
+<p>Hierarchia dokumentu FXML w Scene Builderze:</p>
+<img alt="_images/hierarchy1.png" class="align-center" src="_images/hierarchy1.png" />
+<p>Jak widzisz etykiety w dolnej części aplikacji opakowane zostały w dodatkowy layout typu HBox.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Layouty przy tworzeniu graficznego interfejsu użytkownika służą do ustalenia pewnego porządku dodawanych do nich kontrolek. BorderPane pozwala ustawić elementy na krawędziach (góra, dół, lewo, prawo lub środek) natomiast HBox ustawia kontrolki w jednym wierszu jeden obok drugiego. Istnieje dużo więcej layoutów, któe możesz przejrzeć w sekcji containers Scene Buildera. Ikonki umieszczone przy poszczególnych z nich oraz nazwy bardzo dobrze opisują to w jaki sposób możemy je wykorzystać. Layouty mogą być także zagnieżdżane jeden w drugim tak jak w naszym przykładzie, gdzie HBox jest węzłem w layoucie typu BorderPane.</p>
+</div>
+<p>Problem jaki pojawia się w tym momencie to domyślne parametry kontrolek, które sprawiają, że aplikacja nie wygląda najlepiej:</p>
+<img alt="_images/view1.png" class="align-center" src="_images/view1.png" />
+<p>Możemy to na szczęście dosyć łatwo zmodyfikować w sekcji Layout scene buildera (po prawej stronie po kliknięciu na dowolny element), a także wykorzystując opcję dostosowania do domyślnego rozmiaru węzłów potomnych.</p>
+<p>Po wcześniejszym zaznaczeniu HBoxa oraz elementów do niego dodanych wybierz opcję Use Computed Sizes, co pozwoli na pozbycie się zbędnej przestrzeni przy naszych etykietach:</p>
+<img alt="_images/computedsizes.png" class="align-center" src="_images/computedsizes.png" />
+<p>Teraz kliknij na obiekt TextArea i w ustawieniach Layout po prawej stronie ustaw jego wysokość i szerokość (Pref Width i Pref Height):</p>
+<img alt="_images/widthheight.png" class="align-center" src="_images/widthheight.png" />
+<p>W tym momencie po zapisaniu naszego pliku fxml jego kod powinien wyglądać następująco:</p>
+<p><em>plik Editor.fxml</em></p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
+<span class="cp">&lt;?import javafx.scene.control.*?&gt;</span>
+<span class="cp">&lt;?import java.lang.*?&gt;</span>
+<span class="cp">&lt;?import javafx.scene.layout.*?&gt;</span>
+<span class="cp">&lt;?import javafx.scene.layout.BorderPane?&gt;</span>
+
+<span class="nt">&lt;BorderPane</span> <span class="na">xmlns:fx=</span><span class="s">&quot;http://javafx.com/fxml/1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://javafx.com/javafx/8&quot;</span>
+    <span class="na">fx:controller=</span><span class="s">&quot;application.SampleController&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;top&gt;</span>
+        <span class="nt">&lt;MenuBar</span> <span class="na">BorderPane.alignment=</span><span class="s">&quot;CENTER&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;menus&gt;</span>
+                <span class="nt">&lt;Menu</span> <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">text=</span><span class="s">&quot;File&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;items&gt;</span>
+                        <span class="nt">&lt;MenuItem</span> <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">text=</span><span class="s">&quot;Close&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;/items&gt;</span>
+                <span class="nt">&lt;/Menu&gt;</span>
+                <span class="nt">&lt;Menu</span> <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">text=</span><span class="s">&quot;Edit&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;items&gt;</span>
+                        <span class="nt">&lt;MenuItem</span> <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">text=</span><span class="s">&quot;Delete&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;/items&gt;</span>
+                <span class="nt">&lt;/Menu&gt;</span>
+                <span class="nt">&lt;Menu</span> <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">text=</span><span class="s">&quot;Help&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;items&gt;</span>
+                        <span class="nt">&lt;MenuItem</span> <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">text=</span><span class="s">&quot;About&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;/items&gt;</span>
+                <span class="nt">&lt;/Menu&gt;</span>
+            <span class="nt">&lt;/menus&gt;</span>
+        <span class="nt">&lt;/MenuBar&gt;</span>
+    <span class="nt">&lt;/top&gt;</span>
+    <span class="nt">&lt;center&gt;</span>
+        <span class="nt">&lt;TextArea</span> <span class="na">prefHeight=</span><span class="s">&quot;400.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;500.0&quot;</span>
+            <span class="na">BorderPane.alignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/center&gt;</span>
+    <span class="nt">&lt;bottom&gt;</span>
+        <span class="nt">&lt;HBox</span> <span class="na">BorderPane.alignment=</span><span class="s">&quot;CENTER&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;children&gt;</span>
+                <span class="nt">&lt;Label</span> <span class="na">text=</span><span class="s">&quot;Label&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;Separator</span> <span class="na">orientation=</span><span class="s">&quot;VERTICAL&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;Label</span> <span class="na">text=</span><span class="s">&quot;Label&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/children&gt;</span>
+        <span class="nt">&lt;/HBox&gt;</span>
+    <span class="nt">&lt;/bottom&gt;</span>
+<span class="nt">&lt;/BorderPane&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Jak widać każdy element, który dodaliśmy w Scene Builderze ma tutaj swoje odzwierciedlenie w postaci węxła XML. Widoczne są także ustawienia poszczególnych elementów, np. wysokość i szerokość TextArea postaci <em>TextArea prefHeight=&#8221;400.0&#8221; prefWidth=&#8221;500.0&#8221;</em>.</p>
+<p>W tym momencie warto zobaczyć jak nasza aplikacja będzie wyglądała po uruchomieniu. Co ciekawe jeżeli chcemy podejrzeć tylko wygląd bez funkcjonalności, możemy to zrobić bezpośrednio z poziomu Scene Buildera korzystając z opcji Preview -&gt; Show Preview in Window (Ctrl + P).</p>
+<img alt="_images/preview.png" class="align-center" src="_images/preview.png" />
+<p>Jak widzisz widok aplikacji można więc definiować nawet nie znając języka Java.</p>
+</div>
+</div>
+<div class="section" id="architektura-aplikacji">
+<h2>Architektura aplikacji<a class="headerlink" href="#architektura-aplikacji" title="Permalink to this headline">¶</a></h2>
+<p>Czas wrócić jednak do tego, aby nasza aplikacja dała się uruchomić z poziomu eclipse jako aplikacja Javy. Zacznijmy od poprawki w nazwie pliku fxml wczytywanym w klasie Main:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">application</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javafx.application.Application</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javafx.fxml.FXMLLoader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javafx.scene.Scene</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javafx.scene.layout.BorderPane</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javafx.stage.Stage</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">(</span><span class="n">Stage</span> <span class="n">primaryStage</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">BorderPane</span> <span class="n">root</span> <span class="o">=</span> <span class="o">(</span><span class="n">BorderPane</span><span class="o">)</span> <span class="n">FXMLLoader</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">getClass</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">getResource</span><span class="o">(</span><span class="s">&quot;Editor.fxml&quot;</span><span class="o">));</span>
+            <span class="n">Scene</span> <span class="n">scene</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scene</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="mi">400</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
+            <span class="n">scene</span><span class="o">.</span><span class="na">getStylesheets</span><span class="o">().</span><span class="na">add</span><span class="o">(</span>
+                    <span class="n">getClass</span><span class="o">().</span><span class="na">getResource</span><span class="o">(</span><span class="s">&quot;application.css&quot;</span><span class="o">).</span><span class="na">toExternalForm</span><span class="o">());</span>
+            <span class="n">primaryStage</span><span class="o">.</span><span class="na">setScene</span><span class="o">(</span><span class="n">scene</span><span class="o">);</span>
+            <span class="n">primaryStage</span><span class="o">.</span><span class="na">show</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">launch</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Omówmy ten kod linijka po linijce:</p>
+<ol class="arabic simple">
+<li>Wiersze 1-8 to deklaracja pakietu oraz import bibliotek, które później wykorzystujemy</li>
+<li>W linijce 9 widzimy, że nasza klasa Main rozszerza klasę Application. Oznacza to, że jest to główna klasa aplikacji napisanej w JavieFX i to od niej rozpocznie się działanie naszej aplikacji.</li>
+<li>Klasa Application posiada jedną abstrakcyjną metodę <em>start()</em>, którą musimy przesłonić (Override). Jako jej argument przekazany zostanie obiekt Stage, który zostanie utworzony przez wirtualną maszynę. <strong>Stage</strong> to okno naszej aplikacji.</li>
+<li>W wierszach 13-14 wczytujemy nasz widok za pomocą specjalnej klasy FXMLLoader i metody <em>load()</em>. Przetwarza ona plik XML i na podstawie zawartych w nim definicji tworzy obiekty, które będą odzwierciedlone w kodzie Javy.</li>
+<li>W 15 wierzu tworzymy obiekt <strong>Scene</strong>, który dodamy do naszego okna (Stage) w wierszu 18. Scene to klasa reprezentująca główny kontener z widokiem aplikacji, do któego możemy dodawać inne elementy takie jak layouty, czy konkretne kontrolki.</li>
+<li>W 16 i 17 wierzu wczytujemy style CSS, które aplikujemy do naszej sceny. Ponieważ na tę chwilę plik <em>application.css</em> jest pusty, nie będzie to miało wpływu na wygląd naszej aplikacji.</li>
+<li>W metodzie <em>main()</em> wywołujemy metodę <em>launch()</em> ta z kolei odpowiada za cykl życia aplikacji JavaFX, czyli m.in. wywołanie metody <em>start()</em>.</li>
+</ol>
+<p>Ostateczna hierarchia widoku w JavieFX wygląda więc następująco:</p>
+<img alt="_images/viewh.png" class="align-center" src="_images/viewh.png" />
+<p>Pozostaje nam jeszcze jedna rzecz do poprawy. Przy próbie uruchomienia programu otrzymujemy błąd <em>Caused by: java.lang.ClassNotFoundException: application.SampleController</em> - jest on spowodowany tym, że w pliku fxml nie zmieniliśmy klasy kontrolera (fx:controller) po zmianie nazwy pliku z klasą (EditorController).</p>
+<p>W Scene Builderze można to zrobić także w sekcji Document rozwijając zakładkę Controller. Nazwę klasy kontrolera należy podać również ze ścieżką uwzględniającą pakiet (tzw. fully qualified name).</p>
+<img alt="_images/fxcontroller.png" class="align-center" src="_images/fxcontroller.png" />
+<p>Definicja BorderPane w pliku fxml powinna więc wyglądać teraz następująco:</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;BorderPane</span> <span class="na">xmlns=</span><span class="s">&quot;http://javafx.com/javafx/8&quot;</span> <span class="na">xmlns:fx=</span><span class="s">&quot;http://javafx.com/fxml/1&quot;</span>
+    <span class="na">fx:controller=</span><span class="s">&quot;application.EditorController&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>W tym momencie powinniśmy mieć już możliwość uruchomienia naszej aplikacji z poziomu eclipse a naszym oczom powinien ukazać się widok analogiczny do podglądu, który widzieliśmy wcześniej w Scene Builderze.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Jeżeli przy próbie uruchomienia aplikacji nadal pojawia się jakiś błąd związany z dokumentem fxml, a jesteś pewny, że zapisałeś go w Scene Builderze, otwórz go w eclipse, a to pomoże go odświeżyć. Jeżeli nie otworzysz pliku, który przed chwilą edytowałeś w innym edytorze, eclipse może korzystać ze starszej wersji dokumentu, który wczytał już do pamięci.</p>
+</div>
+</div>
+<div class="section" id="fxml-a-klasa-kontrolera">
+<h2>FXML a klasa kontrolera<a class="headerlink" href="#fxml-a-klasa-kontrolera" title="Permalink to this headline">¶</a></h2>
+<p>Nasza aplikacja daje się już w tym momencie uruchomić, jednak w żaden sposób nie możemy odwołać się do pola tekstowego w naszym kodzie Javy. Zgodnie z architekturą MVC powinniśmy móc pobierać i wysyłać informacje do kontrolek zdefiniowanych w widoku poprzez klasę kontrolera. W tym celu musimy zdefiniować w dokumencie fxml dodatkowe atrybuty <strong>fx:id</strong> dla każdej z kontrolek, a najłatwiej będzie to zrobić przełączając najpierw widok w sekcji Document Hierarchy na fx:id właśnie.</p>
+<img alt="_images/fxid.png" class="align-center" src="_images/fxid.png" />
+<p>Nadając fx:id pamiętaj, żeby były to znaczące nazwy, ponieważ będą to jednocześnie nazwy zmiennych w kodzie Javy. fx:id ustawić klikając dwukrotnie obok danej kontrolki w sekcji Document Hierarchy lub wprowadzając ją w sekcji Code (prawe menu).</p>
+<img alt="_images/fxid2.png" class="align-center" src="_images/fxid2.png" />
+</div>
+<div class="section" id="fx-id-i-klasa-kontrolera">
+<h2>fx:id i klasa kontrolera<a class="headerlink" href="#fx-id-i-klasa-kontrolera" title="Permalink to this headline">¶</a></h2>
+<p>Pobranie wartości z kontrolki
+Ustawienie tekstów kontrolek</p>
 <p>Struktura widoku
 Język FXML
 Prosty przykład aplikacji</p>
+<p><a class="reference external" href="http://javafxports.org/page/What_is_JavaFXPorts">http://javafxports.org/page/What_is_JavaFXPorts</a></p>
 </div>
 </div>
 
@@ -70,14 +369,28 @@ Prosty przykład aplikacji</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Graficzny interfejs użytkownika</a><ul>
-<li><a class="reference internal" href="#javafx-scene-builder">JavaFX Scene builder</a></li>
+<li><a class="reference internal" href="#javafx">JavaFX</a><ul>
+<li><a class="reference internal" href="#scene-builder-2-0-pierwszy-rzut-oka">Scene Builder 2.0 - pierwszy rzut oka</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pierwszy-projekt-javafx">Pierwszy projekt JavaFX</a><ul>
+<li><a class="reference internal" href="#omowienie-domyslnego-projektu">Omówienie domyślnego projektu</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#definiowanie-widoku">Definiowanie widoku</a><ul>
+<li><a class="reference internal" href="#edytor-wysiwyg">Edytor WYSIWYG</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architektura-aplikacji">Architektura aplikacji</a></li>
+<li><a class="reference internal" href="#fxml-a-klasa-kontrolera">FXML a klasa kontrolera</a></li>
+<li><a class="reference internal" href="#fx-id-i-klasa-kontrolera">fx:id i klasa kontrolera</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="kolekcje.html"
-                        title="previous chapter">Kolekcje</a></p>
+  <p class="topless"><a href="komunikacja.html"
+                        title="previous chapter">Wyjątki i kolekcje</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="kontrolery.html"
                         title="next chapter">GUI część 2</a></p>
@@ -113,7 +426,7 @@ Prosty przykład aplikacji</p>
           <a href="kontrolery.html" title="GUI część 2"
              >next</a> |</li>
         <li class="right" >
-          <a href="kolekcje.html" title="Kolekcje"
+          <a href="komunikacja.html" title="Wyjątki i kolekcje"
              >previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>

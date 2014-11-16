@@ -771,19 +771,199 @@ ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;();
 </td></tr></table></div>
 <p><strong>Ćwiczenie</strong>
 Przerób program z wcześniejszej części lekcji (zapisy na konkurs) w taki sposób, aby uczestnicy byli dopisywani do listy, a nie tablicy.</p>
+<p><em>plik Competition.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pl</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">ceo</span><span class="o">.</span><span class="na">app</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.InputMismatchException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">pl.org.ceo.data.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Competition</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ADD_COMPETITOR</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PRINT_ALL</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">EXIT</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="c1">// zastępujemy tablicę listą</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">competitors</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// inicjalizujemy listę</span>
+        <span class="n">competitors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">printOptions</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">option</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dane w nieprawidłowym formacie &quot;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">ADD_COMPETITOR:</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">addCompetitor</span><span class="o">(</span><span class="n">sc</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Błąd odczytu danych&quot;</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">PRINT_ALL:</span>
+                <span class="n">printCompetitors</span><span class="o">();</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">EXIT:</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">option</span> <span class="o">!=</span> <span class="n">EXIT</span><span class="o">);</span>
+
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printCompetitors</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Lista uczestników:&quot;</span><span class="o">);</span>
+        <span class="c1">//W listach możemy wykorzystywać pętle for-each jak przy tablicach</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Person</span> <span class="nl">p:</span> <span class="n">competitors</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addCompetitor</span><span class="o">(</span><span class="n">Scanner</span> <span class="n">sc</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InputMismatchException</span> <span class="o">{</span>
+        <span class="c1">// sprawdzanie ilośći elementów jest zbędne, ponieważ zajmuje się tym</span>
+        <span class="c1">// lista</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dodawanie nowego uczestnika: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Imię: &quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Nazwisko&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;PESEL:&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setPesel</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wiek:&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">competitors</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printOptions</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dostępne opcje: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ADD_COMPETITOR</span> <span class="o">+</span> <span class="s">&quot; - Dodaj uczestnika&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">PRINT_ALL</span> <span class="o">+</span> <span class="s">&quot; - Wyświetl uczestników&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">EXIT</span> <span class="o">+</span> <span class="s">&quot; - Wyjście z programu&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wybierz opcję: &quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
-<div class="section" id="zbiory">
-<h3>Zbiory<a class="headerlink" href="#zbiory" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-<div class="section" id="zapis-i-odczyt-plikow">
-<h2>Zapis i odczyt plików<a class="headerlink" href="#zapis-i-odczyt-plikow" title="Permalink to this headline">¶</a></h2>
-<p>Omówienie sposobów na zapis i odczyt plików
-Pliki txt
-Zapis obiektów i Serializacja</p>
-</div>
-<div class="section" id="serializacja-obiektow">
-<h2>Serializacja obiektów<a class="headerlink" href="#serializacja-obiektow" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -802,11 +982,8 @@ Zapis obiektów i Serializacja</p>
 <li><a class="reference internal" href="#kolekcje">Kolekcje</a></li>
 <li><a class="reference internal" href="#typy-opakowujace">Typy opakowujące</a><ul>
 <li><a class="reference internal" href="#listy">Listy</a></li>
-<li><a class="reference internal" href="#zbiory">Zbiory</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#zapis-i-odczyt-plikow">Zapis i odczyt plików</a></li>
-<li><a class="reference internal" href="#serializacja-obiektow">Serializacja obiektów</a></li>
 </ul>
 </li>
 </ul>

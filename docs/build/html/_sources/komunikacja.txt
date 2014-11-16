@@ -486,24 +486,103 @@ Na listach możemy wykonywać podstawowe operacje takie jak:
 **Ćwiczenie**
 Przerób program z wcześniejszej części lekcji (zapisy na konkurs) w taki sposób, aby uczestnicy byli dopisywani do listy, a nie tablicy.
 
+*plik Competition.java*
 
+.. code-block:: java
+    :linenos:
 
+    package pl.org.ceo.app;
 
-Zbiory
-^^^^^^^^^
+    import java.util.ArrayList;
+    import java.util.InputMismatchException;
+    import java.util.List;
+    import java.util.Scanner;
 
+    import pl.org.ceo.data.Person;
 
+    public class Competition {
 
+        public static final int ADD_COMPETITOR = 0;
+        public static final int PRINT_ALL = 1;
+        public static final int EXIT = 2;
 
+        // zastępujemy tablicę listą
+        private static List<Person> competitors;
 
+        public static void main(String[] args) {
+            // inicjalizujemy listę
+            competitors = new ArrayList<>();
+            Scanner sc = new Scanner(System.in);
+            int option = 0;
 
+            do {
+                printOptions();
+                try {
+                    option = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException exc) {
+                    sc.nextLine();
+                    System.out.println("--------------------");
+                    System.out.println("Dane w nieprawidłowym formacie ");
+                    continue;
+                }
 
-Zapis i odczyt plików
-------------------------------
-Omówienie sposobów na zapis i odczyt plików
-Pliki txt
-Zapis obiektów i Serializacja
+                switch (option) {
+                case ADD_COMPETITOR:
+                    try {
+                        addCompetitor(sc);
+                    } catch (InputMismatchException e) {
+                        sc.nextLine();
+                        System.out.println("--------------------");
+                        System.out.println("Błąd odczytu danych");
+                    }
+                    break;
+                case PRINT_ALL:
+                    printCompetitors();
+                    break;
+                case EXIT:
+                    break;
+                }
+            } while (option != EXIT);
 
+            sc.close();
 
-Serializacja obiektów
-------------------------------
+        }
+
+        private static void printCompetitors() {
+            System.out.println("--------------------");
+            System.out.println("Lista uczestników:");
+            //W listach możemy wykorzystywać pętle for-each jak przy tablicach
+            for (Person p: competitors) {
+                System.out.println(p);
+            }
+        }
+
+        private static void addCompetitor(Scanner sc) throws InputMismatchException {
+            // sprawdzanie ilośći elementów jest zbędne, ponieważ zajmuje się tym
+            // lista
+            Person person = new Person();
+            System.out.println("--------------------");
+            System.out.println("Dodawanie nowego uczestnika: ");
+            System.out.println("Imię: ");
+            person.setFirstName(sc.nextLine());
+            System.out.println("Nazwisko");
+            person.setLastName(sc.nextLine());
+            System.out.println("PESEL:");
+            person.setPesel(sc.nextLine());
+            System.out.println("Wiek:");
+            person.setAge(sc.nextInt());
+            sc.nextLine();
+
+            competitors.add(person);
+        }
+
+        private static void printOptions() {
+            System.out.println("--------------------");
+            System.out.println("Dostępne opcje: ");
+            System.out.println(ADD_COMPETITOR + " - Dodaj uczestnika");
+            System.out.println(PRINT_ALL + " - Wyświetl uczestników");
+            System.out.println(EXIT + " - Wyjście z programu");
+            System.out.println("Wybierz opcję: ");
+        }
+    }
