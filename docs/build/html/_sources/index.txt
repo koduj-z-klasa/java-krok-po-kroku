@@ -37,7 +37,7 @@ Cały kurs podzielony jest na 8 lekcji.
   obiekty2
   komunikacja
   gui
-  kontrolery
+  gui2
   summary
 	
 Indices and tables

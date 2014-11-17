@@ -387,6 +387,8 @@ W metodzie initialize() ustawmy tekst naszego głównego pola tekstowego oraz et
 
 W wierszach 30-32 ustawiamy teksty odpowiednich kontrolek za pomocą metod *setText()*. Analogicznie w celu odczytania tekstu, który wprowadzi użytkownik będziemy używali metody *getText()*, jednak tego nauczymy się już w kolejnej lekcji omawiając obsługę zdarzeń.
 
+Adnotacja @FXML
+
 .. image:: 06_fx/end.png
     :align: center
 
