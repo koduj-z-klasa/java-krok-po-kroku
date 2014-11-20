@@ -35,7 +35,7 @@ Cały kurs podzielony jest na 8 lekcji.
   obiekty
   sterowanie
   obiekty2
-  komunikacja
+  wyjkol
   gui
   gui2
   summary

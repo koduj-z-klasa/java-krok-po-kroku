@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
-    <link rel="next" title="Wyjątki i kolekcje" href="komunikacja.html" />
+    <link rel="next" title="Wyjątki i kolekcje" href="wyjkol.html" />
     <link rel="prev" title="Struktury sterujące i pętle" href="sterowanie.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="komunikacja.html" title="Wyjątki i kolekcje"
+          <a href="wyjkol.html" title="Wyjątki i kolekcje"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="sterowanie.html" title="Struktury sterujące i pętle"
@@ -60,10 +60,11 @@
 <li>Co to jest polimorfizm</li>
 <li>Do czego służy operator instanceof</li>
 <li>Czym są klasy abstrakcyjne i interfejsy</li>
+<li>Co oznacza słowo static</li>
 </ul>
 <div class="section" id="odbieranie-danych-od-uzytkownika">
 <h2>Odbieranie danych od użytkownika<a class="headerlink" href="#odbieranie-danych-od-uzytkownika" title="Permalink to this headline">¶</a></h2>
-<p>W naszych dotychczasowych programach skupialiśmy się na poznawaniu podstawowych mechanizmów języka Java, jednak brakowało w nich interakcji z użytkownikiem. Biblioteka wejścia/wyjścia w Javie jest dosyć rozbudowana i w tej części kursu poznamy podstawowe sposoby interakcji człowieka z komputerem.</p>
+<p>W naszych dotychczasowych programach skupialiśmy się na poznawaniu podstawowych mechanizmów języka Java, jednak brakowało w nich interakcji z użytkownikiem. Biblioteka wejścia/wyjścia w Javie jest dosyć rozbudowana jednak w tej części kursu poznamy podstawowe sposoby interakcji człowieka z komputerem.</p>
 <p>Najprostszą klasą, która pozwoli odczytywać dane od użytkownika jest <strong>Scanner</strong>. Posiada ona zestaw użytecznych metod, które pozwolą nam wczytać zarówno liczby jak i napisy. Klasa ta jest dosyć uniwersalna, więc w zależności od tego co przekażemy w konstruktorze podczas inicjalizacji możemy za pomocą jej obiektu zarówno odczytywać dane od użytkownika, które będą wprowadzane z klawiatury, ale także odczytywać informacje zawarte w plikach.</p>
 <p>Inicjalizacja obiektu Scanner w przypadku, gdy chcemy odczytać dane od użytkownika wygląda następująco:</p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -77,15 +78,15 @@
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Przede wszystkim, aby korzystać z klasy Scanner w swoim kodzie, musisz ją najpierw zaimportować (np. wykorzystując skrót Ctrl+Shift+O w eclipse). Obiekt tworzony jest przez przekazanie w konstruktorze standardowego strumienia wejścia, którym jest <em>System.in</em>.</p>
+<p>Przede wszystkim, aby korzystać z klasy Scanner w swoim kodzie, musisz ją najpierw zaimportować z pakietu java.util (np. wykorzystując skrót Ctrl+Shift+O w eclipse). Obiekt tworzony jest przez przekazanie w konstruktorze standardowego strumienia wejścia, którym jest <em>System.in</em>.</p>
 <p>Następnie do odczytu danych należy skorzystać z jednej z metod zawartych w klasie Scanner:</p>
 <ul class="simple">
 <li>nextInt() - odczytanie kolejnej liczby typu int</li>
-<li>nextDouble() - odczytanie kolejnej liczby typu double</li>
-<li>nextLine() - wczytanie kolejnego wiersza tekstu (String) zakończonego znakiem nowej linii</li>
+<li>nextDouble() - odczytanie kolejnej liczby typu double (uwaga, domyślny separator dziesiętny jest zależny od ustawień maszyny wirtualnej, w Polsce domyślnie liczby należy wprowadzać rozdzielone przecinkiem)</li>
+<li>nextLine() - wczytanie kolejnego wiersza tekstu (String) zakończonego znakiem nowej linii &#8216;n&#8217;</li>
 <li>analogicznie dla innych typów danych istnieją metody takie jak nextBoolean(), nextLong() itp.</li>
 </ul>
-<p>Ważne jest to, że w przypadku, gdy odczytywać będziemy liczby, w buforze nadal pozostanie znak nowej linii, który należy wczytać za pomocą metody nextLine(). Przykład:</p>
+<p>Ważne jest to, że w przypadku, gdy odczytywać będziemy liczby, w buforze nadal pozostanie znak nowej linii, który należy wczytać za pomocą metody <em>nextLine()</em>. Przykład:</p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -149,14 +150,16 @@
 </td></tr></table></div>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">Pamiętaj, że po zakończeniu pracy ze strumieniami wejścia, szczególnie odczytu z plików należy je zamykać za pomocą metody close(). Analogicznie będzie należało postępować z operacjami wyjścia, czyli np. zapisem danych do plików.</p>
+<p class="last">Pamiętaj, że po zakończeniu pracy ze strumieniami wejścia lub wyjścia, szczególnie odczytu plików należy je zamykać za pomocą metody close(). Analogicznie będzie należało postępować z operacjami wyjścia, czyli np. zapisem danych do plików.</p>
 </div>
 <p><strong>Ćwiczenie</strong> <em>(10 min)</em></p>
-<p>Napisz prosty program do zarządzania książkami biblioteki. Powinien się on składać z dwóch klas:</p>
+<blockquote>
+<div><p>Napisz prosty program do zarządzania książkami biblioteki. Powinien się on składać z dwóch klas:</p>
 <ul class="simple">
 <li>Book - klasa reprezentująca pojedynczą książkę. Powinna posiadać pola reprezentujące numer ISBN, tytuł oraz autora</li>
 <li>BookManager - główna klasa aplikacji, w której wczytasz od użytkownika dotyczące 1 książki, utworzysz na ich podstawie obiekt klasy Book i wyświetlisz odpowiednie informacje na ekranie. Zadbaj o utworzenie odpowiednich konstruktorów.</li>
 </ul>
+</div></blockquote>
 <img alt="_images/library1_project.png" class="align-center" src="_images/library1_project.png" />
 <p><em>plik Book.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -246,13 +249,13 @@
 <p>W naszej aplikacji możemy teraz przechowywać i wczytywać od użytkownika informacje o książkach, jednak warto zauważyć, że przecież w bibliotece oprócz książek są także komiksy, gazety, ogólnie rzecz ujmując magazyny. W tym momencie należałoby stworzyć osobną klasę Magazine, która przechowywać będzie również numer ISBN, tytuł, oraz np. wydawnictwo. Problemem jest to, że pewne dane zaczynają się tutaj powielać, a tego w programowaniu zdecydowanie powinniśmy unikać.</p>
 <p>W celu rozwiązania m.in. tego problemu powstał paradygmat programowania obiektowego, które pozwala budować hierarchię klas, dającą możliwość tworzenia kodu, który może być wykorzystywany wielokrotnie i być bazą do tworzenia jeszcze kolejnych klas.</p>
 <img alt="_images/inheritance.png" class="align-center" src="_images/inheritance.png" />
-<p>Na powyższym programie widać bazową klasę <strong>Publication</strong>, po której dziedziczą dwie kolejne klasy: <strong>Book</strong> oraz <strong>Magazine</strong>. Różnią się one tym, że autor posiada najczęściej jednego autora (np. Henryk Sienkiewicz), natomiast w przypadku gazety w tym miejscu pojawi się wydawnictwo (np. Ringier Axel Springer).</p>
+<p>Na powyższym diagramie widać bazową klasę <strong>Publication</strong>, po której dziedziczą dwie kolejne klasy: <strong>Book</strong> oraz <strong>Magazine</strong>. Różnią się one tym, że książka posiada najczęściej jednego autora (np. Henryk Sienkiewicz), natomiast w przypadku gazety w tym miejscu pojawi się wydawnictwo (np. Ringier Axel Springer).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Jeżeli istnieje pewna klasa <strong>A</strong>, a poniej dziedziczy pewna klasa <strong>B</strong>, to klasa <strong>B</strong> przejmuje wszystkie widoczne cechy klasy <strong>A</strong>.</p>
 </div>
-<p>Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram, klasa <strong>Book</strong>, czy <strong>Magazine</strong> będą posiadały także pola klasy <strong>Publication</strong>, czyli isbn oraz title. W Javie dziedziczenie można osiągnąć stosując słowo kluczowe <strong>extends</strong> w definicji klasy, np.:</p>
-<img alt="_images/library1_project.png" class="align-center" src="_images/library1_project.png" />
+<p>Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram, klasa <strong>Book</strong>, czy <strong>Magazine</strong> będą posiadały także pola z klasy <strong>Publication</strong>, czyli <em>isbn</em> oraz <em>title</em>. W Javie dziedziczenie można osiągnąć stosując słowo kluczowe <strong>extends</strong> w definicji klasy, np.:</p>
+<img alt="_images/inherit.png" class="align-center" src="_images/inherit.png" />
 <p><em>plik Publication.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -307,7 +310,7 @@
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
-<p><em>plik Book.java</em></p>
+<p><em>plik Magazine.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -333,15 +336,27 @@
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Zwróć uwagę, że pomimo iż w klasach <em>Book</em> oraz <em>Magazine</em> nie zadeklarowaliśmy pól <em>isbn</em> oraz <em>title</em> to mamy do nich dostęp w konstruktorze, czy metodach getBookInfo() i getMagazineInfo(), ponieważ dziedziczą one te cechy z klasy Publication.</p>
-<p>Kolejną nowością jest zastosowanie specjalnej konstrukcji <strong>super()</strong>. Działa ona w sposób podobny do słowa kluczowego this, którego używaliśmy w przypadku, gdy posiadaliśmy kilka przeciążonych wersji konstruktora z tą różnicą, że wywołuje konstruktor nadklasy z odpowiednimi parametrami.</p>
-<p>Ostatnia rzecz dotyczy <strong>przesłaniania</strong> metod. W klasie Publication zdefiniowaliśmy metodę getInfo(). Jeżeli w klasie dziedzicząsej (Book lub Magazine) zdefiniujemy metodę o takiej samej sygnaturze, to powiemy, że przesłania ona oryginalną metodę getInfo(). W celu wywołania metody nadklasy należy posłużyć się w takiej sytuacji zapisem <strong>super.getInfo()</strong>.</p>
+<p>Zwróć uwagę, że pomimo iż w klasach <em>Book</em> oraz <em>Magazine</em> nie zadeklarowaliśmy pól <em>isbn</em> oraz <em>title</em> to mamy do nich dostęp w konstruktorze, czy metodach <em>getBookInfo()</em> i <em>getMagazineInfo()</em>, ponieważ dziedziczą one te cechy z klasy Publication.</p>
+<p>Kolejną nowością jest zastosowanie specjalnej konstrukcji <strong>super()</strong>. Działa ona w sposób podobny do słowa kluczowego <em>this</em>, którego używaliśmy w przypadku, gdy posiadaliśmy kilka przeciążonych wersji konstruktora z tą różnicą, że wywołuje konstruktor nadklasy z odpowiednimi parametrami.</p>
+<p>Ostatnia rzecz dotyczy <strong>przesłaniania</strong> metod. W klasie Publication zdefiniowaliśmy metodę <em>getInfo()</em>. Jeżeli w klasie dziedzicząsej (Book lub Magazine) zdefiniujemy metodę o takiej samej sygnaturze, to powiemy, że przesłania ona oryginalną metodę <em>getInfo()</em>. W celu wywołania metody nadklasy należy posłużyć się w takiej sytuacji zapisem <strong>super.getInfo()</strong>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Pierwszą, niejawną instrukcją jaka jest wykonywana w podklasie pewnej klasy bazowej jest wywołanie konstruktora nadklasy poprzez <strong>super()</strong>. Jeżeli w klasie bazowej nie jest zdefiniowany konstruktor bezparametrowy to należy jawnie wywołać konstruktor z odpowiednimi argumentami poprzez zapis <strong>super(lista_parametrow)</strong>. Jeżeli chcesz natomiast wywołać w którejś z metod metodę z nadklasy wykorzystaj zapis <strong>super.nazwaMetody(parametry)</strong>.</p>
 </div>
-<p><strong>Ćwiczenie</strong> <em>(10 min)</em>
-W klasie BookManager utwórz tablice do przechowywania książek oraz magazynów. W każdej tablicy utwórz przynajmniej po jednym obiekcie danego typu, a następnie wyświetl je na ekranie.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Jeżeli chcesz zaznaczyć, że jakaś metoda jest przesłonięta możesz zastosować dodatkową adnotację <em>&#64;Override</em>. W wielu sytuacjach będzie ona automatycznie wygenerowana przez eclipse, warto więc rozumieć co oznacza.</p>
+<div class="last highlight-python"><div class="highlight"><pre>@Override
+String getInfo() {
+    return super.getInfo() + &quot; - &quot; + author;
+}
+</pre></div>
+</div>
+</div>
+<dl class="docutils">
+<dt><strong>Ćwiczenie</strong> <em>(10 min)</em></dt>
+<dd>W klasie BookManager utwórz tablice do przechowywania książek oraz magazynów. W każdej tablicy utwórz przynajmniej po jednym obiekcie danego typu, a następnie wyświetl je na ekranie.</dd>
+</dl>
 <p><em>plik BookManager.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -441,19 +456,24 @@ for(int i=0; i &lt; magazines.length; i++) {
 </pre></div>
 </div>
 <p>Lepiej by było tak naprawdę przechowywać wszystkie te dane w jednej wspólnej tablicy typu <em>Publication</em>, a następnie ewentualnie rozpoznać, czy dany element tablicy jest typu Book, czy Magazine.</p>
-<p>Efekt taki można osiągnąć dzięki zastosowaniu tzw. <strong>polimorfizmu</strong> lub inaczej mówiąc wielopostaciowości. Polega to na tym, że do ogólnej, wspólnej referencji można przypisać obiekty różnych typów, które po typie tej referencji dziedziczą.</p>
+<p>Efekt taki można osiągnąć dzięki zastosowaniu <strong>polimorfizmu</strong> lub inaczej mówiąc wielopostaciowości. Polega to na tym, że do ogólnej, wspólnej referencji można przypisać obiekty różnych typów, które po typie tej referencji dziedziczą.</p>
 <p>W naszym przypadku klasy Book i Magazine dziedziczą po klasie Publication, więc jak najbardziej możliwe jest zapisanie:</p>
 <div class="highlight-python"><div class="highlight"><pre>Publication pub1 = new Book(argumenty_konstruktora);
 Publication pub2 = new Magazine(argumenty_konstruktora);
 </pre></div>
 </div>
 <p>W podobny sposób możemy także utworzyć tablicę typu Publication, która będzie przechowywała zarówno książki jak i magazyny. Pamiętać należy jednak o dwóch rzeczach:</p>
-<ol class="arabic simple">
-<li>Zawsze mamy dostęp jedynie do metod z typu referencji. Jeżeli w klasie Book zdefiniujemy dodatkową metodę changeBookTitle(), a referencja będzie typu Publication, to nie będziemy mieli dostępu do takiej metody</li>
+<p>1. Zawsze mamy dostęp jedynie do metod z typu referencji. Jeżeli w klasie Book zdefiniujemy dodatkową metodę changeBookTitle(), a referencja będzie typu Publication, to nie będziemy mieli dostępu do takiej metody. Jeśżeli chcesz uzyskać dostęp do wszystkich metod (również tych nie zdefiniowanych w typie nadrzędnym) musisz skorzystać z rzutowania typu. Rzutowanie polega na wykorzystaniu nawiasu, np.:</p>
+<div class="highlight-python"><div class="highlight"><pre>Publication pub = new Magazine(...);
+((Magazine)pub).metodaZKlasyMagazine();
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
 <li>Metody będą wywoływane na rzecz typu obiektu, a nie typu referencji. Jeżeli zapisaliśmy <em>Publication pub1 = new Book(argumenty_konstruktora);</em> to wywołując metodę pub1.getInfo() wywołamy jej wersję z klasy Book, a nie Publication.</li>
 </ol>
-<p><strong>Ćwiczenie</strong> <em>(5 min)</em>
-Przerób klasę BookManager w taki sposób, aby przechowywać książki oraz magazyny w jednej wspólnej tablicy typu Publication[].</p>
+<p><strong>Ćwiczenie</strong> <em>(5 min)</em></p>
+<blockquote>
+<div>Przerób klasę BookManager w taki sposób, aby przechowywać książki oraz magazyny w jednej wspólnej tablicy typu Publication[].</div></blockquote>
 <p><em>plik BookManager.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -557,13 +577,16 @@ Przerób klasę BookManager w taki sposób, aby przechowywać książki oraz mag
 <span class="o">}</span>
 </pre></div>
 </div>
+<p>Na ekranie zobaczymy tekst &#8220;To jest ksiażka&#8221;.</p>
 <p>Sprawdzenie obiektu za pomocą operatora instanceof zwraca w wyniku true lub false, więc jak widać w powyższym przykładzie, może on być zastosowany jako warunek w instrukcji if.</p>
-<p><strong>Ćwiczenie</strong> <em>(5 min)</em>
-Przerób kod klasy BookManager w taki sposób, aby dane były wyświetlane w formie:</p>
+<p><strong>Ćwiczenie</strong> <em>(5 min)</em></p>
+<blockquote>
+<div><p>Przerób kod klasy BookManager w taki sposób, aby dane były wyświetlane w formie:</p>
 <div class="highlight-python"><div class="highlight"><pre>Książka: 123456789 - W pustyni i w puszczy - Henryk Sienkiewicz
 Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 </pre></div>
 </div>
+</div></blockquote>
 <p><em>plik BookManager.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -659,7 +682,7 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 </div>
 <div class="section" id="klasy-abstrakcyjne-i-interfejsy">
 <h2>Klasy abstrakcyjne i interfejsy<a class="headerlink" href="#klasy-abstrakcyjne-i-interfejsy" title="Permalink to this headline">¶</a></h2>
-<p>Nasza aplikacja jest już prawie gotowa, jednak warto się zastanowić nad jeszcze jedną rzeczą. Stworzyliśmy klasę Publication, która jest klasą bazową dla dwóch konkretnych typó danych, które wykorzystujemy. Ponieważ nie chcemy używać obiektów klasy Publication bezpośrednio, powinniśmy z niej zrobić jedynie pewną warstwę abstrakcji, czyli klasę, która jest jedynie klasą bazową dla innych typów, ale nie można tworzyć jej obiektów bezpośrednio.</p>
+<p>Nasza aplikacja jest już prawie gotowa, jednak warto się zastanowić nad jeszcze jedną rzeczą. Stworzyliśmy klasę Publication, która jest klasą bazową dla dwóch konkretnych typów danych, które wykorzystujemy. Ponieważ nie chcemy używać obiektów klasy Publication bezpośrednio, powinniśmy z niej zrobić jedynie pewną warstwę abstrakcji, czyli klasę, która jest jedynie klasą bazową dla innych typów, ale nie można tworzyć jej obiektów bezpośrednio.</p>
 <p>W Javie można to osiągnąć wykorzystując <strong>klasę abstrakcyjną</strong>. Jeżeli jakaś klasa ma być abstrakcyjna, należy w jej sygnaturze dodać o tym informację za pomocą słowa kluczowego <strong>abstract</strong>.</p>
 <p><em>plik Publication.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -727,9 +750,9 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Jak widzisz metoda printInfo() oznaczona jest słowek abstract. Nie posiada ona żadnej implementacji - nie posiada nawet nawiasów klamrowych i zakończona jest średnikiem.</p>
+<p>Jak widzisz metoda <em>printInfo()</em> oznaczona jest słowek abstract. Nie posiada ona żadnej implementacji - nie posiada nawet nawiasów klamrowych i zakończona jest średnikiem.</p>
 <img alt="_images/abstract.png" class="align-center" src="_images/abstract.png" />
-<p>Jak widzisz dodanie metody abstrakcyjnej powoduje błędy w naszym projekcie w klasach dziedziczących po Publication. W celu ich wyeliminowania powinniśmy zaimplementować metodę printInfo() w tych klasach, np.:</p>
+<p>Jak widzisz dodanie metody abstrakcyjnej powoduje błędy w naszym projekcie w klasach dziedziczących po Publication. W celu ich wyeliminowania powinniśmy zaimplementować metodę <em>printInfo()</em> w tych klasach, np.:</p>
 <p><em>plik Book.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -783,7 +806,8 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Magazine</span> <span class="kd">extends</span> <span class="n">Publication</span> <span class="o">{</span>
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Magazine</span> <span class="kd">extends</span> <span class="n">Publication</span> <span class="o">{</span>
     <span class="n">String</span> <span class="n">publisher</span><span class="o">;</span>
 
     <span class="n">Magazine</span><span class="o">(</span><span class="n">String</span> <span class="n">isbn</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">publisher</span><span class="o">)</span> <span class="o">{</span>
@@ -795,6 +819,7 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
         <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getInfo</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">publisher</span><span class="o">;</span>
     <span class="o">}</span>
 
+    <span class="nd">@Override</span>
     <span class="kt">void</span> <span class="nf">printInfo</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getInfo</span><span class="o">());</span>
     <span class="o">}</span>
@@ -843,12 +868,11 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 <li>Możesz implementować dowolną liczbę interfejsów (implements).</li>
 </ol>
 </div>
-<div class="section" id="cwiczenie-podsumowujace">
-<h2>Ćwiczenie podsumowujące<a class="headerlink" href="#cwiczenie-podsumowujace" title="Permalink to this headline">¶</a></h2>
-<p>Do aplikacji</p>
-</div>
-<div class="section" id="dodatek-metody-dziedziczone-z-klasy-object">
-<h2>Dodatek - metody dziedziczone z klasy Object<a class="headerlink" href="#dodatek-metody-dziedziczone-z-klasy-object" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dodatek-skladowe-statyczne">
+<h2>Dodatek - składowe statyczne<a class="headerlink" href="#dodatek-skladowe-statyczne" title="Permalink to this headline">¶</a></h2>
+<p>Jako dodatek tej lekcji wytłumaczymy jescze krótko co oznacza słowo kluczowe <strong>static</strong>. W niektorych sytuacjach chcielibyśmy mieć dostęp do metody, czy pola klasy bez konieczności tworzenia obiektu. Przykładem takiej metody jest dobrze nam już znana metoda <em>main()</em>.</p>
+<p>Jeżeli zdefiniujemy jakieś pole lub metodę jako statyczne, to możemy się do nich odwoływać bez tworzenia obiektu takiej klasy poprzez konstrukcję NazwaKlasy.nazwaPolaStatycznego lub NazwaKlasy.metodaStatyczna().</p>
+<p>Najważniejszą rzeczą dotyczącą składowych statycznych klasy jest to, że w metodach statycznych możemy odwoływać się jedynie do innych elementów statycznych tej klasy.</p>
 </div>
 </div>
 
@@ -866,8 +890,7 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 <li><a class="reference internal" href="#polimorfizm">Polimorfizm</a></li>
 <li><a class="reference internal" href="#operator-instanceof">Operator instanceof</a></li>
 <li><a class="reference internal" href="#klasy-abstrakcyjne-i-interfejsy">Klasy abstrakcyjne i interfejsy</a></li>
-<li><a class="reference internal" href="#cwiczenie-podsumowujace">Ćwiczenie podsumowujące</a></li>
-<li><a class="reference internal" href="#dodatek-metody-dziedziczone-z-klasy-object">Dodatek - metody dziedziczone z klasy Object</a></li>
+<li><a class="reference internal" href="#dodatek-skladowe-statyczne">Dodatek - składowe statyczne</a></li>
 </ul>
 </li>
 </ul>
@@ -876,7 +899,7 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
   <p class="topless"><a href="sterowanie.html"
                         title="previous chapter">Struktury sterujące i pętle</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="komunikacja.html"
+  <p class="topless"><a href="wyjkol.html"
                         title="next chapter">Wyjątki i kolekcje</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
@@ -907,7 +930,7 @@ Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="komunikacja.html" title="Wyjątki i kolekcje"
+          <a href="wyjkol.html" title="Wyjątki i kolekcje"
              >next</a> |</li>
         <li class="right" >
           <a href="sterowanie.html" title="Struktury sterujące i pętle"

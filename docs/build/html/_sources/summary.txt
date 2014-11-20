@@ -288,6 +288,9 @@ Klasa modelu w naszym przypadku jest bardzo prosta. Jedynym jej zadaniem będzie
         }
     }
 
+Kontroler
+-------------
+
 *plik TicTacToeController.java*
 
 .. code-block:: java
@@ -477,7 +480,9 @@ Klasa modelu w naszym przypadku jest bardzo prosta. Jedynym jej zadaniem będzie
         }
     }
 
-zxc
+Gotowa aplikacja
+------------------
+
 *plik Main.java*
 
 .. code-block:: java

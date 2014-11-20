@@ -1,6 +1,8 @@
 Graficzny interfejs użytkownika
 ================================
 
+Z powodu ilości nowych elementów oraz skomplikowania tej lekcji uczniowie powinni rozwijać kod i aplikację wraz z prowadzącym.
+
 W tej lekcji dowiesz się:
 
 * Czym jest JavaFX
@@ -34,8 +36,9 @@ W Scene Builderze możemy wyróżnić kilka głównych obszarów roboczych, z kt
 #. **Podgląd** - 
 #. **Inspector** - 
 
-**Ćwiczenie**
-Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć różne elementy z sekcji Library do obszaru roboczego lub bezpośrednio do sekcji Document. Kliknij na wybrane z przeciągniętych elementów i spróbuj pozmieniać ustawienia w sekcji Inspector po prawej stronie.
+**Ćwiczenie** *(10 minut)*
+
+    Zapoznaj się przez chwilę z narzędziem Scene Builder. Spróbuj przeciągnąć różne elementy z sekcji Library do obszaru roboczego lub bezpośrednio do sekcji Document. Kliknij na wybrane z przeciągniętych elementów i spróbuj pozmieniać ustawienia w sekcji Inspector po prawej stronie.
 
 
 Pierwszy projekt JavaFX
@@ -54,7 +57,7 @@ Wybierz Finish, po czym projekt zostanie utworzony.
 
 
 Omówienie domyślnego projektu
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 Eclipse domyślnie wygeneruje dla nas prosty szablon projektu JavaFX, który już na pierwszy rzut oka różni się od tego co znaliśmy do tej pory.
 
 .. image:: 06_fx/fxproject.png
@@ -100,6 +103,7 @@ W Scene builderze zauważysz, że kod XML ma odzwierciedlenie w sekcji Document 
 
 .. image:: 06_fx/dochier.png
     :align: center
+
 
 Edytor WYSIWYG
 ^^^^^^^^^^^^^^^
@@ -391,7 +395,6 @@ Adnotacja @FXML
 
 .. image:: 06_fx/end.png
     :align: center
-
 
 
 http://javafxports.org/page/What_is_JavaFXPorts

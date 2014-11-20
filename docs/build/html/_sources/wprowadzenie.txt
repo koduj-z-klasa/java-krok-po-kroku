@@ -16,7 +16,7 @@ Eclipse IDE
 
 Eclipse to najpopularniejsze środowisko programistyczne wśród programistów Java. Jego głównymi zaletami z punktu widzenia osoby początkującej jest wykrywanie błędów w trakcie pisania kodu a także podpowiadanie składni wraz z możliwością generowania i prostej modyfikacji (refaktoryzacji) kodu źródłowego. Wszystko to składa się przede wszystkim na znaczną oszczędność czasu.
 
-Przy pierwszym uruchomieniu środowiska zostaniemy zapytani o wskazanie folder "workspace" - jest to folder, w którym przechowywane będą tworzone przez nas projekty. Zalecamy zostawić tę lokalizację domyślną.
+Przy pierwszym uruchomieniu środowiska zostaniemy zapytani o wskazanie folderu "workspace" - jest to folder, w którym przechowywane będą tworzone przez nas projekty. Zalecamy zostawić tę lokalizację domyślną.
 
 .. image:: 01_wprowadzenie/eclipse_overview.png
     :align: center
@@ -28,10 +28,11 @@ Na powyższym zrzucie ekranu widać domyślny widok, który zastaniemy po urucho
 #. Outline - to skrótowy podgląd danego pliku i elementów w nim zawartych (zmienne, metody/funkcje)
 #. W dolnej części ekranu znajduje się kilka zakładek. Najważniejsza z nich to **Problems**, która pokazuje wszelkie błędy i ostrzeżenia występujące w kodzie źródłowym. W tym miejscu zobaczymy także dodatkową zakładkę **Console** z wydrukami generowanymi przez nasze aplikacje.
 
+
 Pierwszy Projekt
 -----------------
 
-W celu utworzenia nowego projektu wybieramy opcje **File -> New -> Java Project**
+W celu utworzenia nowego projektu wybieramy opcję **File -> New -> Java Project**
 
 .. image:: 01_wprowadzenie/eclipse_first_project.png
     :align: center
@@ -82,10 +83,10 @@ W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy
 
 W linii 1 widzimy definicję klasy. Klasę definiujemy za pomocą słowa kluczowego **class**, po którym następuje nazwa klasy. Eclipse automatycznie oznacza klasę jako publiczną za pomocą słowa kluczowego **public**, co najprościej można wytłumaczyć jako możliwość jej wykorzystania z dowolnego miejsca w naszym projekcie.
 
-W wierszu 3 widzimy zapis *public static void main(String[] args)*, czyli publiczną, statyczną metodę o nazwie **main**, która nie zwraca żadnego wyniku (void). Element umieszczony w nawiasie, czyli *String[] args* to argument metody main w postaci tablicy - więcej na ten temat powiemy w 3 lekcji.
+W wierszu 3 widzimy zapis *public static void main(String[] args)*, czyli publiczną, statyczną metodę o nazwie **main**, która nie zwraca żadnego wyniku (void). Element umieszczony w nawiasie, czyli *String[] args* to argument metody main w postaci tablicy - więcej na ten temat powiemy w dalszej części lekcji.
 
 .. note::
-    Zapamiętaj, że od metody main rozpoczyna się działanie każdej aplikacji napisanej w języku Java. Jeżeli nie zdefiniujesz takiej metody w swojej klasie, to nie będziesz w stanie uruchomić aplikacji.
+    Zapamiętaj, że od metody main rozpoczyna się działanie każdej aplikacji napisanej w języku Java. Jeżeli nie zdefiniujesz takiej metody w swojej klasie, to nie będziesz w stanie uruchomić programu.
 
 Zauważ, że zarówno definicja klasy jak i metody rozpoczyna się i końcy nawiasami klamrowymi. Nawiasy klamrowe znacznie podnoszą czytelność kodu, szczególnie, gdy klasa składa się z kilkuset, czy nawet kilku tysięcy wierszy.
 
@@ -106,6 +107,7 @@ W tym momencie w dolnej części eclipse powinno się pojawić okno konsoli (Con
 .. image:: 01_wprowadzenie/run.png
     :align: center
 
+    
 Typy danych
 ------------
 
@@ -117,7 +119,8 @@ W Javie tak jak w praktycznie każdym języku programowania istnieją różne ty
 * char - typ znakowy, reprezentuje pojedyncze litery lub znaki. Wartości tego typu umieszczamy pomiędzy znakami pojedynczego cudzysłowu, np. 'a', '&'.
 * String - (pisany z wielkie litery) - specjalny typ, który służy do przechowywania ciągów znaków. Ciągi znaków zapisujemy pomiędzy podwójnymi cudzysłowami, np. "Ania", "Jakiś dowolny tekst".
 
-**Ćwiczenie**
+**Ćwiczenie (5 min)**
+
 Napisz program, który wydrukuje na ekranie następujące wartości (wykorzystaj różne typy danych):
 ::
   245
@@ -143,7 +146,7 @@ Napisz program, który wydrukuje na ekranie następujące wartości (wykorzystaj
 
 Zmienne
 ------------
-Drukowanie danych, na których nie możemy wykonywać żadnych działań, czy po prostu zapamiętać w pamięci komputera nie byłoby zbyt użyteczne. Na szczęście w Javie możemy tworzyć tzw. **zmienne**, czyli takie elementy, które pozwalają na przechowywanie wartości różnych typów danych. Java w odróżnieniu od np. PHP jest językiem statycznie typowanym co oznacza, że zmienna musi mieć określony typ - jeżeli chcesz przechowywać w niej wartość zmiennoprzecinkową, to nie możesz jej zadeklarować jako int, ponieważ spowoduje to błąd kompilacji.
+Drukowanie danych, na których nie możemy wykonywać żadnych działań, czy po prostu zapamiętać w pamięci komputera nie byłoby zbyt użyteczne. Na szczęście w Javie możemy tworzyć tzw. **zmienne**, czyli takie elementy, które pozwalają na przechowywanie wartości różnych typów danych. Java w odróżnieniu od np. PHP jest językiem statycznie typowanym co oznacza, że zmienna musi mieć określony typ. Jeżeli chcesz przechowywać w niej wartość zmiennoprzecinkową, to nie możesz jej zadeklarować jako int, ponieważ spowoduje to błąd kompilacji.
 
 Tworzenie zmiennej możemy podzielić na dwa etapy:
 
@@ -177,7 +180,8 @@ Dwa wyżej wspomniane etapy mogą być od siebie oddzielone lub też można je p
       }
     }
 
-**Ćwiczenie**
+**Ćwiczenie (5 min)**
+
 Napisz program podobny do tego z poprzedniego zadania - wydrukuj na ekranie kilka wartości różnego typu, ale tym razem skorzystaj także ze zmiennych.
 
 *plik DataTypesVars.java*
@@ -241,7 +245,7 @@ Znak dodawania (+) ma również specjalne zastosowanie w przypadku ciągów znak
 
     String napis = "Jan" + "Kowalski";
 
-**Ćwiczenie**
+**Ćwiczenie (10 min)**
 Napisz prosty kalkulator. Zadeklaruj i zainicjuj dwie liczby typu zmiennoprzecinkowego a następnie wyświetl na ekranie wynik ich dodawania, odejmowania, mnożenia i dzielenia. Dodatkowo wyświetl na ekranie, czy pierwsza z liczb jest większa od drugiej, a także, czy ich iloczyn jest większy od 100.
 Przykładowy wydruk programu:
 ::
@@ -271,7 +275,7 @@ Przykładowy wydruk programu:
       }
     }
 
-Zauważ, że w powyższym przykładzie konkatenacji a nawet obliczeń dokonujemy bezpośrednio w metodzie drukującej wynik na ekranie. Warto zwrócić także uwagę na to, że wartość typu String możemy łączyć z wartościami innego typu i zostaną one automatycznie dołączone do naszego napisu.
+Zauważ, że w powyższym przykładzie konkatenacji a nawet obliczeń dokonujemy bezpośrednio w metodzie drukującej wynik na ekranie. Warto zwrócić także uwagę na to, że wartość typu String możemy łączyć z wartościami innego typu i zostaną one automatycznie dołączone do naszego napisu. Jeżeli wykorzystałeś dodatkowe zmienne do przechowywania wyników poszczególnych działań - nie jest to błędem.
 
 
 Tablice jednowymiarowe
@@ -285,6 +289,7 @@ Zmienne nadają się świetnie do przechowywania pojedynczych wartości, jednak 
 
 nie byłoby zbyt wygodne, prawda?
 Podstawowym elementem, który pozwala rozwiązać ten problem w programowaniu są tablice.
+
 .. note::
     Tablica to specjalny typ danych, który pozwala przechowywać duże ilości wartości tego samego typu.
     
@@ -292,6 +297,7 @@ Deklaracja i inicjalizacja tablic jest bardzo podobna do zwykłych zmiennych:
 
 .. code-block:: java
     :linenos:
+    
   int[] tab = new int[5];
   String[] words = new String[10];
 
@@ -303,7 +309,7 @@ W przypadku, gdy z góry znasz wartości, którymi chcesz uzupełnić tablicę, 
 
 Zauważ, że w takim przypadku nie jest konieczne określanie rozmiaru tablicy w nawiasach kwadratowych, ponieważ maszyna wirtualna wywnioskuje to sama na podstawie ilości podanych elementów.
 
-W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy znali rozmiaru tablicy. W takiej sytuacji możemy jednak skorzystać z wartości **length**, którą posiada każda tablica niezależnie od tego jakiego jest typu.
+W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy go znali w dalszej części kodu. W takiej sytuacji możemy jednak skorzystać z wartości **length**, którą posiada każda tablica niezależnie od tego jakiego jest typu.
 ::
   int[] tab = new int[5];
   int size = tab.length;
@@ -342,7 +348,8 @@ W celu przypisania lub odwołania się do poszczególnych komórek takich tablic
 
 Rozmiaru tablic niestety nie da się zmienić, więc jeżeli uznasz, że zabrakło Ci w niej miejsca, będziesz musiał utworzyć nową, większą tablicę.
 
-**Ćwiczenie**
+**Ćwiczenie (10 min)**
+
 Napisz program, w którym utworzysz tablicę 10 losowo wybranych przez siebie liczb zmiennoprzecinkowych. Wydrukuj na ekranie:
 
 * wszystkie wartości,
@@ -442,7 +449,8 @@ Przykład:
         }
     }
 
-**Ćwiczenie**
+**Ćwiczenie (10 min)**
+
 Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean (załóżmy maksymalny rozmiar jako 5x5). Wypełnij jej przekątną wartościami typu true a na końcu wyświetl wartość elementu przechowywanego w prawym dolnym wierzchołku tablicy. Przy wyświetlaniu wartości wykorzystaj właściwość length tak, aby po zmianie rozmiaru tablicy nie było konieczne modyfikowanie kodu wyświetlającego tę wartość.
 
 *plik Matrix.java*

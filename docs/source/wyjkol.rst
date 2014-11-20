@@ -12,7 +12,7 @@ W tej lekcji dowiesz się:
 
 Wyjątki
 ---------
-W każdym programie występują pewne sytuacje nieprzewidziane, które jednak można przewidzieć. Nasza aplikacja powinna być odporna przede wszystkim na błędy, które mogą wyniknąć nie z naszej winy, czyli np. zamknięcie połączenia sieciowego w trakcie komunikacji z innym komputerem podłączonym do sieci, błąd odczytu pliku, albo zwyczajnie wprowadzenie przez użytkownika danych w niepoprawnym formacie (napis zamiast liczby).
+W każdym programie występują pewne sytuacje wyjątkowe, które jednak można przewidzieć i w odpowiedni sposób obsłużyć. Nasza aplikacja powinna być odporna przede wszystkim na błędy, które mogą wyniknąć nie z naszej programistycznej winy, czyli np. zamknięcie połączenia sieciowego w trakcie komunikacji z innym komputerem podłączonym do sieci, błąd odczytu pliku, albo zwyczajnie wprowadzenie przez użytkownika danych w niepoprawnym formacie (napis zamiast liczby).
 
 We wszystkich takich przypadkach zostają wygenerowane wyjątki, czyli specjalne obiekty, które mówią o tym co poszło nie tak jak powinno. W Javie istnieją dwa sposoby na obsługę wyjątków, które w tym miejscu krótko omówimy.
 
@@ -21,12 +21,16 @@ Hierarchia dziedziczenia klas wyjątków wygląda tak jak na poniższym schemaci
 .. image:: 05_wyjcol/exception-hierarchy.png
     :align: center
 
-Nie musisz tego zapamiętywać, ponieważ najważniejszą różnicą pomiędyz poszczególnymi typami wyjątków jest to, czy musimy je obsługiwać, czy też nie. Obsługę wyjątków w niektórych sytuacjach wymusi na Tobie eclipse. W innych sytuacjach warto spojrzeć na sygnatury metod w dokumentacji, ponieważ to w nich znajdziesz informację, czy może ona generować jakiś wyjątek.
+Nie musisz tego zapamiętywać, ponieważ najważniejszą różnicą pomiędzy poszczególnymi typami wyjątków jest to, czy musimy je obsługiwać, czy też nie. Obsługę wyjątków w niektórych sytuacjach wymusi na Tobie eclipse. W innych sytuacjach warto spojrzeć na sygnatury metod w dokumentacji, ponieważ to w nich znajdziesz informację, czy może ona generować jakiś wyjątek.
 
 Zacznijmy od prostej aplikacji, która posłuży nam do omówienia zagadnień tej lekcji.
 
-**Ćwiczenie**
-Przeanalizuj kod poniższego programu, który służy do zbierania danych o uczestnikach konkursu, uruchom go oraz przetestuj dostępne opcje.
+**Ćwiczenie** *(10 minut)*
+
+    Przeanalizuj kod poniższego programu, który służy do zbierania danych o uczestnikach dowolnego konkursu, uruchom go oraz przetestuj dostępne opcje.
+
+.. image:: 05_wyjcol/comp.png
+    :align: center
 
 *plik Person.java*
 
@@ -71,13 +75,16 @@ Przeanalizuj kod poniższego programu, który służy do zbierania danych o ucze
         }
     }
 
+Zwróć uwagę na to, że pola tej klasy oznaczyliśmy jako prywatne oraz wygenerowaliśmy dla nich zestaw dwóch metod - tzw. getterów i setterów, któe pozwalają je odczytać poza tą klasą. Jest to ogólnie przyjęta konwencja, do której należy się przyzwyczaić, ponieważ spotkamy się z nią w Javie na każdym kroku.
+
+Druga nowość to przesłonięcie metody *toString()*. Oznaczona jest jako Override, czyli przesłania metodę *toString()* z klasy nadrzędnej. Możliwe, że myślisz - ale jak to, przecież klasa Person nie dziedziczy po żadnej klasie (brak extends). Otóż w Javie niejawnie każda klasa dziedziczy po specjalnej klasie Object. Metoda toString() to ogólnie przyjęta metoda, która zwraca opisową formę obiektu.
+
 *plik Competition.java*
 
 .. code-block:: java
     :linenos:
 
     package pl.org.ceo.app;
-
     import java.util.Scanner;
 
     import pl.org.ceo.data.Person;
@@ -156,12 +163,12 @@ Przeanalizuj kod poniższego programu, który służy do zbierania danych o ucze
         }
     }
 
-Klasa **Person** to nasz nośnik danych. Przechowuje ona informacje dotyczące imienia, nazwiska, nr. PESEL oraz wieku uczestnika. Posiada także metodę toString(), która przesłania domyślną metodę toString() z klasy Object. W klasie Competition znajduje się główna logika aplikacji, w której dajemy użytkownikowi jedną z trzech opcji, czyli dodanie nowego uczestnika, wyświetlenie wszystkich uczestników lub wyjście z programu. Po wybraniu opcji wywoływana jest odpowiednia metoda, w której wyświetlamy odpowiednie komunikaty, odbieramy dane od użytkownika i na ich podstawie tworzymy kolejne obiekty Person lub wyświetlamy już te dodane. Wszystkie składowe klasy zostały oznaczone jako statyczne, więc nie jest wymagane tworzenie obiektu klasy Competition w celu wywoływania metod, czy odwoływania się do poszczególnych pól z metody main().
+Klasa **Person** to nasz nośnik danych. Przechowuje ona informacje dotyczące imienia, nazwiska, nr. PESEL oraz wieku uczestnika. Posiada także metodę *toString()*, która przesłania domyślną metodę *toString()* z klasy Object. W klasie Competition znajduje się główna logika aplikacji, w której dajemy użytkownikowi jedną z trzech opcji, czyli dodanie nowego uczestnika, wyświetlenie wszystkich uczestników lub wyjście z programu. Po wybraniu opcji wywoływana jest odpowiednia metoda, w której wyświetlamy odpowiednie komunikaty, odbieramy dane od użytkownika i na ich podstawie tworzymy kolejne obiekty Person lub wyświetlamy już te dodane. Wszystkie składowe klasy zostały oznaczone jako statyczne, więc nie jest wymagane tworzenie obiektu klasy Competition w celu wywoływania metod, czy odwoływania się do poszczególnych pól z metody *main()*.
 
 
 Wyjątki - blok try catch
 -------------------------
-Miejscem, w którym w naszym programie mogą pojawić się problemy, są związane głównie z odbiorem danych od użytkownika - w końcu nie jesteśmy w stanie przewidzieć, czy zamiast konkretnej liczby nie wprowadzi on dla żartu napisu "asdf". Jeżeli coś takiego się wydarzy, zostanie wtedy wygenerowany wyjątek fazy wykonania o nazwie InputMismatchException, który jest spowodowany tym, że metoda nextInt() nie jest przygotowana na odbiór danych typu String.
+Miejscem, w którym w naszym programie mogą pojawić się problemy, są związane głównie z odbiorem danych od użytkownika - w końcu nie jesteśmy w stanie przewidzieć, czy zamiast konkretnej liczby nie wprowadzi on dla żartu napisu "asdf". Jeżeli coś takiego się wydarzy, zostanie wtedy wygenerowany wyjątek fazy wykonania o nazwie *InputMismatchException*, który jest spowodowany tym, że metoda *nextInt()* nie jest przygotowana na odbiór danych typu String.
 
 .. image:: 05_wyjcol/inputmismatch.png
     :align: center
@@ -176,7 +183,7 @@ Aplikacja w tej sytuacji przestaje działać, a dane zostają utracone. W Javie 
       //instrukcje, które wykonają się zawsze, niezależnie, czy wyjątek wystąpi, czy też nie (blok opcjonalny)
     }
 
-W naszym kodzie w bloku try można oczywiście umieścić odczyt danych, czyli wywołanie metody nextInt(). Można także w nim umieścić dużo większy fragment kodu, jednak warto się zastanowić, czy na pewno się to opłaca i czy pomoże nam to w identyfikacji konkretnego problemu.
+W naszym kodzie w bloku try można oczywiście umieścić odczyt danych, czyli wywołanie metody *nextInt()*. Można także w nim umieścić dużo większy fragment kodu, jednak warto się zastanowić, czy na pewno się to opłaca i czy pomoże nam to w identyfikacji konkretnego problemu.
 
 *plik Competition.java*
 
@@ -199,10 +206,10 @@ W naszym kodzie w bloku try można oczywiście umieścić odczyt danych, czyli w
                     option = sc.nextInt();
                     sc.nextLine();
                 } catch(InputMismatchException exc) {
-                    sc.nextLine();
+                    sc.nextLine(); //"zjadamy" znak nowej linii z bufora
                     System.out.println("--------------------");
                     System.out.println("Dane w nieprawidłowym formacie ");
-                    continue;
+                    continue; //przejście do kolejnej iteracji pętli
                 }
                 
                 switch (option) {
@@ -224,12 +231,12 @@ W naszym kodzie w bloku try można oczywiście umieścić odczyt danych, czyli w
 
 Jeżeli użytkownik wprowadzi teraz niepoprawne dane podczas przypisania *option = sc.nextInt();* wygenerowany zostanie wyjątek, który jednak obsługujemy w bloku try-catch, a tym samym możemy zapobiec zakońćzeniu programu. Ponieważ po wygenerowaniu wyjątku sterowanie programu jest przekazywane natychmiast do bloku catch, musimy w pierwszej kolejności pozbyć się z bufora znaku nowej linii, który pozostaje po wywołaniu metody nextInt(). Następnie wyświetlamy komunikat o błędzie i przechodzimy do kolejnej iteracji pętli dzięki instrukcji continue. Będzie się tak działo za każdym razem, gdy użytkownik wprowadzi wartość niezgodną z typem int.
 
-Blok finally jest w tym przypadku zbędny. Przydatny będzie natomiast, gdy będziemy chcieli zamknąć strumień, czy plik niezależnie od tego, czy błąd wystąpił, czy nie - pokażemy to w kolejnej lekcji podczas operacji na plikach.
+Blok finally jest w tym przypadku zbędny. Przydatny będzie natomiast, gdy będziemy chcieli zamknąć strumień, czy plik niezależnie od tego, czy błąd wystąpił, czy nie.
 
 
 Wyjątki - deklaracja throws
 ----------------------------
-Istnieją takie sytuacje, w których nie chcemy obsługiwać wyjątków za pomocą bloku za pomocą try-catch, bo zwyczajnie nie będziemy w stanie nic z tym problemem zrobić. W takiej sytuacji możemy przekazać wyjątek wyżej i dać osobie korzystającej z naszego kodu możliwość zadecydowania, czy chce obsłużyć dany wyjątek, czy też również nic z nim nie robić. Przykładem takiego działania jest metoda nextInt() klasy Scanner - może ona generować trzy różne wyjątki, które możemy obsłużyć tak jak w powyższym kodzie, albo je pominąć, tak jak robiliśmy to wcześniej.
+Istnieją takie sytuacje, w których nie chcemy obsługiwać wyjątków za pomocą bloku try-catch, bo zwyczajnie nie będziemy w stanie nic z tym problemem zrobić. W takiej sytuacji możemy przekazać wyjątek wyżej i dać osobie korzystającej z naszego kodu możliwość zadecydowania, czy chce obsłużyć dany wyjątek, czy też również nic z nim nie robić. Przykładem takiego działania jest metoda *nextInt()* klasy Scanner - może ona generować trzy różne wyjątki, które możemy obsłużyć tak jak w powyższym kodzie, albo je pominąć, tak jak robiliśmy to wcześniej.
 
 *plik Competition.java*
 
@@ -336,9 +343,9 @@ Istnieją takie sytuacje, w których nie chcemy obsługiwać wyjątków za pomoc
         }
     }
 
-W naszym programie sensownym miejscem, w którym możemy stworzyć i rzucić wyjątek jest metoda addCompetitor(). Jeżeli tablica, którą utworzyliśmy będzie już pełna, wygenerujemy wyjątek, który pojawia się, gdy próbujemy odwoływać się do indeksu tablicy wykraczającego poza zakres, czyli ArrayIndexOutOfBoundsException. W kodzie używamy także metody getInt() klasy Scanner, jednak tym razem nie obsługujemy tu wyjątku, a jedynie dodajemy o nim informację w sygnaturze metody.
+W naszym programie sensownym miejscem, w którym możemy stworzyć i rzucić wyjątek jest metoda *addCompetitor()*. Jeżeli tablica, którą utworzyliśmy będzie już pełna, wygenerujemy wyjątek, który pojawia się, gdy próbujemy odwoływać się do indeksu tablicy wykraczającego poza zakres, czyli *ArrayIndexOutOfBoundsException*. W kodzie używamy także metody *getInt()* klasy Scanner, jednak tym razem nie obsługujemy tu wyjątku, a jedynie dodajemy o nim informację w sygnaturze metody (lepiej jest go obsłużyć, ale na potrzeby ćwiczenia zróbmy to w ten sposób).
 
-Oba wyjątki, czyli ArrayIndexOutOfBoundsException i InputMismatchException nie muszą być obsługiwane, więc informacja w sygnaturze metody jest bardziej komunikatem dla programisty, czego może się spodziewać. Oba wyjątki obsługujemy w osobnych blokach catch już bezpośrednio w bloku konstrukcji switch umieszczonej w metodzie main(). Jak widzisz do jednego bloku try możemy podpiąć kilka bloków catch do obsługi różnych wyjątków - działa to podobnie do instrukcji warunkowej if else.
+Oba wyjątki, czyli ArrayIndexOutOfBoundsException i InputMismatchException nie muszą być obsługiwane, więc informacja w sygnaturze metody jest bardziej komunikatem dla programisty, czego może się spodziewać. Oba wyjątki obsługujemy w osobnych blokach catch już bezpośrednio w bloku konstrukcji switch umieszczonej w metodzie *main()*. Jak widzisz do jednego bloku try możemy podpiąć kilka bloków catch do obsługi różnych wyjątków - działa to podobnie do instrukcji warunkowej if else.
 
 Rozmiar tablicy w powyższym przykładzie zmieniliśmy na 1, abyś mógł przetestować działanie wyjątku. Przy próbie dodania drugiego uczestnika do tablicy, generujemy wyjątek ArrayIndexOutOfBoundsException, z którego następnie już w bloku catch() pobieramy informację przekazaną w konstruktorze za pomocą metody *e.getMessage()*.
 
@@ -348,7 +355,7 @@ Rozmiar tablicy w powyższym przykładzie zmieniliśmy na 1, abyś mógł przete
     
 Kolekcje
 ----------
-Mówiąc o kolekcjach w Javie będziemy mieli na myśli Collections framework, czyli specjalny zestaw interfejsów i klas, które są przeznaczone do przechowywania różnych kolekcji obiektów. Hierarchię kolekcji w języku Java przedstawiono na poniższym diagramie, my skupimy się na dwóch z nich - listach (interfejs List) oraz zbiorach (interfejs Set).
+Mówiąc o kolekcjach w Javie będziemy mieli na myśli Collections framework, czyli specjalny zestaw interfejsów i klas, które są przeznaczone do przechowywania różnych kolekcji obiektów. Hierarchię kolekcji w języku Java przedstawiono na poniższym diagramie, my omówimy najczęściej wykorzystywane listy.
 
 Zbiory, listy i kolejki:
 
@@ -376,7 +383,7 @@ Każdy z typów prostych ma swój odpowiednik obiektowy. Lista klas reprezentuj�
 * boolean - Boolean
 * char - Character
 
-Jak widzisz w większości przypadków zmianie ulega jedynie litera z małej na wielką. W celu zamiany wartości typu prostego, np. liczby 15, na obiekt typu Integer reprezentujący wartość 15 nasleży wykorzystać metodę *valueOf()*, którą posiada każdy z wyżej wymieninych typów. Metoda ta jest dostępna w kilku przeciążonych wersjach, więc jako jej argument możemy podać zarówno liczbę w formie typu prostego lub jako String. Innym sposobem jest po prostu skorzystanie z konstruktora danej klasy - oba podejścia działają w praktyce tak samo.
+Jak widzisz w większości przypadków zmianie ulega jedynie litera z małej na wielką. W celu zamiany wartości typu prostego, np. liczby 15, na obiekt typu Integer reprezentujący wartość 15 należy wykorzystać statyczną metodę *valueOf()*, którą posiada każdy z wyżej wymieninych typów. Metoda ta jest dostępna w kilku przeciążonych wersjach, więc jako jej argument możemy podać zarówno liczbę w formie typu prostego lub jako String. Innym sposobem jest po prostu skorzystanie z konstruktora danej klasy - oba podejścia działają w praktyce tak samo.
 
 *plik Wrappers.java*
 
@@ -426,7 +433,7 @@ Typ String jest typem obiektowym (dlatego też pisany jest z wielkiej litery), w
 
 
 Listy
-^^^^^^^^^
+----------
 Listy to najprostsze struktury danych. Ich głównym zadaniem jest przechowywanie obiektów w uporządkowanej, indeksowanej formie - czyli podobnie jak w przypadku tablic. Istnieją dwa główne typy list:
 
 * lista tablicowa (**ArrayList**) - jej wewnętrzna struktura opiera się dokładnie na tablicy
@@ -446,7 +453,8 @@ Ponieważ typy kolekcyjne stanowią jednak pewną hierarchię dziedziczenia, war
 
     List<String> names = new ArrayList<>();
 
-Pomiędzy ostrymi nawiasami określami typ danych jaki będzie przechowywała dana lista. Powiemy dzięki temu, że kolekcja jest **typem generycznym**.
+Mamy jednak wtedy dostęp jedynie do metod z typu referencji, czyli interfejsu List (chyba, że zastosujemy rzutowanie na typ ArrayList).
+Pomiędzy ostrymi nawiasami określamy typ danych jaki będzie przechowywała dana lista. Powiemy dzięki temu, że kolekcja jest **typem generycznym**.
 
 Na listach możemy wykonywać podstawowe operacje takie jak:
 
@@ -483,8 +491,8 @@ Na listach możemy wykonywać podstawowe operacje takie jak:
     }
 
 
-**Ćwiczenie**
-Przerób program z wcześniejszej części lekcji (zapisy na konkurs) w taki sposób, aby uczestnicy byli dopisywani do listy, a nie tablicy.
+**Ćwiczenie** *(15 minut)*
+    Przerób program z wcześniejszej części lekcji (zapisy na konkurs) w taki sposób, aby uczestnicy byli dopisywani do listy, a nie tablicy.
 
 *plik Competition.java*
 
@@ -586,3 +594,9 @@ Przerób program z wcześniejszej części lekcji (zapisy na konkurs) w taki spo
             System.out.println("Wybierz opcję: ");
         }
     }
+
+
+Dodatek - porównywanie obiektów
+----------------------------------
+
+

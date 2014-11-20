@@ -10,11 +10,12 @@ W tej lekcji dowiesz się:
 * Co to jest polimorfizm
 * Do czego służy operator instanceof
 * Czym są klasy abstrakcyjne i interfejsy
+* Co oznacza słowo static
 
 
 Odbieranie danych od użytkownika
 ---------------------------------
-W naszych dotychczasowych programach skupialiśmy się na poznawaniu podstawowych mechanizmów języka Java, jednak brakowało w nich interakcji z użytkownikiem. Biblioteka wejścia/wyjścia w Javie jest dosyć rozbudowana i w tej części kursu poznamy podstawowe sposoby interakcji człowieka z komputerem.
+W naszych dotychczasowych programach skupialiśmy się na poznawaniu podstawowych mechanizmów języka Java, jednak brakowało w nich interakcji z użytkownikiem. Biblioteka wejścia/wyjścia w Javie jest dosyć rozbudowana jednak w tej części kursu poznamy podstawowe sposoby interakcji człowieka z komputerem.
 
 Najprostszą klasą, która pozwoli odczytywać dane od użytkownika jest **Scanner**. Posiada ona zestaw użytecznych metod, które pozwolą nam wczytać zarówno liczby jak i napisy. Klasa ta jest dosyć uniwersalna, więc w zależności od tego co przekażemy w konstruktorze podczas inicjalizacji możemy za pomocą jej obiektu zarówno odczytywać dane od użytkownika, które będą wprowadzane z klawiatury, ale także odczytywać informacje zawarte w plikach.
 
@@ -29,16 +30,16 @@ Inicjalizacja obiektu Scanner w przypadku, gdy chcemy odczytać dane od użytkow
         Scanner sc = new Scanner(System.in);
     }
 
-Przede wszystkim, aby korzystać z klasy Scanner w swoim kodzie, musisz ją najpierw zaimportować (np. wykorzystując skrót Ctrl+Shift+O w eclipse). Obiekt tworzony jest przez przekazanie w konstruktorze standardowego strumienia wejścia, którym jest *System.in*.
+Przede wszystkim, aby korzystać z klasy Scanner w swoim kodzie, musisz ją najpierw zaimportować z pakietu java.util (np. wykorzystując skrót Ctrl+Shift+O w eclipse). Obiekt tworzony jest przez przekazanie w konstruktorze standardowego strumienia wejścia, którym jest *System.in*.
 
 Następnie do odczytu danych należy skorzystać z jednej z metod zawartych w klasie Scanner:
 
 * nextInt() - odczytanie kolejnej liczby typu int
-* nextDouble() - odczytanie kolejnej liczby typu double
-* nextLine() - wczytanie kolejnego wiersza tekstu (String) zakończonego znakiem nowej linii
+* nextDouble() - odczytanie kolejnej liczby typu double (uwaga, domyślny separator dziesiętny jest zależny od ustawień maszyny wirtualnej, w Polsce domyślnie liczby należy wprowadzać rozdzielone przecinkiem)
+* nextLine() - wczytanie kolejnego wiersza tekstu (String) zakończonego znakiem nowej linii '\n'
 * analogicznie dla innych typów danych istnieją metody takie jak nextBoolean(), nextLong() itp.
 
-Ważne jest to, że w przypadku, gdy odczytywać będziemy liczby, w buforze nadal pozostanie znak nowej linii, który należy wczytać za pomocą metody nextLine(). Przykład:
+Ważne jest to, że w przypadku, gdy odczytywać będziemy liczby, w buforze nadal pozostanie znak nowej linii, który należy wczytać za pomocą metody *nextLine()*. Przykład:
 
 .. code-block:: java
     :linenos:
@@ -75,14 +76,14 @@ Ważne jest to, że w przypadku, gdy odczytywać będziemy liczby, w buforze nad
     }
 
 .. attention::
-    Pamiętaj, że po zakończeniu pracy ze strumieniami wejścia, szczególnie odczytu z plików należy je zamykać za pomocą metody close(). Analogicznie będzie należało postępować z operacjami wyjścia, czyli np. zapisem danych do plików.
+    Pamiętaj, że po zakończeniu pracy ze strumieniami wejścia lub wyjścia, szczególnie odczytu plików należy je zamykać za pomocą metody close(). Analogicznie będzie należało postępować z operacjami wyjścia, czyli np. zapisem danych do plików.
 
 **Ćwiczenie** *(10 min)*
 
-Napisz prosty program do zarządzania książkami biblioteki. Powinien się on składać z dwóch klas:
-
-* Book - klasa reprezentująca pojedynczą książkę. Powinna posiadać pola reprezentujące numer ISBN, tytuł oraz autora
-* BookManager - główna klasa aplikacji, w której wczytasz od użytkownika dotyczące 1 książki, utworzysz na ich podstawie obiekt klasy Book i wyświetlisz odpowiednie informacje na ekranie. Zadbaj o utworzenie odpowiednich konstruktorów.
+    Napisz prosty program do zarządzania książkami biblioteki. Powinien się on składać z dwóch klas:
+    
+    * Book - klasa reprezentująca pojedynczą książkę. Powinna posiadać pola reprezentujące numer ISBN, tytuł oraz autora
+    * BookManager - główna klasa aplikacji, w której wczytasz od użytkownika dotyczące 1 książki, utworzysz na ich podstawie obiekt klasy Book i wyświetlisz odpowiednie informacje na ekranie. Zadbaj o utworzenie odpowiednich konstruktorów.
 
 .. image:: 04_obiekty2/library1_project.png
     :align: center
@@ -152,14 +153,14 @@ W celu rozwiązania m.in. tego problemu powstał paradygmat programowania obiekt
 .. image:: 04_obiekty2/inheritance.png
     :align: center
 
-Na powyższym programie widać bazową klasę **Publication**, po której dziedziczą dwie kolejne klasy: **Book** oraz **Magazine**. Różnią się one tym, że autor posiada najczęściej jednego autora (np. Henryk Sienkiewicz), natomiast w przypadku gazety w tym miejscu pojawi się wydawnictwo (np. Ringier Axel Springer).
+Na powyższym diagramie widać bazową klasę **Publication**, po której dziedziczą dwie kolejne klasy: **Book** oraz **Magazine**. Różnią się one tym, że książka posiada najczęściej jednego autora (np. Henryk Sienkiewicz), natomiast w przypadku gazety w tym miejscu pojawi się wydawnictwo (np. Ringier Axel Springer).
 
 .. Note::
     Jeżeli istnieje pewna klasa **A**, a poniej dziedziczy pewna klasa **B**, to klasa **B** przejmuje wszystkie widoczne cechy klasy **A**.
 
-Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram, klasa **Book**, czy **Magazine** będą posiadały także pola klasy **Publication**, czyli isbn oraz title. W Javie dziedziczenie można osiągnąć stosując słowo kluczowe **extends** w definicji klasy, np.:
+Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram, klasa **Book**, czy **Magazine** będą posiadały także pola z klasy **Publication**, czyli *isbn* oraz *title*. W Javie dziedziczenie można osiągnąć stosując słowo kluczowe **extends** w definicji klasy, np.:
 
-.. image:: 04_obiekty2/library1_project.png
+.. image:: 04_obiekty2/inherit.png
     :align: center
 
 *plik Publication.java*
@@ -200,7 +201,7 @@ Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram,
     }
 
 
-*plik Book.java*
+*plik Magazine.java*
 
 .. code-block:: java
     :linenos:
@@ -218,17 +219,26 @@ Powyższa regułka oznacza, że w przypadku, gdy spojrzymy na powyższy diagram,
         }
     }
 
-Zwróć uwagę, że pomimo iż w klasach *Book* oraz *Magazine* nie zadeklarowaliśmy pól *isbn* oraz *title* to mamy do nich dostęp w konstruktorze, czy metodach getBookInfo() i getMagazineInfo(), ponieważ dziedziczą one te cechy z klasy Publication.
+Zwróć uwagę, że pomimo iż w klasach *Book* oraz *Magazine* nie zadeklarowaliśmy pól *isbn* oraz *title* to mamy do nich dostęp w konstruktorze, czy metodach *getBookInfo()* i *getMagazineInfo()*, ponieważ dziedziczą one te cechy z klasy Publication.
 
-Kolejną nowością jest zastosowanie specjalnej konstrukcji **super()**. Działa ona w sposób podobny do słowa kluczowego this, którego używaliśmy w przypadku, gdy posiadaliśmy kilka przeciążonych wersji konstruktora z tą różnicą, że wywołuje konstruktor nadklasy z odpowiednimi parametrami.
+Kolejną nowością jest zastosowanie specjalnej konstrukcji **super()**. Działa ona w sposób podobny do słowa kluczowego *this*, którego używaliśmy w przypadku, gdy posiadaliśmy kilka przeciążonych wersji konstruktora z tą różnicą, że wywołuje konstruktor nadklasy z odpowiednimi parametrami.
 
-Ostatnia rzecz dotyczy **przesłaniania** metod. W klasie Publication zdefiniowaliśmy metodę getInfo(). Jeżeli w klasie dziedzicząsej (Book lub Magazine) zdefiniujemy metodę o takiej samej sygnaturze, to powiemy, że przesłania ona oryginalną metodę getInfo(). W celu wywołania metody nadklasy należy posłużyć się w takiej sytuacji zapisem **super.getInfo()**.
+Ostatnia rzecz dotyczy **przesłaniania** metod. W klasie Publication zdefiniowaliśmy metodę *getInfo()*. Jeżeli w klasie dziedzicząsej (Book lub Magazine) zdefiniujemy metodę o takiej samej sygnaturze, to powiemy, że przesłania ona oryginalną metodę *getInfo()*. W celu wywołania metody nadklasy należy posłużyć się w takiej sytuacji zapisem **super.getInfo()**.
 
 .. note::
     Pierwszą, niejawną instrukcją jaka jest wykonywana w podklasie pewnej klasy bazowej jest wywołanie konstruktora nadklasy poprzez **super()**. Jeżeli w klasie bazowej nie jest zdefiniowany konstruktor bezparametrowy to należy jawnie wywołać konstruktor z odpowiednimi argumentami poprzez zapis **super(lista_parametrow)**. Jeżeli chcesz natomiast wywołać w którejś z metod metodę z nadklasy wykorzystaj zapis **super.nazwaMetody(parametry)**.
 
+.. note::
+    Jeżeli chcesz zaznaczyć, że jakaś metoda jest przesłonięta możesz zastosować dodatkową adnotację *@Override*. W wielu sytuacjach będzie ona automatycznie wygenerowana przez eclipse, warto więc rozumieć co oznacza.
+    ::
+        @Override
+        String getInfo() {
+            return super.getInfo() + " - " + author;
+        }
+
+
 **Ćwiczenie** *(10 min)*
-W klasie BookManager utwórz tablice do przechowywania książek oraz magazynów. W każdej tablicy utwórz przynajmniej po jednym obiekcie danego typu, a następnie wyświetl je na ekranie.
+    W klasie BookManager utwórz tablice do przechowywania książek oraz magazynów. W każdej tablicy utwórz przynajmniej po jednym obiekcie danego typu, a następnie wyświetl je na ekranie.
 
 *plik BookManager.java*
 
@@ -296,7 +306,7 @@ Wcześniej wspomnieliśmy, że dziedziczenia warto używać między innymi po to
 
 Lepiej by było tak naprawdę przechowywać wszystkie te dane w jednej wspólnej tablicy typu *Publication*, a następnie ewentualnie rozpoznać, czy dany element tablicy jest typu Book, czy Magazine.
 
-Efekt taki można osiągnąć dzięki zastosowaniu tzw. **polimorfizmu** lub inaczej mówiąc wielopostaciowości. Polega to na tym, że do ogólnej, wspólnej referencji można przypisać obiekty różnych typów, które po typie tej referencji dziedziczą.
+Efekt taki można osiągnąć dzięki zastosowaniu **polimorfizmu** lub inaczej mówiąc wielopostaciowości. Polega to na tym, że do ogólnej, wspólnej referencji można przypisać obiekty różnych typów, które po typie tej referencji dziedziczą.
 
 W naszym przypadku klasy Book i Magazine dziedziczą po klasie Publication, więc jak najbardziej możliwe jest zapisanie:
 ::
@@ -305,13 +315,17 @@ W naszym przypadku klasy Book i Magazine dziedziczą po klasie Publication, wię
 
 W podobny sposób możemy także utworzyć tablicę typu Publication, która będzie przechowywała zarówno książki jak i magazyny. Pamiętać należy jednak o dwóch rzeczach:
 
-#. Zawsze mamy dostęp jedynie do metod z typu referencji. Jeżeli w klasie Book zdefiniujemy dodatkową metodę changeBookTitle(), a referencja będzie typu Publication, to nie będziemy mieli dostępu do takiej metody
+1. Zawsze mamy dostęp jedynie do metod z typu referencji. Jeżeli w klasie Book zdefiniujemy dodatkową metodę changeBookTitle(), a referencja będzie typu Publication, to nie będziemy mieli dostępu do takiej metody. Jeśżeli chcesz uzyskać dostęp do wszystkich metod (również tych nie zdefiniowanych w typie nadrzędnym) musisz skorzystać z rzutowania typu. Rzutowanie polega na wykorzystaniu nawiasu, np.:
+::
+    Publication pub = new Magazine(...);
+    ((Magazine)pub).metodaZKlasyMagazine();
 
-#. Metody będą wywoływane na rzecz typu obiektu, a nie typu referencji. Jeżeli zapisaliśmy *Publication pub1 = new Book(argumenty_konstruktora);* to wywołując metodę pub1.getInfo() wywołamy jej wersję z klasy Book, a nie Publication.
+2. Metody będą wywoływane na rzecz typu obiektu, a nie typu referencji. Jeżeli zapisaliśmy *Publication pub1 = new Book(argumenty_konstruktora);* to wywołując metodę pub1.getInfo() wywołamy jej wersję z klasy Book, a nie Publication.
 
 
 **Ćwiczenie** *(5 min)*
-Przerób klasę BookManager w taki sposób, aby przechowywać książki oraz magazyny w jednej wspólnej tablicy typu Publication[].
+
+    Przerób klasę BookManager w taki sposób, aby przechowywać książki oraz magazyny w jednej wspólnej tablicy typu Publication[].
 
 *plik BookManager.java*
 
@@ -382,13 +396,16 @@ np.
         System.out.println("To jest książka");
     }
 
+Na ekranie zobaczymy tekst "To jest ksiażka".
+
 Sprawdzenie obiektu za pomocą operatora instanceof zwraca w wyniku true lub false, więc jak widać w powyższym przykładzie, może on być zastosowany jako warunek w instrukcji if.
 
 **Ćwiczenie** *(5 min)*
-Przerób kod klasy BookManager w taki sposób, aby dane były wyświetlane w formie:
-::
-    Książka: 123456789 - W pustyni i w puszczy - Henryk Sienkiewicz
-    Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
+
+    Przerób kod klasy BookManager w taki sposób, aby dane były wyświetlane w formie:
+    ::
+        Książka: 123456789 - W pustyni i w puszczy - Henryk Sienkiewicz
+        Magazyn: 987654321 - Wprost - Wydawnictwo Wprost
 
 *plik BookManager.java*
 
@@ -444,7 +461,7 @@ Przerób kod klasy BookManager w taki sposób, aby dane były wyświetlane w for
 
 Klasy abstrakcyjne i interfejsy
 --------------------------------
-Nasza aplikacja jest już prawie gotowa, jednak warto się zastanowić nad jeszcze jedną rzeczą. Stworzyliśmy klasę Publication, która jest klasą bazową dla dwóch konkretnych typó danych, które wykorzystujemy. Ponieważ nie chcemy używać obiektów klasy Publication bezpośrednio, powinniśmy z niej zrobić jedynie pewną warstwę abstrakcji, czyli klasę, która jest jedynie klasą bazową dla innych typów, ale nie można tworzyć jej obiektów bezpośrednio.
+Nasza aplikacja jest już prawie gotowa, jednak warto się zastanowić nad jeszcze jedną rzeczą. Stworzyliśmy klasę Publication, która jest klasą bazową dla dwóch konkretnych typów danych, które wykorzystujemy. Ponieważ nie chcemy używać obiektów klasy Publication bezpośrednio, powinniśmy z niej zrobić jedynie pewną warstwę abstrakcji, czyli klasę, która jest jedynie klasą bazową dla innych typów, ale nie można tworzyć jej obiektów bezpośrednio.
 
 W Javie można to osiągnąć wykorzystując **klasę abstrakcyjną**. Jeżeli jakaś klasa ma być abstrakcyjna, należy w jej sygnaturze dodać o tym informację za pomocą słowa kluczowego **abstract**.
 
@@ -496,12 +513,12 @@ Przykład metody abstrakcyjnej:
         abstract void printInfo();
     }
 
-Jak widzisz metoda printInfo() oznaczona jest słowek abstract. Nie posiada ona żadnej implementacji - nie posiada nawet nawiasów klamrowych i zakończona jest średnikiem.
+Jak widzisz metoda *printInfo()* oznaczona jest słowek abstract. Nie posiada ona żadnej implementacji - nie posiada nawet nawiasów klamrowych i zakończona jest średnikiem.
 
 .. image:: 04_obiekty2/abstract.png
     :align: center
 
-Jak widzisz dodanie metody abstrakcyjnej powoduje błędy w naszym projekcie w klasach dziedziczących po Publication. W celu ich wyeliminowania powinniśmy zaimplementować metodę printInfo() w tych klasach, np.:
+Jak widzisz dodanie metody abstrakcyjnej powoduje błędy w naszym projekcie w klasach dziedziczących po Publication. W celu ich wyeliminowania powinniśmy zaimplementować metodę *printInfo()* w tych klasach, np.:
 
 *plik Book.java*
 
@@ -544,7 +561,8 @@ analogicznie w klasie Magazine:
         String getInfo() {
             return super.getInfo() + " - " + publisher;
         }
-        
+
+        @Override
         void printInfo() {
             System.out.println(getInfo());  
         }
@@ -588,12 +606,10 @@ Ponieważ wszystkie metody interfejsu muszą być abstrakcyjne, to nie jest koni
 #. Możesz implementować dowolną liczbę interfejsów (implements).
 
 
-Ćwiczenie podsumowujące
-------------------------
-Do aplikacji
+Dodatek - składowe statyczne
+--------------------------------
+Jako dodatek tej lekcji wytłumaczymy jescze krótko co oznacza słowo kluczowe **static**. W niektorych sytuacjach chcielibyśmy mieć dostęp do metody, czy pola klasy bez konieczności tworzenia obiektu. Przykładem takiej metody jest dobrze nam już znana metoda *main()*.
 
+Jeżeli zdefiniujemy jakieś pole lub metodę jako statyczne, to możemy się do nich odwoływać bez tworzenia obiektu takiej klasy poprzez konstrukcję NazwaKlasy.nazwaPolaStatycznego lub NazwaKlasy.metodaStatyczna().
 
-Dodatek - metody dziedziczone z klasy Object
-----------------------------------------------
-
-
+Najważniejszą rzeczą dotyczącą składowych statycznych klasy jest to, że w metodach statycznych możemy odwoływać się jedynie do innych elementów statycznych tej klasy.

@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
     <link rel="next" title="Graficzny interfejs użytkownika cz.2" href="gui2.html" />
-    <link rel="prev" title="Wyjątki i kolekcje" href="komunikacja.html" /> 
+    <link rel="prev" title="Wyjątki i kolekcje" href="wyjkol.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +38,7 @@
           <a href="gui2.html" title="Graficzny interfejs użytkownika cz.2"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="komunikacja.html" title="Wyjątki i kolekcje"
+          <a href="wyjkol.html" title="Wyjątki i kolekcje"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -51,6 +51,7 @@
             
   <div class="section" id="graficzny-interfejs-uzytkownika">
 <h1>Graficzny interfejs użytkownika<a class="headerlink" href="#graficzny-interfejs-uzytkownika" title="Permalink to this headline">¶</a></h1>
+<p>Z powodu ilości nowych elementów oraz skomplikowania tej lekcji uczniowie powinni rozwijać kod i aplikację wraz z prowadzącym.</p>
 <p>W tej lekcji dowiesz się:</p>
 <ul class="simple">
 <li>Czym jest JavaFX</li>
@@ -75,8 +76,9 @@
 <li><strong>Podgląd</strong> -</li>
 <li><strong>Inspector</strong> -</li>
 </ol>
-<p><strong>Ćwiczenie</strong>
-Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć różne elementy z sekcji Library do obszaru roboczego lub bezpośrednio do sekcji Document. Kliknij na wybrane z przeciągniętych elementów i spróbuj pozmieniać ustawienia w sekcji Inspector po prawej stronie.</p>
+<p><strong>Ćwiczenie</strong> <em>(10 minut)</em></p>
+<blockquote>
+<div>Zapoznaj się przez chwilę z narzędziem Scene Builder. Spróbuj przeciągnąć różne elementy z sekcji Library do obszaru roboczego lub bezpośrednio do sekcji Document. Kliknij na wybrane z przeciągniętych elementów i spróbuj pozmieniać ustawienia w sekcji Inspector po prawej stronie.</div></blockquote>
 </div>
 <div class="section" id="pierwszy-projekt-javafx">
 <h2>Pierwszy projekt JavaFX<a class="headerlink" href="#pierwszy-projekt-javafx" title="Permalink to this headline">¶</a></h2>
@@ -85,8 +87,9 @@ Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć
 <p>Następnie wpisz dowolną nazwę projektu i klikając przycisk Next przejdź do ostatniej zakładki kreatora projektu, gdzie wybierz Language jako <strong>FXML</strong>.</p>
 <img alt="_images/fx2.png" class="align-center" src="_images/fx2.png" />
 <p>Wybierz Finish, po czym projekt zostanie utworzony.</p>
+</div>
 <div class="section" id="omowienie-domyslnego-projektu">
-<h3>Omówienie domyślnego projektu<a class="headerlink" href="#omowienie-domyslnego-projektu" title="Permalink to this headline">¶</a></h3>
+<h2>Omówienie domyślnego projektu<a class="headerlink" href="#omowienie-domyslnego-projektu" title="Permalink to this headline">¶</a></h2>
 <p>Eclipse domyślnie wygeneruje dla nas prosty szablon projektu JavaFX, który już na pierwszy rzut oka różni się od tego co znaliśmy do tej pory.</p>
 <img alt="_images/fxproject.png" class="align-center" src="_images/fxproject.png" />
 <ul class="simple">
@@ -97,7 +100,6 @@ Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć
 </ul>
 <p><strong>Model View Controller</strong> jest najpopularniejszym wzorcem architektonicznym wykorzystywanym w tworzeniu aplikacji. Jego głównym zamysłem jest to, żeby oddzielić od siebie definicję tego jak aplikacja wygląda od tego co robi. W komunikacji pomiędzy tymi dwoma elementami występuje kontroler, który odpowiednio przekazuje informacje od użytkownika (GUI aplikacji) do modelu danych i w drugą stronę.</p>
 <p>Zaletą takiego podejścia jest to, że aplikacje można rozwijać równolegle i lepiej dzielić obowiązki w zespole programistów. Jeżeli ktoś jest silniejszy tworzeniu tzw. backendu może zająć się programowaniem logiki biznesowej, natomiast osoby o lepszym zmyśle estetycznym mogą się poświęcić stworzeniu frontendu aplikacji.</p>
-</div>
 </div>
 <div class="section" id="definiowanie-widoku">
 <h2>Definiowanie widoku<a class="headerlink" href="#definiowanie-widoku" title="Permalink to this headline">¶</a></h2>
@@ -499,10 +501,8 @@ Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć
 <li><a class="reference internal" href="#">Graficzny interfejs użytkownika</a><ul>
 <li><a class="reference internal" href="#javafx">JavaFX</a></li>
 <li><a class="reference internal" href="#scene-builder-2-0-pierwszy-rzut-oka">Scene Builder 2.0 - pierwszy rzut oka</a></li>
-<li><a class="reference internal" href="#pierwszy-projekt-javafx">Pierwszy projekt JavaFX</a><ul>
+<li><a class="reference internal" href="#pierwszy-projekt-javafx">Pierwszy projekt JavaFX</a></li>
 <li><a class="reference internal" href="#omowienie-domyslnego-projektu">Omówienie domyślnego projektu</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#definiowanie-widoku">Definiowanie widoku</a><ul>
 <li><a class="reference internal" href="#edytor-wysiwyg">Edytor WYSIWYG</a></li>
 </ul>
@@ -515,7 +515,7 @@ Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="komunikacja.html"
+  <p class="topless"><a href="wyjkol.html"
                         title="previous chapter">Wyjątki i kolekcje</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="gui2.html"
@@ -552,7 +552,7 @@ Zapoznaj się przez 5 minut z narzędziem Scene Builder. Spróbuj przeciągnąć
           <a href="gui2.html" title="Graficzny interfejs użytkownika cz.2"
              >next</a> |</li>
         <li class="right" >
-          <a href="komunikacja.html" title="Wyjątki i kolekcje"
+          <a href="wyjkol.html" title="Wyjątki i kolekcje"
              >previous</a> |</li>
         <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
       </ul>

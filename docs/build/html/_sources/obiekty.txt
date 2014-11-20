@@ -8,12 +8,13 @@ Programowanie obiektowe
 * W jaki sposób definiować własne typy danych
 * Czym są metody i konstruktory
 * Czym jest przeciążanie metod i konstruktorów
-* Do czego służy słowo kluczowe this
+* Do czego służy słowo kluczowe 
+* Czym są pakiety i jakie są możliwe specyfikatory dostępu
 
 
 **Czym jest programowanie obiektowe?**
 
-Czysto teoretycznie programowaniem obiektowym najłatwiej nazwać próbę odwzorowania bytów ze świata rzeczywistego w naszej aplikacji poprzez możliwość odzwierciedlenie ich w opisowy sposób i utworzenie nowych, bardziej złożonych typów danych.
+Czysto teoretycznie programowaniem obiektowym najłatwiej nazwać próbę odwzorowania bytów ze świata rzeczywistego w naszej aplikacji poprzez utworzenie nowych, bardziej złożonych typów danych.
 
 Dużo prościej jest to jednak zrozumieć na konkretnych przykładach, do których za chwilę przejdziemy.
 
@@ -22,7 +23,7 @@ Klasy i obiekty
 ----------------
 
 **Ćwiczenie**
-Wyobraź sobie, że tworzysz aplikację prostą aplikację do obsługi sklepu komputerowego. Najważniejsze będzie w niej zdecydowanie przechowywanie informacji o produktach. Wypisz kilka cech produktu, które Twoim zdaniem będą istotne z punktu widzenia użytkownika tej aplikacji.
+Wyobraź sobie, że tworzysz aplikację prostą aplikację do obsługi sklepu komputerowego. Najważniejsze będzie w niej zdecydowanie przechowywanie informacji o produktach. Wypisz kilka cech produktu, które Twoim zdaniem będą istotne z punktu widzenia użytkownika tej aplikacji(sprzedawcy).
 
 Przykłady cech przydatnych
 ::
@@ -34,8 +35,9 @@ Przykłady cech przydatnych
   
 Możliwe, że rzeczy, które wypisałeś są inne od pokazanych powyżej - to bardzo dobrze! Świadczyć to może o różnej wizji na aplikację. Na tę chwilę ograniczymy się do dwóch podstawowych informacji, czyli nazwy produktu oraz jego ceny. Te dwie podstawowe rzeczy na dobrą sprawę pozwolą nam znaleźć dowolny towar w bazie wszystkich produktów oraz dokonać sprzedaży na podstawie podanej ceny.
 
-**Ćwiczenie**
-Napisz prosty program, w którym w zmiennych przechowasz informacje o 2 różnych produktach (np. Monitor Samsung Syncmaster za 700zł oraz Laptop HP Probook 450 za 3000zł). Wydrukuj następnie informacje o tych produktach na ekranie.
+**Ćwiczenie** *(5 min)*
+
+    Napisz prosty program, w którym w zmiennych przechowasz informacje o 2 różnych produktach (np. Monitor Samsung Syncmaster za 700zł oraz Laptop HP Probook 450 za 3000zł). Wydrukuj następnie informacje o tych produktach na ekranie. Wykorzystaj różne typy danych do przechowywania nazw produktów a inne do przechowywania ceny.
 
 *plik Shop.java*
 
@@ -81,7 +83,7 @@ Struktura projektu eclipse:
 Na podstawie takiej klasy możemy utworzyć **obiekt**. Obiekty zawsze będziemy tworzyli poprzez zapis **new NazwaKlasy();** przekazując w nawiasie ewentualne parametry (o tym za chwilę).
 
 .. note::
-    Obiektem nazywamy konkretny egzemplarz danej klasy. Klasą nazwiemy "Produkt", ale obiektem "laptop HP Probook 450 kosztujący 3000zł".
+    Obiektem nazywamy konkretny egzemplarz danej klasy. Klasą nazwiemy "Produkt", ale obiektem " produkt laptop HP Probook 450 kosztujący 3000zł".
 
 *plik Shop.java*
 
@@ -105,6 +107,12 @@ Na podstawie takiej klasy możemy utworzyć **obiekt**. Obiekty zawsze będziemy
     }
 
 Jak widzisz zmienne *name* i *price* z wcześniejszego kodu są teraz opakowane w **obiekty** typu Product. Do poszczególnych **pól klasy** odwołujemy się za pomocą operatora kropki, np. *"product1.name"*.
+
+.. note::
+    Jeżeli nie zainicjujesz poszczególnych klas obiektu, przyjmą one wartości domyślne. Dla typów liczbowych jest to 0 lub 0.0, dla typu char specjalna wartość pusta, a dla typów obiektowych (w tym String) jest to wartość null.
+
+.. attention::
+    Często powtarzającym się błędem w Javie jest **NullPointerException*. Oznacza on, że obiekt, do którego próbujesz się odwołać nie został utworzony, a jedynie zadeklarowany. Jeżeli zobaczysz go w eclipse sprawdż więc, czy przypisałeś do odpowiedniej zmiennej (referencji) obiekt utworzony za pomocą słowa new.
 
 Na chwilę obecną może Ci się wydawać, że zrobiło się tylko więcej kodu, a program nadal robi to samo. Zwróć jednak uwagę, że dane są teraz bardziej spójne, a dzięki podejściu obiektowemu informacje o np. 100 produktach możemy przechowywać w tylko 1 tablicy typu *Product[]*.
 
@@ -131,8 +139,9 @@ Na chwilę obecną może Ci się wydawać, że zrobiło się tylko więcej kodu,
         }
     }
 
-**Ćwiczenie**
-Wyobraź sobie, że tworzysz aplikację do diagnostyki komputerowej samochodów. Zacznij od utworzenia klasy Car przechowującej informacje o marce producenta, modelu, roku produkcji i mocy silnika. W drugiej klasie o nazwie CarDiagnostic utwórz dwa obiekty klasy Car i wyświetl informacje o samochodach na ekranie.
+**Ćwiczenie** *(10 min)*
+
+    Wyobraź sobie, że tworzysz aplikację do diagnostyki komputerowej samochodów. Zacznij od utworzenia klasy Car przechowującej informacje o marce producenta, modelu, roku produkcji i mocy silnika. W drugiej klasie o nazwie CarDiagnostic utwórz dwa obiekty klasy Car i wyświetl informacje o samochodach na ekranie.
 
 Struktura projektu:
 
@@ -183,7 +192,7 @@ Struktura projektu:
     }
 
 
-Metody i konstruktory
+Metody
 ----------------------
 Klasa Product potrafi już przechowywać informacje o nazwie i cenie produktu, jednak jak wspomnieliśmy w definicji klasy jest to także zbiór funkcjonalności. W programowaniu obiektowym funkcjonalności danej klasy realizuje się poprzez utworzenie **metod**. W naszym przykładzie funkcjonalnością może być na przykład zwrócenie przez obiekt klasy Product nazwy oraz ceny w czytelnej formie, dzięki czemu w metodzie println() nie będziemy musieli się odwoływać do poszczególnych pól.
 
@@ -204,7 +213,12 @@ Klasa Product potrafi już przechowywać informacje o nazwie i cenie produktu, j
 W klasie Product utworzyliśmy metodę **getProductInfo**. Ponieważ zwraca ona opisową formę produktu musieliśmy zadeklarować jej typ jako String. Wynik metody należy zwrócić za pomocą słowa kluczowego **return**.
 
 .. note::
-    Ogólna postać metody to **typ_zwracany nazwaMetody(opcjonalne_argumenty_metody) { ciało metody między nawiasami klamrowymi }** Elementami opcjonalnymi są jeszcze specyfikatory dostępu (np. public) oraz oznaczenie metody jako statycznej (static) - do tego dojdziemy jednak niebawem. Metody mogą zwracać wynik (np. String) i wtedy musi w nich występować instrukcja **return**, ale mogą także nie zwracać żadnego wyniku - sytuacja taka będzie miała miejsce, gdy metoda ma za zadanie np. wydrukować coś na ekranie za pomocą System.out.print(). Jeżeli metoda nie zwraca żadnego wyniku należy jako jej typ zwracany podać słowo kluczowe **void**. Przykładem metody, która nie zwraca żadnego wyniku jest metoda **main**, którą poznałeś już na samym początku szkolenia.
+    Ogólna postać metody to:
+    ::
+        typ_zwracany nazwaMetody(opcjonalne_argumenty_metody) { 
+          //ciało metody między nawiasami klamrowymi
+        }
+    Elementami opcjonalnymi są jeszcze specyfikatory dostępu (np. public) oraz oznaczenie metody jako statycznej (static) - do tego dojdziemy jednak niebawem. Metody mogą zwracać wynik (np. String) i wtedy musi w nich występować instrukcja **return**, ale mogą także nie zwracać żadnego wyniku - sytuacja taka będzie miała miejsce, gdy metoda ma za zadanie np. wydrukować coś na ekranie za pomocą System.out.print(). Jeżeli metoda nie zwraca żadnego wyniku należy jako jej typ zwracany podać słowo kluczowe **void**. Przykładem metody, która nie zwraca żadnego wyniku jest metoda **main**, którą poznałeś już na samym początku kursu.
 
 *plik Shop.java*
 
@@ -229,6 +243,9 @@ W klasie Product utworzyliśmy metodę **getProductInfo**. Ponieważ zwraca ona 
         }
     }
 
+
+Konstruktory
+-----------------
 Ostatnią rzeczą, którą możemy uprościć w klasie Shop jest inicjalizacja zmiennych. W chwili obecnej w celu utworzenia jednego tylko obiektu potrzebujemy aż 3 linijek kodu - w przypadku tworzenia 100 obiektów, kod rozrasta się do 300 linii - jest to niedopuszczalne.
 
 Tworzenie obiektów możemy jednak uprościć za pomocą specjalnych metod nazywanych **konstruktorami**.
@@ -280,7 +297,8 @@ Nasz konstruktor przyjmuje dwa argumenty - jeden typu String, a drugi typu doubl
 .. attention::
     Każda klasa posiada domyślnie jeden niejawny konstruktor (bez parametrów). Jeżeli jednak zdefiniujesz w swojej klasie chociaż jeden konstruktor przyjmujący dowolne argumenty, to konstruktor domyślny przestaje istnieć.
 
-**Ćwiczenie**
+**Ćwiczenie** *(10 min)*
+
     Rozwiń aplikację z poprzedniego ćwiczenia (diagnostyka sanmochodu) o następujące informacje. W klasie Car dodaj konstruktor pozwalający zainicjować wszystkie pola klasy oraz dwie metody: getInfo(), która zwróci opisową formę danego samochodu, a także upgreade(), która zwiększa moc silnika o tyle koni mechanicznych ile przekażemy jako jej parametr. Przetestuj nowe funkcjonalności w klasie CarDiagnostic.
 
 *plik Car.java*
@@ -295,6 +313,7 @@ Nasz konstruktor przyjmuje dwa argumenty - jeden typu String, a drugi typu doubl
         int year; //rok produkcji
         int horsePower; // ilość koni mechanicznych
         
+        //konstruktor do zainicjowania wszystkich pól
         Car(String cb, String m, int y, int hp) {
             carBrand = cb;
             model = m;
@@ -302,10 +321,12 @@ Nasz konstruktor przyjmuje dwa argumenty - jeden typu String, a drugi typu doubl
             horsePower = hp;
         }
         
+        //zwiększenie mocy silnika
         void upgreade(int hp) {
             horsePower = horsePower + hp;
         }
         
+        //zwrócenie opisowej formy samochodu
         String getInfo() {
             return carBrand + " " + model + "; " + year + "; " + horsePower + "HP";
         }
@@ -318,6 +339,7 @@ Nasz konstruktor przyjmuje dwa argumenty - jeden typu String, a drugi typu doubl
 
     public class CarDiagnostic {
         public static void main(String[] args) {
+            //utworzenie obiektów
             Car audiA4 = new Car("Audi", "A4", 2008, 170);
             Car vwGolf = new Car("Volkswagen", "Golf", 2010, 130);
             
@@ -325,6 +347,7 @@ Nasz konstruktor przyjmuje dwa argumenty - jeden typu String, a drugi typu doubl
             audiA4.upgreade(30);
             vwGolf.upgreade(20);
 
+            //wydruk informacji
             System.out.println("Samochód 1: ");
             System.out.println(audiA4.getInfo());
 
@@ -364,8 +387,9 @@ Czasami może zdarzyć się sytuacja, w której nie będziemy mieli pełnych inf
 
 W powyższym przykładzie widzimy, że utworzyliśmy drugi konstruktor, który inicjuje jedynie nazwę produktu. Cena (price) przyjmie w takiej sytuacji wartość domyślną, którą dla typu double jest 0.0. W podobny sposób możemy przeciążać dowolne metody, które będą miały takie same nazwy, ale przyjmą różne parametry.
 
-**Ćwiczenie**
-W programie do diagnostyki samochodu dopisz dodatkowy konstruktor pozwoli zainicjować jedynie markę i model samochodu, pozostawiając rok produkcji i moc silnika wartościami domyślnymi. W klasie CarDiagnostic utwórz za pomocą tego konstruktora nowy obiekt i wyświetl informacje o nim na ekranie.
+**Ćwiczenie** *(5 min)*
+
+    W programie do diagnostyki samochodu dopisz dodatkowy konstruktor pozwoli zainicjować jedynie markę i model samochodu, pozostawiając rok produkcji i moc silnika wartościami domyślnymi. W klasie CarDiagnostic utwórz za pomocą tego konstruktora nowy obiekt i wyświetl informacje o nim na ekranie.
 
 *plik Car.java*
 
@@ -459,7 +483,7 @@ Tym sposobem nasza poprawiona klasa Product prezentuje się jak poniżej.
         }
     }
 
-Zapis *this.name = name* należy rozumieć jako "przypisz do pola tej (this) klasy o nazwie name wartość argumentu konstruktora o nazwie name".
+Zapis *this.name = name* należy rozumieć jako "przypisz do pola tej (this) klasy o nazwie *name* wartość argumentu konstruktora o nazwie *name*".
 
 Słowo kluczowe this ma także drugie zastosowanie, które pozwala wywoływać przeciążoną wersję konstruktora w innym konstruktorze. Ma to takie zastosowanie, że pozwala zaoszczędzić powtarzalnego kodu w przypadku, gdy w klasie zdefiniujemy np. 4 podobne konstruktory, w których spora część kodu źródłowego się powtarza. U nas nie zaoszczędzimy specjalnie kodu, jednak wygląda to następująco:
 
@@ -474,7 +498,7 @@ Słowo kluczowe this ma także drugie zastosowanie, które pozwala wywoływać p
         
         //konstruktory
         Product(String name, double price) {
-            this(name);
+            this(name); //wywołanie innego konstruktora
             this.price = price;
         }
         
@@ -489,8 +513,9 @@ Słowo kluczowe this ma także drugie zastosowanie, które pozwala wywoływać p
 
 Jak widzisz w konstruktorze przyjmującym dwa argumenty wywołujemy w pierwszej kolejności konstruktor z jednym argumentem poprzez this(name). W ten sposób zainicjowaliśmy pole name, a następnie możemy zainicjować cenę, czyli pole price.
 
-**Ćwiczenie**
-Popraw klasę Car z poprzedniego zadania w taki sposób, aby nazwy argumentów konstruktorów miały bardziej znaczące nazwy (najlepiej takie same jak nazwy pól klasy). Wykorzystaj także słowo kluczowe this w celu wywołania w jednym z konstruktorów drugiego konstruktora i zaoszczędzić tym samym powtarzalnego kodu.
+**Ćwiczenie** *(5 min)*
+
+    Popraw klasę Car z poprzedniego zadania w taki sposób, aby nazwy argumentów konstruktorów miały bardziej znaczące nazwy (najlepiej takie same jak nazwy pól klasy). Wykorzystaj także słowo kluczowe this w celu wywołania w jednym z konstruktorów drugiego konstruktora i zaoszczędzić tym samym powtarzalnego kodu.
 
 *plik Car.java*
 
@@ -524,19 +549,85 @@ Popraw klasę Car z poprzedniego zadania w taki sposób, aby nazwy argumentów k
         }
     }
 
-Wartości domyślne i null
---------------------------
-Istotnym elementem 
-
-
 
 Pakiety i modyfikatory dostępu
 -------------------------------
+Istotnym elementem, który pomaga w organizacji większych projektów jest podział klas i plików źródłowych na pakiety. Pakiety są niczym innym jak dodatkowymi folderami, które pozwalają grupować wspólnie klasy, które odpowiadają za podobne funkcjonalności. W celu utworzenia pakietu wybieramy po prostu New -> Package. Nazewnictwo pakietów zazwyczaj odzwierciedla nazwę domeny autorów, czyli np. pl.org.ceo.kursjava.pakiet1 - gdzie pakiet1 powinien być jakąś znaczącą nazwą, kursjava nazwą projektu, a pl.org.ceo to odwrócona nazwa domeny Centrum Edukacji Obywatelskiej.
+
+Gdy w kodzie projektu CarDiagnoser podzielimy klasy na dwa pakiety (przeciągnij klasy do odpowiednich pakietów:
+
+.. image:: 02_obiekty/package.png
+    :align: center
+
+zauważamy błąd w klasie CarDiagnostic.
 
 
+    package pl.org.ceo.cardiagnoser.app;
+    import pl.org.ceo.cardiagnoser.data.Car;
 
-Ćwiczenie podsumowujące
---------------------------
+    public class CarDiagnostic {
+    //kod bez zmian
+    }
+
+Pierwszą rzeczą, na którą warto zwrócić uwagę są dwiue linie kodu, które eclipse dodał automatycznie:
+
+* package oznacza pakiet, w którym umieszczona jest dana klasa
+* import jest dyrektywą niezbędną w przypadku, gdy korzystamy z klas umieszczonych w innych pakietach. W naszym przypadku musieliśmy zaimportować klasę Car.
+
+Błąd w klasie polega na tym, że konstruktor jest niewidoczny:
+
+.. image:: 02_obiekty/constructor.png
+    :align: center
+
+Można sobie zadać pytanie, ale jak to niewidoczny, skoro przed chwilą z niego korzystaliśmy? Jest to spowodowane różnymi zasięgami widoczności pól metod i konstruktorów. W Javie istnieją cztery możliwe zasięgi:
+
+* default - domyślny, czyli pakietowy zasięg dostępu
+* public - publiczny, można się odwoływać z dowolnego miejsca w pakiecie i poza nim
+* protected - zasięg ograniczony do danego pakietu
+* private - zasięg tylko w ramach jednej klasy. Do tak oznaczonych pól, metod i konstruktorów nie można odwołać się nawet z klas w tym samym pakiecie
+
+Ponieważ klasy Car i CarDiagnoser znajdują się w różnych pakietach odpowiednie konstruktory i pola musimy oznaczyć jako publiczne:
+
+*plik Car.java*
+
+.. code-block:: java
+    :linenos:
+
+    package pl.org.ceo.cardiagnoser.data;
+
+    public class Car {
+        
+        public String carBrand; // marka samochodu
+        public String model;
+        public int year; //rok produkcji
+        public int horsePower; // ilość koni mechanicznych
+        
+        public Car(String carBrand, String model) {
+            this.carBrand = carBrand;
+            this.model = model;
+        }
+        
+        public Car(String carBrand, String model, int year, int horsePower) {
+            this(carBrand, model);
+            this.year = year;
+            this.horsePower = horsePower;
+        }
+        
+        public void upgreade(int hp) {
+            horsePower = horsePower + hp;
+        }
+        
+        public String getInfo() {
+            return carBrand + " " + model + "; " + year + "; " + horsePower + "HP";
+        }
+    }
+
+.. note::
+    Nasze przykłady najczęściej będą na tyle proste, że dla uproszczenia wszystkie pliki będą znajdowały się w jednym pakiecie.
+
+
+Ćwiczenie podsumowujące (20 minut)
+-----------------------------------
 Napisz prosty kalkulator, który będzie zgodny z podejściem programowania obiektowego. Niech składa się on z dwóch klas:
 
 * Calculator - klasa, w której zdefiniujesz metody add(), subtract(), multiply() oraz divide() odpowiedzialne odpowiednio za dodawanie, odejmowanie, mnożenie i dzielenie. Każda z metod powinna przyjmować dwa argumenty typu double, na których wykonuje obliczenie i zwraca w wynik.

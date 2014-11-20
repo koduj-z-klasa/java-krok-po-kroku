@@ -1,0 +1,1046 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wyjątki i kolekcje &mdash; Java krok po kroku 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Java krok po kroku 0.1 documentation" href="index.html" />
+    <link rel="next" title="Graficzny interfejs użytkownika" href="gui.html" />
+    <link rel="prev" title="Programowanie obiektowe 2" href="obiekty2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gui.html" title="Graficzny interfejs użytkownika"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="obiekty2.html" title="Programowanie obiektowe 2"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wyjatki-i-kolekcje">
+<h1>Wyjątki i kolekcje<a class="headerlink" href="#wyjatki-i-kolekcje" title="Permalink to this headline">¶</a></h1>
+<p>W tej lekcji dowiesz się:</p>
+<ul class="simple">
+<li>Czym są wyjątki i jak je obsługiwać</li>
+<li>Czym są kolekcje (listy, zbiory i mapy)</li>
+<li>Co to oznacza, że kolekcje są typem generycznym</li>
+<li>Jakie są typy opakowujące</li>
+<li>Co oznaczają pojęcia autoboxing i unboxing</li>
+</ul>
+<div class="section" id="wyjatki">
+<h2>Wyjątki<a class="headerlink" href="#wyjatki" title="Permalink to this headline">¶</a></h2>
+<p>W każdym programie występują pewne sytuacje wyjątkowe, które jednak można przewidzieć i w odpowiedni sposób obsłużyć. Nasza aplikacja powinna być odporna przede wszystkim na błędy, które mogą wyniknąć nie z naszej programistycznej winy, czyli np. zamknięcie połączenia sieciowego w trakcie komunikacji z innym komputerem podłączonym do sieci, błąd odczytu pliku, albo zwyczajnie wprowadzenie przez użytkownika danych w niepoprawnym formacie (napis zamiast liczby).</p>
+<p>We wszystkich takich przypadkach zostają wygenerowane wyjątki, czyli specjalne obiekty, które mówią o tym co poszło nie tak jak powinno. W Javie istnieją dwa sposoby na obsługę wyjątków, które w tym miejscu krótko omówimy.</p>
+<p>Hierarchia dziedziczenia klas wyjątków wygląda tak jak na poniższym schemacie.</p>
+<img alt="_images/exception-hierarchy.png" class="align-center" src="_images/exception-hierarchy.png" />
+<p>Nie musisz tego zapamiętywać, ponieważ najważniejszą różnicą pomiędzy poszczególnymi typami wyjątków jest to, czy musimy je obsługiwać, czy też nie. Obsługę wyjątków w niektórych sytuacjach wymusi na Tobie eclipse. W innych sytuacjach warto spojrzeć na sygnatury metod w dokumentacji, ponieważ to w nich znajdziesz informację, czy może ona generować jakiś wyjątek.</p>
+<p>Zacznijmy od prostej aplikacji, która posłuży nam do omówienia zagadnień tej lekcji.</p>
+<p><strong>Ćwiczenie</strong> <em>(10 minut)</em></p>
+<blockquote>
+<div>Przeanalizuj kod poniższego programu, który służy do zbierania danych o uczestnikach dowolnego konkursu, uruchom go oraz przetestuj dostępne opcje.</div></blockquote>
+<img alt="05_wyjcol/comp.png" class="align-center" src="05_wyjcol/comp.png" />
+<p><em>plik Person.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pl</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">ceo</span><span class="o">.</span><span class="na">data</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">pesel</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLastName</span><span class="o">(</span><span class="n">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getPesel</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">pesel</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPesel</span><span class="o">(</span><span class="n">String</span> <span class="n">pesel</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">pesel</span> <span class="o">=</span> <span class="n">pesel</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">firstName</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">lastName</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">pesel</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">&quot; lat&quot;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Zwróć uwagę na to, że pola tej klasy oznaczyliśmy jako prywatne oraz wygenerowaliśmy dla nich zestaw dwóch metod - tzw. getterów i setterów, któe pozwalają je odczytać poza tą klasą. Jest to ogólnie przyjęta konwencja, do której należy się przyzwyczaić, ponieważ spotkamy się z nią w Javie na każdym kroku.</p>
+<p>Druga nowość to przesłonięcie metody <em>toString()</em>. Oznaczona jest jako Override, czyli przesłania metodę <em>toString()</em> z klasy nadrzędnej. Możliwe, że myślisz - ale jak to, przecież klasa Person nie dziedziczy po żadnej klasie (brak extends). Otóż w Javie niejawnie każda klasa dziedziczy po specjalnej klasie Object. Metoda toString() to ogólnie przyjęta metoda, która zwraca opisową formę obiektu.</p>
+<p><em>plik Competition.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pl</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">ceo</span><span class="o">.</span><span class="na">app</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">pl.org.ceo.data.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Competition</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ADD_COMPETITOR</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PRINT_ALL</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">EXIT</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Person</span><span class="o">[]</span> <span class="n">competitors</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">competitorsNumber</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">competitors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span>
+        <span class="n">competitorsNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">printOptions</span><span class="o">();</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+            <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+            <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">ADD_COMPETITOR:</span>
+                <span class="n">addCompetitor</span><span class="o">(</span><span class="n">sc</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">PRINT_ALL:</span>
+                <span class="n">printCompetitors</span><span class="o">();</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">EXIT:</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">option</span> <span class="o">!=</span> <span class="n">EXIT</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printCompetitors</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Lista uczestników:&quot;</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">competitorsNumber</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">competitors</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addCompetitor</span><span class="o">(</span><span class="n">Scanner</span> <span class="n">sc</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">competitorsNumber</span> <span class="o">&lt;</span> <span class="n">competitors</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dodawanie nowego uczestnika: &quot;</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Imię: &quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Nazwisko&quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;PESEL:&quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setPesel</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wiek:&quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+            <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+            <span class="n">competitors</span><span class="o">[</span><span class="n">competitorsNumber</span><span class="o">]</span> <span class="o">=</span> <span class="n">person</span><span class="o">;</span>
+            <span class="n">competitorsNumber</span><span class="o">++;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Osiągnięto maksymalną liczbę uczestników&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printOptions</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dostępne opcje: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ADD_COMPETITOR</span> <span class="o">+</span> <span class="s">&quot; - Dodaj uczestnika&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">PRINT_ALL</span> <span class="o">+</span> <span class="s">&quot; - Wyświetl uczestników&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">EXIT</span> <span class="o">+</span> <span class="s">&quot; - Wyjście z programu&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wybierz opcję: &quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Klasa <strong>Person</strong> to nasz nośnik danych. Przechowuje ona informacje dotyczące imienia, nazwiska, nr. PESEL oraz wieku uczestnika. Posiada także metodę <em>toString()</em>, która przesłania domyślną metodę <em>toString()</em> z klasy Object. W klasie Competition znajduje się główna logika aplikacji, w której dajemy użytkownikowi jedną z trzech opcji, czyli dodanie nowego uczestnika, wyświetlenie wszystkich uczestników lub wyjście z programu. Po wybraniu opcji wywoływana jest odpowiednia metoda, w której wyświetlamy odpowiednie komunikaty, odbieramy dane od użytkownika i na ich podstawie tworzymy kolejne obiekty Person lub wyświetlamy już te dodane. Wszystkie składowe klasy zostały oznaczone jako statyczne, więc nie jest wymagane tworzenie obiektu klasy Competition w celu wywoływania metod, czy odwoływania się do poszczególnych pól z metody <em>main()</em>.</p>
+</div>
+<div class="section" id="wyjatki-blok-try-catch">
+<h2>Wyjątki - blok try catch<a class="headerlink" href="#wyjatki-blok-try-catch" title="Permalink to this headline">¶</a></h2>
+<p>Miejscem, w którym w naszym programie mogą pojawić się problemy, są związane głównie z odbiorem danych od użytkownika - w końcu nie jesteśmy w stanie przewidzieć, czy zamiast konkretnej liczby nie wprowadzi on dla żartu napisu &#8220;asdf&#8221;. Jeżeli coś takiego się wydarzy, zostanie wtedy wygenerowany wyjątek fazy wykonania o nazwie <em>InputMismatchException</em>, który jest spowodowany tym, że metoda <em>nextInt()</em> nie jest przygotowana na odbiór danych typu String.</p>
+<img alt="_images/inputmismatch.png" class="align-center" src="_images/inputmismatch.png" />
+<p>Aplikacja w tej sytuacji przestaje działać, a dane zostają utracone. W Javie istnieje jednak dosyć prosty mechanizm obsługi sytuacji wyjątkowych za pomocą bloku try catch. Jego ogólna konstrukcja wygląda następująco:</p>
+<div class="highlight-python"><div class="highlight"><pre>try {
+  //instrukcje mogące wygenerować wyjątek
+} catch(typ_wyjatku nazwa_zmiennej) {
+  //instrukcje, które zostaną wykonane po wygenerowaniu wyjątku
+} finally {
+  //instrukcje, które wykonają się zawsze, niezależnie, czy wyjątek wystąpi, czy też nie (blok opcjonalny)
+}
+</pre></div>
+</div>
+<p>W naszym kodzie w bloku try można oczywiście umieścić odczyt danych, czyli wywołanie metody <em>nextInt()</em>. Można także w nim umieścić dużo większy fragment kodu, jednak warto się zastanowić, czy na pewno się to opłaca i czy pomoże nam to w identyfikacji konkretnego problemu.</p>
+<p><em>plik Competition.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Competition</span> <span class="o">{</span>
+
+    <span class="c1">//reszta kodu bez zmian</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">competitors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span>
+        <span class="n">competitorsNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">printOptions</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">option</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span> <span class="c1">//&quot;zjadamy&quot; znak nowej linii z bufora</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dane w nieprawidłowym formacie &quot;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span> <span class="c1">//przejście do kolejnej iteracji pętli</span>
+            <span class="o">}</span>
+
+            <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">ADD_COMPETITOR:</span>
+                <span class="n">addCompetitor</span><span class="o">(</span><span class="n">sc</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">PRINT_ALL:</span>
+                <span class="n">printCompetitors</span><span class="o">();</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">EXIT:</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">option</span> <span class="o">!=</span> <span class="n">EXIT</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+    <span class="c1">//reszta kodu bez zmian</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Jeżeli użytkownik wprowadzi teraz niepoprawne dane podczas przypisania <em>option = sc.nextInt();</em> wygenerowany zostanie wyjątek, który jednak obsługujemy w bloku try-catch, a tym samym możemy zapobiec zakońćzeniu programu. Ponieważ po wygenerowaniu wyjątku sterowanie programu jest przekazywane natychmiast do bloku catch, musimy w pierwszej kolejności pozbyć się z bufora znaku nowej linii, który pozostaje po wywołaniu metody nextInt(). Następnie wyświetlamy komunikat o błędzie i przechodzimy do kolejnej iteracji pętli dzięki instrukcji continue. Będzie się tak działo za każdym razem, gdy użytkownik wprowadzi wartość niezgodną z typem int.</p>
+<p>Blok finally jest w tym przypadku zbędny. Przydatny będzie natomiast, gdy będziemy chcieli zamknąć strumień, czy plik niezależnie od tego, czy błąd wystąpił, czy nie.</p>
+</div>
+<div class="section" id="wyjatki-deklaracja-throws">
+<h2>Wyjątki - deklaracja throws<a class="headerlink" href="#wyjatki-deklaracja-throws" title="Permalink to this headline">¶</a></h2>
+<p>Istnieją takie sytuacje, w których nie chcemy obsługiwać wyjątków za pomocą bloku try-catch, bo zwyczajnie nie będziemy w stanie nic z tym problemem zrobić. W takiej sytuacji możemy przekazać wyjątek wyżej i dać osobie korzystającej z naszego kodu możliwość zadecydowania, czy chce obsłużyć dany wyjątek, czy też również nic z nim nie robić. Przykładem takiego działania jest metoda <em>nextInt()</em> klasy Scanner - może ona generować trzy różne wyjątki, które możemy obsłużyć tak jak w powyższym kodzie, albo je pominąć, tak jak robiliśmy to wcześniej.</p>
+<p><em>plik Competition.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pl</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">ceo</span><span class="o">.</span><span class="na">app</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.InputMismatchException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">pl.org.ceo.data.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Competition</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ADD_COMPETITOR</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PRINT_ALL</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">EXIT</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Person</span><span class="o">[]</span> <span class="n">competitors</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">competitorsNumber</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">competitors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">competitorsNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">printOptions</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">option</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dane w nieprawidłowym formacie &quot;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">ADD_COMPETITOR:</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">addCompetitor</span><span class="o">(</span><span class="n">sc</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Błąd odczytu danych&quot;</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ArrayIndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">PRINT_ALL:</span>
+                <span class="n">printCompetitors</span><span class="o">();</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">EXIT:</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">option</span> <span class="o">!=</span> <span class="n">EXIT</span><span class="o">);</span>
+
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printCompetitors</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Lista uczestników:&quot;</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">competitorsNumber</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">competitors</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addCompetitor</span><span class="o">(</span><span class="n">Scanner</span> <span class="n">sc</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InputMismatchException</span><span class="o">,</span> <span class="n">ArrayIndexOutOfBoundsException</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">competitorsNumber</span> <span class="o">&lt;</span> <span class="n">competitors</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dodawanie nowego uczestnika: &quot;</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Imię: &quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Nazwisko&quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;PESEL:&quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setPesel</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wiek:&quot;</span><span class="o">);</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+            <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+            <span class="n">competitors</span><span class="o">[</span><span class="n">competitorsNumber</span><span class="o">]</span> <span class="o">=</span> <span class="n">person</span><span class="o">;</span>
+            <span class="n">competitorsNumber</span><span class="o">++;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">//jeżeli tablica jest pełna, tworzymy wyjątek, który o tym informuje</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArrayIndexOutOfBoundsException</span><span class="o">(</span><span class="s">&quot;Osiągnięto maksymalną liczbę uczestników&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printOptions</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dostępne opcje: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ADD_COMPETITOR</span> <span class="o">+</span> <span class="s">&quot; - Dodaj uczestnika&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">PRINT_ALL</span> <span class="o">+</span> <span class="s">&quot; - Wyświetl uczestników&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">EXIT</span> <span class="o">+</span> <span class="s">&quot; - Wyjście z programu&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wybierz opcję: &quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>W naszym programie sensownym miejscem, w którym możemy stworzyć i rzucić wyjątek jest metoda <em>addCompetitor()</em>. Jeżeli tablica, którą utworzyliśmy będzie już pełna, wygenerujemy wyjątek, który pojawia się, gdy próbujemy odwoływać się do indeksu tablicy wykraczającego poza zakres, czyli <em>ArrayIndexOutOfBoundsException</em>. W kodzie używamy także metody <em>getInt()</em> klasy Scanner, jednak tym razem nie obsługujemy tu wyjątku, a jedynie dodajemy o nim informację w sygnaturze metody (lepiej jest go obsłużyć, ale na potrzeby ćwiczenia zróbmy to w ten sposób).</p>
+<p>Oba wyjątki, czyli ArrayIndexOutOfBoundsException i InputMismatchException nie muszą być obsługiwane, więc informacja w sygnaturze metody jest bardziej komunikatem dla programisty, czego może się spodziewać. Oba wyjątki obsługujemy w osobnych blokach catch już bezpośrednio w bloku konstrukcji switch umieszczonej w metodzie <em>main()</em>. Jak widzisz do jednego bloku try możemy podpiąć kilka bloków catch do obsługi różnych wyjątków - działa to podobnie do instrukcji warunkowej if else.</p>
+<p>Rozmiar tablicy w powyższym przykładzie zmieniliśmy na 1, abyś mógł przetestować działanie wyjątku. Przy próbie dodania drugiego uczestnika do tablicy, generujemy wyjątek ArrayIndexOutOfBoundsException, z którego następnie już w bloku catch() pobieramy informację przekazaną w konstruktorze za pomocą metody <em>e.getMessage()</em>.</p>
+<img alt="_images/aioobe.png" class="align-center" src="_images/aioobe.png" />
+</div>
+<div class="section" id="kolekcje">
+<h2>Kolekcje<a class="headerlink" href="#kolekcje" title="Permalink to this headline">¶</a></h2>
+<p>Mówiąc o kolekcjach w Javie będziemy mieli na myśli Collections framework, czyli specjalny zestaw interfejsów i klas, które są przeznaczone do przechowywania różnych kolekcji obiektów. Hierarchię kolekcji w języku Java przedstawiono na poniższym diagramie, my omówimy najczęściej wykorzystywane listy.</p>
+<p>Zbiory, listy i kolejki:</p>
+<img alt="_images/collections.png" class="align-center" src="_images/collections.png" />
+<p>oraz mapy:</p>
+<img alt="_images/maps_collections.png" class="align-center" src="_images/maps_collections.png" />
+</div>
+<div class="section" id="typy-opakowujace">
+<h2>Typy opakowujące<a class="headerlink" href="#typy-opakowujace" title="Permalink to this headline">¶</a></h2>
+<p>Pierwszą rzeczą, którą musimy wyjaśnić przed przejściem do omówienia list oraz zbiorów są typy opakowujące typów prostych. Jest to spowodowane tym, że jak wspomnieliśmy na wstępie, kolekcje służą do przechowywania obiektów, a typy proste takie jak int, czy double typami obiektowymi nie są. Typem obiektowym jest natomiast String, w którego przypadku nie napotkamy na większe problemy.</p>
+<p>Każdy z typów prostych ma swój odpowiednik obiektowy. Lista klas reprezentujących poszczególne z nich przedstawia się następująco:</p>
+<ul class="simple">
+<li>byte - Byte</li>
+<li>short - Short</li>
+<li>int - Integer</li>
+<li>long - Long</li>
+<li>float - Float</li>
+<li>double - Double</li>
+<li>boolean - Boolean</li>
+<li>char - Character</li>
+</ul>
+<p>Jak widzisz w większości przypadków zmianie ulega jedynie litera z małej na wielką. W celu zamiany wartości typu prostego, np. liczby 15, na obiekt typu Integer reprezentujący wartość 15 należy wykorzystać statyczną metodę <em>valueOf()</em>, którą posiada każdy z wyżej wymieninych typów. Metoda ta jest dostępna w kilku przeciążonych wersjach, więc jako jej argument możemy podać zarówno liczbę w formie typu prostego lub jako String. Innym sposobem jest po prostu skorzystanie z konstruktora danej klasy - oba podejścia działają w praktyce tak samo.</p>
+<p><em>plik Wrappers.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Wrappers</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//konstruktor na podstawie liczby</span>
+        <span class="n">Integer</span> <span class="n">num1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">15</span><span class="o">);</span>
+        <span class="c1">//konstruktor na podstawie Stringa</span>
+        <span class="n">Integer</span> <span class="n">num2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="s">&quot;15&quot;</span><span class="o">);</span>
+
+        <span class="c1">//metody valueOf()</span>
+        <span class="n">Integer</span> <span class="n">num3</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">15</span><span class="o">);</span>
+        <span class="n">Integer</span> <span class="n">num4</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="s">&quot;15&quot;</span><span class="o">);</span>
+
+        <span class="c1">//Porównanie obiektów nie działa tak jak porównywanie typów prostych!</span>
+        <span class="c1">//do porównywanie obiektów zawsze wykorzystuj metodę equals()</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;num1 == num2 = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">num1</span><span class="o">==</span><span class="n">num2</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;num1.equals(num2) = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">num1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">num2</span><span class="o">)));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Ponieważ korzystając z kolekcji byłoby straszną męczarnią konwertowanie typów z prostych na obiektowe i z obiektowych na proste, to w Javie 1.5 wprowadzono mechanizm autoboxingu i unboxingu, czyli automatycznej konwersji pomiędzy typami. Można więc bez problemu przypisać do referencji typu Integer wartość 5, a wirtualna maszyna automatycznie zamieni ją na obiekt.</p>
+<p><em>plik Autoboxing.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Autoboxing</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//autoboxing</span>
+        <span class="n">Double</span> <span class="n">num1</span> <span class="o">=</span> <span class="mf">5.54</span><span class="o">;</span>
+        <span class="n">Integer</span> <span class="n">num2</span> <span class="o">=</span> <span class="mi">200</span><span class="o">;</span>
+
+        <span class="c1">//unboxing</span>
+        <span class="kt">double</span> <span class="n">num3</span> <span class="o">=</span> <span class="n">num1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">num4</span> <span class="o">=</span> <span class="n">num2</span><span class="o">;</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;num1.equals(num2) = &quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">num1</span> <span class="o">==</span> <span class="n">num3</span><span class="o">));</span> <span class="c1">//true</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Typ String jest typem obiektowym (dlatego też pisany jest z wielkiej litery), więc nie wymaga dodatkowych zabiegów.</p>
+</div>
+<div class="section" id="listy">
+<h2>Listy<a class="headerlink" href="#listy" title="Permalink to this headline">¶</a></h2>
+<p>Listy to najprostsze struktury danych. Ich głównym zadaniem jest przechowywanie obiektów w uporządkowanej, indeksowanej formie - czyli podobnie jak w przypadku tablic. Istnieją dwa główne typy list:</p>
+<ul class="simple">
+<li>lista tablicowa (<strong>ArrayList</strong>) - jej wewnętrzna struktura opiera się dokładnie na tablicy</li>
+<li>lista wiązana (<strong>LinkedList</strong>) - obiekty w niej stanowią skończony ciąg połączonych ze sobą węzłów</li>
+</ul>
+<p>Na poziomie tego szkolenia nie będziemy zgłębiali różnić pomiędzy tymi strukturami i skupimy się na pierwszej z nich, jednak warto wiedzieć, że z powodu odmiennej reprezentacji wewnętrznej wydajnosć operacji takich jak usuwanie, czy wyszukiwanie w obu z nich może się znacząco różnić w przypadku dużych grup danych.</p>
+<p>Listę tworzymy w następujący sposób:</p>
+<div class="highlight-python"><div class="highlight"><pre>ArrayList&lt;Typ_Danych&gt; nazwaListy = new ArrayList&lt;&gt;();
+//np.
+ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;();
+</pre></div>
+</div>
+<p>Ponieważ typy kolekcyjne stanowią jednak pewną hierarchię dziedziczenia, warto również korzystać z zalet polimorfizmu i stosować ogólniejszy typ referencji, do którego można przypisać zarówno LinkedListę jak i ArrayListę.</p>
+<div class="highlight-python"><div class="highlight"><pre>List&lt;String&gt; names = new ArrayList&lt;&gt;();
+</pre></div>
+</div>
+<p>Mamy jednak wtedy dostęp jedynie do metod z typu referencji, czyli interfejsu List (chyba, że zastosujemy rzutowanie na typ ArrayList).
+Pomiędzy ostrymi nawiasami określamy typ danych jaki będzie przechowywała dana lista. Powiemy dzięki temu, że kolekcja jest <strong>typem generycznym</strong>.</p>
+<p>Na listach możemy wykonywać podstawowe operacje takie jak:</p>
+<ul class="simple">
+<li>dodawanie - metoda <strong>add(Object obiekt)</strong></li>
+<li>usuwanie - metoda <strong>remove(int index)</strong> jeśli chcemy usunąć element o wskazanym indeksie lub <strong>remove(Object o)</strong> jeżeli chcemy usunąć obiekt, dla którego porównanie za pomocą metody equals() z przekazanym parametrem zwróci true</li>
+<li>pobranie elementu z listy - metoda <strong>get()</strong> - analogicznie jak w przypadku tablic listy indeksowane są od 0</li>
+<li>sprawdzenie rozmiaru listy - metoda <strong>size()</strong></li>
+<li>sprawdzenie, czy dany obiekt znajduje się w liście - metoda <strong>contains(Object obiekt)</strong></li>
+</ul>
+<p><em>plik Collect.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pl</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">ceo</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Collect</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Jan&quot;</span><span class="o">);</span>
+        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Wojtek&quot;</span><span class="o">);</span>
+        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Kasia&quot;</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Czy Jan jest na liście: &quot;</span> <span class="o">+</span> <span class="n">names</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&quot;Jan&quot;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Ile jest osób na liście: &quot;</span> <span class="o">+</span> <span class="n">names</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A po usunięciu Wojtka &quot;</span><span class="o">);</span>
+        <span class="n">names</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">&quot;Wojtek&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;rozmiar to &quot;</span> <span class="o">+</span> <span class="n">names</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<dl class="docutils">
+<dt><strong>Ćwiczenie</strong> <em>(15 minut)</em></dt>
+<dd>Przerób program z wcześniejszej części lekcji (zapisy na konkurs) w taki sposób, aby uczestnicy byli dopisywani do listy, a nie tablicy.</dd>
+</dl>
+<p><em>plik Competition.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pl</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">ceo</span><span class="o">.</span><span class="na">app</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.InputMismatchException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">pl.org.ceo.data.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Competition</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ADD_COMPETITOR</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PRINT_ALL</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">EXIT</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="c1">// zastępujemy tablicę listą</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">competitors</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// inicjalizujemy listę</span>
+        <span class="n">competitors</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">printOptions</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">option</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dane w nieprawidłowym formacie &quot;</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">ADD_COMPETITOR:</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">addCompetitor</span><span class="o">(</span><span class="n">sc</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Błąd odczytu danych&quot;</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">PRINT_ALL:</span>
+                <span class="n">printCompetitors</span><span class="o">();</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">EXIT:</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">option</span> <span class="o">!=</span> <span class="n">EXIT</span><span class="o">);</span>
+
+        <span class="n">sc</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printCompetitors</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Lista uczestników:&quot;</span><span class="o">);</span>
+        <span class="c1">//W listach możemy wykorzystywać pętle for-each jak przy tablicach</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Person</span> <span class="nl">p:</span> <span class="n">competitors</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addCompetitor</span><span class="o">(</span><span class="n">Scanner</span> <span class="n">sc</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InputMismatchException</span> <span class="o">{</span>
+        <span class="c1">// sprawdzanie ilośći elementów jest zbędne, ponieważ zajmuje się tym</span>
+        <span class="c1">// lista</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dodawanie nowego uczestnika: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Imię: &quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Nazwisko&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;PESEL:&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setPesel</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wiek:&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">());</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+
+        <span class="n">competitors</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printOptions</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Dostępne opcje: &quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ADD_COMPETITOR</span> <span class="o">+</span> <span class="s">&quot; - Dodaj uczestnika&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">PRINT_ALL</span> <span class="o">+</span> <span class="s">&quot; - Wyświetl uczestników&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">EXIT</span> <span class="o">+</span> <span class="s">&quot; - Wyjście z programu&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Wybierz opcję: &quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="dodatek-porownywanie-obiektow">
+<h2>Dodatek - porównywanie obiektów<a class="headerlink" href="#dodatek-porownywanie-obiektow" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wyjątki i kolekcje</a><ul>
+<li><a class="reference internal" href="#wyjatki">Wyjątki</a></li>
+<li><a class="reference internal" href="#wyjatki-blok-try-catch">Wyjątki - blok try catch</a></li>
+<li><a class="reference internal" href="#wyjatki-deklaracja-throws">Wyjątki - deklaracja throws</a></li>
+<li><a class="reference internal" href="#kolekcje">Kolekcje</a></li>
+<li><a class="reference internal" href="#typy-opakowujace">Typy opakowujące</a></li>
+<li><a class="reference internal" href="#listy">Listy</a></li>
+<li><a class="reference internal" href="#dodatek-porownywanie-obiektow">Dodatek - porównywanie obiektów</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="obiekty2.html"
+                        title="previous chapter">Programowanie obiektowe 2</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gui.html"
+                        title="next chapter">Graficzny interfejs użytkownika</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/wyjkol.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gui.html" title="Graficzny interfejs użytkownika"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="obiekty2.html" title="Programowanie obiektowe 2"
+             >previous</a> |</li>
+        <li><a href="index.html">Java krok po kroku 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Slawomir Ludwiczak.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
