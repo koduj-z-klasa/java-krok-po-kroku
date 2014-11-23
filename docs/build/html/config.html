@@ -72,6 +72,24 @@
 <p>Narzędzie JavaFX Scene Builder w wersji 2.0 można pobrać <a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/sb2download-2177776.html">ze strony Oracle</a>.</p>
 <img alt="_images/scenebuilder.png" src="_images/scenebuilder.png" />
 </div>
+<div class="section" id="rozwiazywanie-problemow">
+<h2>Rozwiązywanie problemów<a class="headerlink" href="#rozwiazywanie-problemow" title="Permalink to this headline">¶</a></h2>
+<p>1. Sprawdzenie wersji systemu operacyjnego
+W celu sprawdzenia wersji systemu operacyjnego kliknij prawym przyciskiem myszy na opcji &#8220;Komputer&#8221; i wybierz właściwości. Wśród informacji znajdziesz także wersję systemu operacyjnego (32 lub 64 bit)</p>
+<img alt="_images/bit.png" src="_images/bit.png" />
+<p>Wszystkie wcześniej wspomniane narzędzia należy zainstalować zgodnie z wersją swojego systemu operacyjnego.</p>
+<ol class="arabic simple" start="2">
+<li>Konfiguracja Javy 8 w przypadku kilku jej wersji na komputerze.</li>
+</ol>
+<p>W przypadku, gdy na komputerze było wcześniej zainstalowanych kilka wersji Javy, eclipse może domyślnie korzystać z jej starszej wersji (np. 7), co na późniejszym etapie uniemożliwi nam tworzenie aplikacji z graficznym interfejsem użytkownika w Javie FX. W celu sprawdzenia i skonfigurowania odpowiedniej wersji Javy w eclipse należy przejść do opcji Window -&gt; Preferences -&gt; Installed JREs.</p>
+<p>Jako domyślne środowisko uruchomieniowe powinno być to oznaczone jako 1.8.0 (z ewentualnym dopiskiem o wersji aktualizacji). Jeżeli tak nie jest należy wybrać opcję Add -&gt; Standard VM a następnie wskazać główny folder zainstalowanego pakietu JDK w sekcji JRE home.</p>
+<img alt="_images/eclipsejdk.png" src="_images/eclipsejdk.png" />
+<p>Powyżej widać, że skonfigurowana jest zarówno Java 7 jak i 8, ale wersja 8 ustawiona jest jako domyślna</p>
+<ol class="arabic simple" start="3">
+<li>Eclipse po uruchomieniu pokazuje błąd związany z wtyczką Mercurial (system kontroli wersji).</li>
+</ol>
+<p>Błąd należy zignorować, nie powinien pojawiać się przy kolejnych uruchomieniach środowiska.</p>
+</div>
 </div>
 
 
@@ -87,6 +105,7 @@
 <li><a class="reference internal" href="#java-development-kit">Java Development Kit</a></li>
 <li><a class="reference internal" href="#srodowisko-programistyczne-ide">Środowisko programistyczne (IDE)</a></li>
 <li><a class="reference internal" href="#javafx-scene-builder">JavaFX Scene Builder</a></li>
+<li><a class="reference internal" href="#rozwiazywanie-problemow">Rozwiązywanie problemów</a></li>
 </ul>
 </li>
 </ul>

@@ -307,10 +307,11 @@
 <span class="nt">&lt;/VBox&gt;</span>
 </pre></div>
 </td></tr></table></div>
+<p>W pliku fxml widzimy wynik wcześniejszych operacji, nie powinno być w nim nic czego wcześniej nie poznaliśmy - konfiguracja layoutu oraz kilku przycisków z odpowiednio nadanymi atrybutami fx:id.</p>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>Klasa modelu w naszym przypadku jest bardzo prosta. Jedynym jej zadaniem będzie przechowywanie aktualnego stanu aplikacji, a to najłatwiej będzie zrealizować za pomocą dwuwymiarowej tablicy. Możemy wykorzystać dowolny typ liczbowy, np. int ponieważ potrzebujemy 3 stanów każdego przycisku:</p>
+<p>Klasa modelu w naszym przypadku będzie stanowiła główną logikę aplikacji. Zamieścimy w niej zarówno model danych, czyli odwzorowanie planszy jak i logikę biznesową, czyli metody, które sprawdzą , czy ktoś już przypadkiem nie wygrał.</p>
 <ul class="simple">
 <li>-1 - kółko</li>
 <li>0 - puste pole</li>
@@ -498,9 +499,23 @@
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
+<p>Powyższy kod może wydawać Ci się nieco skomplikowany jak na nasze potrzeby, ale jego zaletą jest to, że dzięki wykorzystaniu pętli możemy go wykorzystać zarówno w planszy 3x3, 4x4 jak i większych. W praktyce w takie gry raczej się nie gra, bo prawie zawsze padałby remis, jednak rozwiązanie takie i tak wydaje się lepsze niż kilkadziesiąt warunków if sprawdzających wszystkie wiersze i kolumny osobno.</p>
+<p>Bardziej szczegółowy opis klasy poniżej.</p>
+<p>Wiersze 4-6 to deklaracja stałych, które posłużą nam do wypełniania i sprawdzania stanów danego pola na planszy. X to krzyżyk O to kółko, a BLANK oznacza pole puste.
+W wierzu 8 deklarujemy stałą definiującą rozmiar planszy - w tym przypadku 3x3
+W 9 wierszu  widzimy tablicę dwuwymiarową, która będzie reprezentowała naszą planszę
+Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktualny gracz - zmieniany co rundę.</p>
+<p>W Javie zwykło się oznaczać pola, które nie są stałymi za pomocą prywatnego specyfikatora dostępu. Ponieważ są one prywatne potrzebujemy utworzyć metody dostępowe do tych pól.</p>
+<p><em>getValue()</em> zwraca pole w tablicy o współrzędnych x, y,
+<em>setValue()</em> odpowiednio je ustawia,
+<em>getActivePlayer()</em> zwraca aktualnie ustawionego gracza,
+<em>switchPlayer()</em> ustawia zmienną <em>activePlayer</em> na wartość ze zmienionym znakiem, czyli z 1 na -1 lub z -1 na 1.</p>
+<p>W konstruktorze inicjalizujemy tablicę o zadanym rozmiarze oraz ustawiamy gracza rozpoczynającego grę na O (kółko zaczyna).</p>
+<p>Metoda <em>getWinner()</em> jest najbardziej skomplikowana i służy do sprawdzenia warunków, czy w którymś wierszu, kolumnie, lub dowolnej z przekątnych znajdują się wartości jednego typu (kółko lub krzyżyk, reprezentowane w programie przez wartości 1 lub -1). Jeżeli napotkamy na pierwszy przypadek, w którym warunek zwycięstwa jest prawdziwy kończymy działanie pętli i zwracamy w wyniku wartość zgodną ze zwycięzkim graczem (kółko lub krzyżyk). Jeżeli wszystkie pętle zostaną ukończone oznacza to, że nie ma jeszcze zwycięzcy i zwracana jest wartość BLANK, którą zainicjowaliśmy zmienną winner.</p>
 </div>
 <div class="section" id="kontroler">
 <h2>Kontroler<a class="headerlink" href="#kontroler" title="Permalink to this headline">¶</a></h2>
+<p>Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zdefiniowanym w pliku fxml.</p>
 <p><em>plik TicTacToeController.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2

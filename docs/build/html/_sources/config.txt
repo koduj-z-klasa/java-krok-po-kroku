@@ -27,6 +27,35 @@ Narzędzie JavaFX Scene Builder w wersji 2.0 można pobrać `ze strony Oracle`_.
 
 .. image:: 00_config/scenebuilder.png
 
+
+Rozwiązywanie problemów
+------------------------
+
+1. Sprawdzenie wersji systemu operacyjnego
+W celu sprawdzenia wersji systemu operacyjnego kliknij prawym przyciskiem myszy na opcji "Komputer" i wybierz właściwości. Wśród informacji znajdziesz także wersję systemu operacyjnego (32 lub 64 bit)
+
+.. image:: 00_config/bit.png
+
+Wszystkie wcześniej wspomniane narzędzia należy zainstalować zgodnie z wersją swojego systemu operacyjnego.
+
+2. Konfiguracja Javy 8 w przypadku kilku jej wersji na komputerze.
+
+W przypadku, gdy na komputerze było wcześniej zainstalowanych kilka wersji Javy, eclipse może domyślnie korzystać z jej starszej wersji (np. 7), co na późniejszym etapie uniemożliwi nam tworzenie aplikacji z graficznym interfejsem użytkownika w Javie FX. W celu sprawdzenia i skonfigurowania odpowiedniej wersji Javy w eclipse należy przejść do opcji Window -> Preferences -> Installed JREs.
+
+Jako domyślne środowisko uruchomieniowe powinno być to oznaczone jako 1.8.0 (z ewentualnym dopiskiem o wersji aktualizacji). Jeżeli tak nie jest należy wybrać opcję Add -> Standard VM a następnie wskazać główny folder zainstalowanego pakietu JDK w sekcji JRE home.
+
+.. image:: 00_config/eclipsejdk.png
+
+Powyżej widać, że skonfigurowana jest zarówno Java 7 jak i 8, ale wersja 8 ustawiona jest jako domyślna
+
+3. Eclipse po uruchomieniu pokazuje błąd związany z wtyczką Mercurial (system kontroli wersji).
+
+Błąd należy zignorować, nie powinien pojawiać się przy kolejnych uruchomieniach środowiska.
+
+
+
+
+
 .. _JDK: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 .. _ze strony eFXclipse: http://efxclipse.bestsolution.at/install.html
 .. _ze strony Oracle: http://www.oracle.com/technetwork/java/javase/downloads/sb2download-2177776.html
