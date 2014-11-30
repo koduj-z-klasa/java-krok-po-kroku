@@ -15,7 +15,7 @@ Ze strony Oracle należy pobrać najnowszą dostępną wersję `JDK`_ w wersji o
 ---------------------------------
 Kolejnym narzędziem, które będzie wykorzystywane w trakcie kursu jest środowisko programistyczne eclipse. Na rynku istnieją także inne IDE takie jak Netbeans oraz Intellij IDEA (szczególnie popularne w zastosowaniach komercyjnych), jednak to eclipse jest najpopularniejsze, a jednocześnie proste w obsłudze i z dużymi możliwościami rozbudowy oraz co ważne - całkowicie bezpłatne.
 
-Ponieważ w dalszej częściu kursu będziemy tworzyli aplikacje z graficznym interfejsem użytkownika, zalecamy pobrać wcześniej przygotowane środowisko eclipse wyposażone w niezbędne wtyczki. Całość można pobrać `ze strony eFXclipse`_ w postazi archiwum zip, a następnie wypakować je w dowolnym miejscu na komputerze.
+Ponieważ w dalszej częściu kursu będziemy tworzyli aplikacje z graficznym interfejsem użytkownika, zalecamy pobrać wcześniej przygotowane środowisko eclipse wyposażone w niezbędne wtyczki. Całość można pobrać `ze strony eFXclipse`_ w postaci archiwum zip, a następnie wypakować je w dowolnym miejscu na komputerze.
 
 .. image:: 00_config/eclipse.png
 
@@ -32,6 +32,7 @@ Rozwiązywanie problemów
 ------------------------
 
 1. Sprawdzenie wersji systemu operacyjnego
+
 W celu sprawdzenia wersji systemu operacyjnego kliknij prawym przyciskiem myszy na opcji "Komputer" i wybierz właściwości. Wśród informacji znajdziesz także wersję systemu operacyjnego (32 lub 64 bit)
 
 .. image:: 00_config/bit.png
@@ -51,9 +52,6 @@ Powyżej widać, że skonfigurowana jest zarówno Java 7 jak i 8, ale wersja 8 u
 3. Eclipse po uruchomieniu pokazuje błąd związany z wtyczką Mercurial (system kontroli wersji).
 
 Błąd należy zignorować, nie powinien pojawiać się przy kolejnych uruchomieniach środowiska.
-
-
-
 
 
 .. _JDK: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html

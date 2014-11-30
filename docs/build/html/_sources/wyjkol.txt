@@ -75,7 +75,7 @@ Zacznijmy od prostej aplikacji, która posłuży nam do omówienia zagadnień te
         }
     }
 
-Zwróć uwagę na to, że pola tej klasy oznaczyliśmy jako prywatne oraz wygenerowaliśmy dla nich zestaw dwóch metod - tzw. getterów i setterów, któe pozwalają je odczytać poza tą klasą. Jest to ogólnie przyjęta konwencja, do której należy się przyzwyczaić, ponieważ spotkamy się z nią w Javie na każdym kroku.
+Zwróć uwagę na to, że pola tej klasy oznaczyliśmy jako prywatne oraz wygenerowaliśmy dla nich zestaw dwóch metod - tzw. getterów i setterów, które pozwalają je odczytać poza tą klasą. Jest to ogólnie przyjęta konwencja, do której należy się przyzwyczaić, ponieważ spotkamy się z nią w Javie na każdym kroku.
 
 Druga nowość to przesłonięcie metody *toString()*. Oznaczona jest jako Override, czyli przesłania metodę *toString()* z klasy nadrzędnej. Możliwe, że myślisz - ale jak to, przecież klasa Person nie dziedziczy po żadnej klasie (brak extends). Otóż w Javie niejawnie każda klasa dziedziczy po specjalnej klasie Object. Metoda toString() to ogólnie przyjęta metoda, która zwraca opisową formę obiektu.
 
@@ -163,7 +163,7 @@ Druga nowość to przesłonięcie metody *toString()*. Oznaczona jest jako Overr
         }
     }
 
-Klasa **Person** to nasz nośnik danych. Przechowuje ona informacje dotyczące imienia, nazwiska, nr. PESEL oraz wieku uczestnika. Posiada także metodę *toString()*, która przesłania domyślną metodę *toString()* z klasy Object. W klasie Competition znajduje się główna logika aplikacji, w której dajemy użytkownikowi jedną z trzech opcji, czyli dodanie nowego uczestnika, wyświetlenie wszystkich uczestników lub wyjście z programu. Po wybraniu opcji wywoływana jest odpowiednia metoda, w której wyświetlamy odpowiednie komunikaty, odbieramy dane od użytkownika i na ich podstawie tworzymy kolejne obiekty Person lub wyświetlamy już te dodane. Wszystkie składowe klasy zostały oznaczone jako statyczne, więc nie jest wymagane tworzenie obiektu klasy Competition w celu wywoływania metod, czy odwoływania się do poszczególnych pól z metody *main()*.
+Klasa **Person** to nasz nośnik danych. Przechowuje ona informacje dotyczące imienia, nazwiska, nr. PESEL oraz wieku uczestnika. W klasie Competition znajduje się główna logika aplikacji, w której dajemy użytkownikowi jedną z trzech opcji, czyli dodanie nowego uczestnika, wyświetlenie wszystkich uczestników lub wyjście z programu. Po wybraniu opcji wywoływana jest odpowiednia metoda, w której wyświetlamy odpowiednie komunikaty, odbieramy dane od użytkownika i na ich podstawie tworzymy kolejne obiekty Person lub wyświetlamy już te dodane. Wszystkie składowe klasy zostały oznaczone jako statyczne, więc nie jest wymagane tworzenie obiektu klasy Competition w celu wywoływania metod, czy odwoływania się do poszczególnych pól z metody *main()*. Elementy oznaczone jako *public static final* nazywać będziemy stałymi.
 
 
 Wyjątki - blok try catch
@@ -370,7 +370,7 @@ oraz mapy:
 
 Typy opakowujące
 -----------------
-Pierwszą rzeczą, którą musimy wyjaśnić przed przejściem do omówienia list oraz zbiorów są typy opakowujące typów prostych. Jest to spowodowane tym, że jak wspomnieliśmy na wstępie, kolekcje służą do przechowywania obiektów, a typy proste takie jak int, czy double typami obiektowymi nie są. Typem obiektowym jest natomiast String, w którego przypadku nie napotkamy na większe problemy.
+Pierwszą rzeczą, którą musimy wyjaśnić przed przejściem do omówienia list są typy opakowujące typów prostych. Jest to spowodowane tym, że jak wspomnieliśmy na wstępie, kolekcje służą do przechowywania obiektów, a typy proste takie jak int, czy double typami obiektowymi nie są. Typem obiektowym jest natomiast String, w którego przypadku nie napotkamy na większe problemy.
 
 Każdy z typów prostych ma swój odpowiednik obiektowy. Lista klas reprezentujących poszczególne z nich przedstawia się następująco:
 
@@ -596,7 +596,106 @@ Na listach możemy wykonywać podstawowe operacje takie jak:
     }
 
 
-Dodatek - porównywanie obiektów
-----------------------------------
+Porównywanie obiektów
+-----------------------
+Ważnym zagadnieniem, które może sprawiać pewne problemy jest porównywanie obiektów w języku Java. Najważniejszym zagadnieniem jest tutaj zrozumienie tego, że obiekt i referencja wskazująca na ten obiekt (uproszczając - zmienna) to dwie różne rzeczy, które porównujemy w różny sposób.
+
+Obiekty zawsze powinniśmy porównywać za pomocą metody **equals()**. Jest to specjalna metoda, która jest dziedziczona przez każdą klasę Javy z klasy Object, która jest nadrzędną klasą dla wszystkich innych. Warto przesłonić metodę *equals()* i zdefiniować w niej porównanie wszystkich pól klasy. Metodę *equals()* możesz wygenerować w eclipse korzystając z opcji Source -> Generate hashCode() and equals(). Możemy następnie wybrać, które pola muszą być równe, aby uznać, że dwa obiekty danego typu będą równe. Np. dla naszej wcześniejszej klasy Car wyglądałoby to następująco:
+
+*plik Car.java*
+
+.. code-block:: java
+    :linenos:
+
+    package pl.org.ceo.cardiagnoser.data;
+
+    public class Car {
+        
+        public String carBrand; // marka samochodu
+        public String model;
+        public int year; //rok produkcji
+        public int horsePower; // ilość koni mechanicznych
+        
+        public Car(String carBrand, String model) {
+            this.carBrand = carBrand;
+            this.model = model;
+        }
+        
+        public Car(String carBrand, String model, int year, int horsePower) {
+            this(carBrand, model);
+            this.year = year;
+            this.horsePower = horsePower;
+        }
+        
+        public void upgreade(int hp) {
+            horsePower = horsePower + hp;
+        }
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result
+                    + ((carBrand == null) ? 0 : carBrand.hashCode());
+            result = prime * result + horsePower;
+            result = prime * result + ((model == null) ? 0 : model.hashCode());
+            result = prime * result + year;
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Car other = (Car) obj;
+            if (carBrand == null) {
+                if (other.carBrand != null)
+                    return false;
+            } else if (!carBrand.equals(other.carBrand))
+                return false;
+            if (horsePower != other.horsePower)
+                return false;
+            if (model == null) {
+                if (other.model != null)
+                    return false;
+            } else if (!model.equals(other.model))
+                return false;
+            if (year != other.year)
+                return false;
+            return true;
+        }
+
+        public String getInfo() {
+            return carBrand + " " + model + "; " + year + "; " + horsePower + "HP";
+        }
+    }
+
+Metoda hashCode() generowane wspólnie z equals() jest tzw. funkcją mieszającą i zwraca unikalny identyfikator obiektu obliczony na podstawie jego pól. Nie będziemy się w tym miejscu zagłębiali w jej zastosowanie, jednak należy pamiętać, że jeżeli metoda equals (porównanie dwóch obiektów) zwraca true, to wynik metody hashCode() dla tych dwóch obiektów także powinien być równy.
+
+Teraz jeszcze w celu uzupełnienia wróćmy do kwestii porównania referencji vs porównania faktycznych obiektów. Jeżeli zapiszemy np.:
+::
+    Car car1 = new Car("VW", "Polo");
+    Car car2 = car1;
+
+to w takiej sytuacji widzimy dwie referencje *car1* i *car2* wskazujące na dokładnie ten sam obiekt. Jeżeli zapiszemy teraz:
+::
+    car2.year = 2000;
+
+to odwołując się do pola *year* poprzez referencję *car1* również mamy dostęp do podanej wartości 2000. Zupełnie inna sytuacja będzie w sytuacji, gdy utworzymy osobne obiekty i przypiszemy je do dwóch różnych referencji:
+::
+    Car car1 = new Car("VW", "Polo");
+    Car car2 = new Car("VW", "Polo");
+
+Teraz istnieją dwa różne obiekty, ale o takiej samej strukturze. Jeżeli porównamy referencje operatorem == otrzymamy wartość false, ale jeśli sprawdzimy równość obiektów metodą equals() otrzymamy true.
+::
+    Car car1 = new Car("VW", "Polo");
+    Car car2 = new Car("VW", "Polo");
+    boolean eq = car1.equals(car2); //true, bo obiekty są równe (równość "zawartości obiektów")
+    boolean eqRef = car1==car2; //false, bo car1 i car2 wskazują na różne obiekty
+
 
 

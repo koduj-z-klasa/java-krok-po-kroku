@@ -51,13 +51,15 @@
             
   <div class="section" id="wprowadzenie-do-jezyka-java">
 <h1>Wprowadzenie do języka Java<a class="headerlink" href="#wprowadzenie-do-jezyka-java" title="Permalink to this headline">¶</a></h1>
-<p>W lekcji tej dowiesz się:
-* jak używać środowiska eclipse
-* co powstaje w wyniku kompilacji kodu źródłowego napisanego w języku Java
-* jak uruchamiać swoje programy
-* czym są zmienne
-* jakie są podstawowe typy danych w Javie
-* jak wykonywać podstawowe operacje arytmetyczne</p>
+<p>W lekcji tej dowiesz się:</p>
+<ul class="simple">
+<li>jak używać środowiska eclipse</li>
+<li>co powstaje w wyniku kompilacji kodu źródłowego napisanego w języku Java</li>
+<li>jak uruchamiać swoje programy</li>
+<li>czym są zmienne</li>
+<li>jakie są podstawowe typy danych w Javie</li>
+<li>jak wykonywać podstawowe operacje arytmetyczne</li>
+</ul>
 <p>Podczas lekcji nauczyciel powinien krótko omawiać daną sekcję pod względem teoretycznym, a następnie omawiać prezentowane przykłady, prosząc z wyprzedzeniem uczniów o sugestie tego jak zapisać dalszy fragment kodu źródłowego. Uczniowie powinni pisać kod jednocześnie na swoich komputerach, aby móc obserwować wynik działania aplikacji. Lekcja kończy się zadaniem do samodzielnego wykonania, które należy wykonać na zajęciach lub dokończyć samodzielnie w domu.</p>
 <div class="section" id="eclipse-ide">
 <h2>Eclipse IDE<a class="headerlink" href="#eclipse-ide" title="Permalink to this headline">¶</a></h2>
@@ -95,6 +97,7 @@
 <p class="last">Zapamiętaj, że w Javie nazwy klas i wielkość używanych liter, mają znaczenie. &#8220;NazwaKlasy&#8221; i &#8220;nazwaKlasy&#8221; będą potraktowane jako dwa zupełnie różne elementy.</p>
 </div>
 <p>W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:</p>
+<p><em>plik FirstClass.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -112,17 +115,17 @@
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>W linii 1 widzimy definicję klasy. Klasę definiujemy za pomocą słowa kluczowego <strong>class</strong>, po którym następuje nazwa klasy. Eclipse automatycznie oznacza klasę jako publiczną za pomocą słowa kluczowego <strong>public</strong>, co najprościej można wytłumaczyć jako możliwość jej wykorzystania z dowolnego miejsca w naszym projekcie.</p>
+<p>W linii 1 widzimy definicję klasy. Klasę definiujemy za pomocą słowa kluczowego <strong>class</strong>, po którym następuje jej nazwa. Eclipse automatycznie oznacza ją jako publiczną za pomocą słowa kluczowego <strong>public</strong>, co najprościej można wytłumaczyć jako możliwość jej wykorzystania z dowolnego miejsca w naszym projekcie.</p>
 <p>W wierszu 3 widzimy zapis <em>public static void main(String[] args)</em>, czyli publiczną, statyczną metodę o nazwie <strong>main</strong>, która nie zwraca żadnego wyniku (void). Element umieszczony w nawiasie, czyli <em>String[] args</em> to argument metody main w postaci tablicy - więcej na ten temat powiemy w dalszej części lekcji.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Zapamiętaj, że od metody main rozpoczyna się działanie każdej aplikacji napisanej w języku Java. Jeżeli nie zdefiniujesz takiej metody w swojej klasie, to nie będziesz w stanie uruchomić programu.</p>
 </div>
-<p>Zauważ, że zarówno definicja klasy jak i metody rozpoczyna się i końcy nawiasami klamrowymi. Nawiasy klamrowe znacznie podnoszą czytelność kodu, szczególnie, gdy klasa składa się z kilkuset, czy nawet kilku tysięcy wierszy.</p>
+<p>Zauważ, że zarówno definicja klasy jak i metody rozpoczyna się i kończy nawiasami klamrowymi. Nawiasy klamrowe znacznie podnoszą czytelność kodu, szczególnie, gdy klasa składa się z kilkuset, czy nawet kilku tysięcy wierszy.</p>
 <p>W metodzie main znajduje się jeden wiersz komentarza poprzedzony znakiem podwójnego ukośnika.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Komentarze w języku Java można zapisywać na dwa sposoby. Jeżeli komentarz ma zajmować jedynie jeden wiersz poprzedź go znakiem podwójnego ukośnika. Jeżeli będzie dłuższy umieść komentarz w bloku /* komentarz <a href="#id1"><span class="problematic" id="id2">*</span></a>/ Komentarze są pomijane w trakcie kompilacji programu i nie mają wpływu na działanie aplikacji.</p>
+<p class="last">Komentarze w języku Java można zapisywać na dwa sposoby. Jeżeli komentarz ma zajmować jedynie jeden wiersz, poprzedź go znakiem podwójnego ukośnika. Jeżeli będzie dłuższy umieść komentarz w bloku /* komentarz <a href="#id1"><span class="problematic" id="id2">*</span></a>/ Komentarze są pomijane w trakcie kompilacji programu i nie mają wpływu na jego działanie.</p>
 </div>
 <p>Po komentarzu dopisaliśmy także linijkę o treści <strong>System.out.print(&#8220;Witaj Świecie&#8221;);</strong>, która wydrukuje na ekranie tekst podany w nawiasie, czyli Witaj Świecie.</p>
 <div class="admonition note">
@@ -353,6 +356,11 @@ Podstawowym elementem, który pozwala rozwiązać ten problem w programowaniu s�
 <p class="last">Tablica to specjalny typ danych, który pozwala przechowywać duże ilości wartości tego samego typu.</p>
 </div>
 <p>Deklaracja i inicjalizacja tablic jest bardzo podobna do zwykłych zmiennych:</p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+<span class="n">String</span><span class="o">[]</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">10</span><span class="o">];</span>
+</pre></div>
+</td></tr></table></div>
 <p>Powyżej zadeklarowano i utworzono tablicę 5 liczb całkowitych typu int, która może przechowywać 5 wartości oraz tablicę typu String, która może przechowywać 10 napisów.</p>
 <p>W przypadku, gdy z góry znasz wartości, którymi chcesz uzupełnić tablicę, istnieje szybki sposób na jej inicjalizację poprzez wymienienie wszystkich wartości w trakcie tworzenia tablicy:</p>
 <div class="highlight-python"><div class="highlight"><pre>int[] numbers = new int[]{1, 2, 3, 4, 5};
@@ -695,7 +703,7 @@ int[] w19 = new int[20];
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Slawomir Ludwiczak.
+        &copy; Copyright 2014, Centrum Edukacji Obywatelskiej (http://www.ceo.org.pl/).
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>

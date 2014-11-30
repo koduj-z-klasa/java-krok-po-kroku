@@ -10,6 +10,7 @@ Programowanie obiektowe
 * Czym jest przeciążanie metod i konstruktorów
 * Do czego służy słowo kluczowe 
 * Czym są pakiety i jakie są możliwe specyfikatory dostępu
+* Jak porównywać obiekty
 
 
 **Czym jest programowanie obiektowe?**
@@ -23,7 +24,7 @@ Klasy i obiekty
 ----------------
 
 **Ćwiczenie**
-Wyobraź sobie, że tworzysz aplikację prostą aplikację do obsługi sklepu komputerowego. Najważniejsze będzie w niej zdecydowanie przechowywanie informacji o produktach. Wypisz kilka cech produktu, które Twoim zdaniem będą istotne z punktu widzenia użytkownika tej aplikacji(sprzedawcy).
+Wyobraź sobie, że tworzysz prostą aplikację do obsługi sklepu komputerowego. Najważniejsze będzie w niej zdecydowanie przechowywanie informacji o produktach. Wypisz kilka cech produktu, które Twoim zdaniem będą istotne z punktu widzenia użytkownika tej aplikacji(sprzedawcy).
 
 Przykłady cech przydatnych
 ::
@@ -109,10 +110,10 @@ Na podstawie takiej klasy możemy utworzyć **obiekt**. Obiekty zawsze będziemy
 Jak widzisz zmienne *name* i *price* z wcześniejszego kodu są teraz opakowane w **obiekty** typu Product. Do poszczególnych **pól klasy** odwołujemy się za pomocą operatora kropki, np. *"product1.name"*.
 
 .. note::
-    Jeżeli nie zainicjujesz poszczególnych klas obiektu, przyjmą one wartości domyślne. Dla typów liczbowych jest to 0 lub 0.0, dla typu char specjalna wartość pusta, a dla typów obiektowych (w tym String) jest to wartość null.
+    Jeżeli nie zainicjujesz poszczególnych pól obiektu, przyjmą one wartości domyślne. Dla typów liczbowych jest to 0 lub 0.0, dla typu char specjalna wartość pusta, a dla typów obiektowych (w tym String) jest to wartość null.
 
 .. attention::
-    Często powtarzającym się błędem w Javie jest **NullPointerException*. Oznacza on, że obiekt, do którego próbujesz się odwołać nie został utworzony, a jedynie zadeklarowany. Jeżeli zobaczysz go w eclipse sprawdż więc, czy przypisałeś do odpowiedniej zmiennej (referencji) obiekt utworzony za pomocą słowa new.
+    Często powtarzającym się błędem w Javie jest **NullPointerException**. Oznacza on, że obiekt, do którego próbujesz się odwołać nie został utworzony, a jedynie zadeklarowany. Jeżeli zobaczysz go w eclipse sprawdż więc, czy przypisałeś do odpowiedniej zmiennej (referencji) obiekt utworzony za pomocą słowa new.
 
 Na chwilę obecną może Ci się wydawać, że zrobiło się tylko więcej kodu, a program nadal robi to samo. Zwróć jednak uwagę, że dane są teraz bardziej spójne, a dzięki podejściu obiektowemu informacje o np. 100 produktach możemy przechowywać w tylko 1 tablicy typu *Product[]*.
 
@@ -242,6 +243,8 @@ W klasie Product utworzyliśmy metodę **getProductInfo**. Ponieważ zwraca ona 
             System.out.println(products[1].getProductInfo());
         }
     }
+
+Do metod, podobnie jak do pól klasy odołujemy się za pomocą operatora kropki, jednak oprócz samej nazwy metody nie możemy zapomnieć o dodaniu na końcu okrągłych nawiasów.
 
 
 Konstruktory
@@ -554,13 +557,17 @@ Pakiety i modyfikatory dostępu
 -------------------------------
 Istotnym elementem, który pomaga w organizacji większych projektów jest podział klas i plików źródłowych na pakiety. Pakiety są niczym innym jak dodatkowymi folderami, które pozwalają grupować wspólnie klasy, które odpowiadają za podobne funkcjonalności. W celu utworzenia pakietu wybieramy po prostu New -> Package. Nazewnictwo pakietów zazwyczaj odzwierciedla nazwę domeny autorów, czyli np. pl.org.ceo.kursjava.pakiet1 - gdzie pakiet1 powinien być jakąś znaczącą nazwą, kursjava nazwą projektu, a pl.org.ceo to odwrócona nazwa domeny Centrum Edukacji Obywatelskiej.
 
-Gdy w kodzie projektu CarDiagnoser podzielimy klasy na dwa pakiety (przeciągnij klasy do odpowiednich pakietów:
+Gdy w kodzie projektu CarDiagnoser podzielimy klasy na dwa pakiety (przeciągnij klasy do odpowiednich pakietów):
 
 .. image:: 02_obiekty/package.png
     :align: center
 
 zauważamy błąd w klasie CarDiagnostic.
 
+*plik CarDiagnostic.java*
+
+.. code-block:: java
+    :linenos:
 
     package pl.org.ceo.cardiagnoser.app;
     import pl.org.ceo.cardiagnoser.data.Car;
@@ -569,7 +576,7 @@ zauważamy błąd w klasie CarDiagnostic.
     //kod bez zmian
     }
 
-Pierwszą rzeczą, na którą warto zwrócić uwagę są dwiue linie kodu, które eclipse dodał automatycznie:
+Pierwszą rzeczą, na którą warto zwrócić uwagę są dwie linie kodu, które eclipse dodał automatycznie:
 
 * package oznacza pakiet, w którym umieszczona jest dana klasa
 * import jest dyrektywą niezbędną w przypadku, gdy korzystamy z klas umieszczonych w innych pakietach. W naszym przypadku musieliśmy zaimportować klasę Car.

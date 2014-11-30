@@ -612,4 +612,4 @@ Jako dodatek tej lekcji wytłumaczymy jescze krótko co oznacza słowo kluczowe 
 
 Jeżeli zdefiniujemy jakieś pole lub metodę jako statyczne, to możemy się do nich odwoływać bez tworzenia obiektu takiej klasy poprzez konstrukcję NazwaKlasy.nazwaPolaStatycznego lub NazwaKlasy.metodaStatyczna().
 
-Najważniejszą rzeczą dotyczącą składowych statycznych klasy jest to, że w metodach statycznych możemy odwoływać się jedynie do innych elementów statycznych tej klasy.
+Najważniejszą rzeczą dotyczącą składowych statycznych klasy jest to, że w metodach statycznych możemy odwoływać się jedynie do innych elementów statycznych.

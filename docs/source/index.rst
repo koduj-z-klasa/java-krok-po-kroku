@@ -3,7 +3,7 @@ Kurs Java krok po kroku
 
 Kurs ten powstał w ramach projektu Koduj z Klasą prowadzonego przez `Centrum Edukacji Obywatelskiej`_ pod patronatem Ministerstwa Administracji i Cyfryzacji.
 
-Materiały stanowią scenariusze 8 lekcji wprowadzających do programowania w języku Java i zakładają brak wcześniejszej znajomości tej technologii. Są one zbudowane w taki sposób, aby zajęcia miały charakter warsztatowy i w trakcie każdych z nich wykonać kilka praktycznych zadań poznając jednocześnie nowe elementy języka.
+Materiały stanowią scenariusze 8 lekcji wprowadzających do programowania w języku Java i zakładają brak wcześniejszej znajomości tej technologii. Są one zbudowane w taki sposób, aby zajęcia miały charakter warsztatowy i w trakcie każdych z nich wykonać kilka praktycznych zadań poznając jednocześnie nowe elementy języka. **Ćwiczenia** służą do samodzielnego przećwiczenia zagadnienia wcześniej omówionego przez prowadzącego. W tematach związanych z tworzeniem graficznego interfejsu użytkownika w Javie FX w związku z mocno ograniczonym czasem lekcje zbudowane są w taki sposób, aby wraz z prowadzącym rozwijać wspólny kod, a następnie dodać samodzielnie dodatkowe funkcjonalności do programu.
 
 Z powodu wielkości biblioteki standardowej Javy i relatywnie niewielkiej ilości czasu wiele elementów zostało celowo pominiętych.
 
@@ -39,10 +39,3 @@ Cały kurs podzielony jest na 8 lekcji.
   gui
   gui2
   summary
-	
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

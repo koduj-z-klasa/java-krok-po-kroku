@@ -18,7 +18,7 @@ JavaFX
 .. image:: 06_fx/javafx.png
     :align: center
 
-JavaFX jest technologią, która pozwala na tworzenie bogatych graficznie interfejsów użytkownika do aplikacji napisanych w Javie. W początkowym zamyśle miała to być technologia przeznaczona głównie do tworzenia tzw. Rich Internet Application, któe miałyby rywalizować z Adobe Flash, czy Microsoft Silverlight. Ostatecznie oprócz wspomnianej funkcji stała się także rekomendowaną biblioteką do tworzenia graficznego interfejsu użytkownika aplikacji desktopowych napisanych w języku Java. Trwają także prace nad tym, aby aplikacje napisane w JavieFX można portować na platformy Android oraz iOS (zasada write once run everywhere).
+JavaFX jest technologią, która pozwala na tworzenie bogatych graficznie interfejsów użytkownika do aplikacji napisanych w Javie. W początkowym zamyśle miała to być technologia przeznaczona głównie do tworzenia tzw. Rich Internet Application, które miałyby rywalizować z Adobe Flash, czy Microsoft Silverlight. Ostatecznie oprócz wspomnianej funkcji stała się także rekomendowaną biblioteką do tworzenia graficznego interfejsu użytkownika aplikacji desktopowych napisanych w języku Java. Trwają także prace nad tym, aby aplikacje napisane w JavieFX można portować na platformy Android oraz iOS (zasada write once run everywhere).
 
 Głównym narzędziem, który posłuży nam do budowania GUI (graphical user interface) będzie Scene Builder - oficjalne narzędzie rozwijane przez Oracle, które pozwala tworzyć interfejs użytkownika za pomocą przyjaznego edytora WYSIWYG.
 
@@ -31,10 +31,10 @@ Scene Builder 2.0 - pierwszy rzut oka
 
 W Scene Builderze możemy wyróżnić kilka głównych obszarów roboczych, z których będziemy korzystali. Zgodnie z oznaczeniami na powyższym zrzucie ekranu są to:
 
-#. **Library** - 
-#. **Document** - 
-#. **Podgląd** - 
-#. **Inspector** - 
+#. **Library** - zestaw możliwych do wykorzystania kontrolek i layoutów
+#. **Document** - podgląd pliku w postaci drzewa węzłów
+#. **Podgląd** - główny obszar roboczy
+#. **Inspector** - ustawianie właściwości poszczególnych kontrolek
 
 **Ćwiczenie** *(10 minut)*
 
@@ -64,7 +64,7 @@ Eclipse domyślnie wygeneruje dla nas prosty szablon projektu JavaFX, który ju�
     :align: center
 
 * Main.java to główna klasa, od której rozpoczyna się działanie aplikacji.
-* Sample.fxml zawiera definicję tego z jakich layoutów oraz kontrolek zkłada się widok naszej aplikacji - w skrócie jak wygląda
+* Sample.fxml zawiera definicję tego z jakich layoutów oraz kontrolek składa się widok naszej aplikacji - w skrócie jak wygląda
 * application.css to definicja stylów CSS dla naszej aplikacji. Z pewnością słyszałeś już o nich w przypadku stron internetowych
 * SampleController.java to dodatkowa klasa, która występuje w architekturze MVC (Model View Controller)
 
@@ -140,7 +140,7 @@ Hierarchia dokumentu FXML w Scene Builderze:
 Jak widzisz etykiety w dolnej części aplikacji opakowane zostały w dodatkowy layout typu HBox.
 
 .. note::
-    Layouty przy tworzeniu graficznego interfejsu użytkownika służą do ustalenia pewnego porządku dodawanych do nich kontrolek. BorderPane pozwala ustawić elementy na krawędziach (góra, dół, lewo, prawo lub środek) natomiast HBox ustawia kontrolki w jednym wierszu jeden obok drugiego. Istnieje dużo więcej layoutów, któe możesz przejrzeć w sekcji containers Scene Buildera. Ikonki umieszczone przy poszczególnych z nich oraz nazwy bardzo dobrze opisują to w jaki sposób możemy je wykorzystać. Layouty mogą być także zagnieżdżane jeden w drugim tak jak w naszym przykładzie, gdzie HBox jest węzłem w layoucie typu BorderPane.
+    Layouty przy tworzeniu graficznego interfejsu użytkownika służą do ustalenia pewnego porządku dodawanych do nich kontrolek. BorderPane pozwala ustawić elementy na krawędziach (góra, dół, lewo, prawo lub środek) natomiast HBox ustawia kontrolki w jednym wierszu jeden obok drugiego. Istnieje dużo więcej layoutów, które możesz przejrzeć w sekcji containers Scene Buildera. Ikonki umieszczone przy poszczególnych z nich oraz nazwy bardzo dobrze opisują to w jaki sposób możemy je wykorzystać. Layouty mogą być także zagnieżdżane jeden w drugim tak jak w naszym przykładzie, gdzie HBox jest węzłem w layoucie typu BorderPane.
 
 Problem jaki pojawia się w tym momencie to domyślne parametry kontrolek, które sprawiają, że aplikacja nie wygląda najlepiej:
 
@@ -211,7 +211,7 @@ W tym momencie po zapisaniu naszego pliku fxml jego kod powinien wyglądać nast
         </bottom>
     </BorderPane>
 
-Jak widać każdy element, który dodaliśmy w Scene Builderze ma tutaj swoje odzwierciedlenie w postaci węxła XML. Widoczne są także ustawienia poszczególnych elementów, np. wysokość i szerokość TextArea postaci *TextArea prefHeight="400.0" prefWidth="500.0"*.
+Jak widać każdy element, który dodaliśmy w Scene Builderze ma tutaj swoje odzwierciedlenie w postaci węzła XML. Widoczne są także ustawienia poszczególnych elementów, np. wysokość i szerokość TextArea postaci *TextArea prefHeight="400.0" prefWidth="500.0"*.
 
 W tym momencie warto zobaczyć jak nasza aplikacja będzie wyglądała po uruchomieniu. Co ciekawe jeżeli chcemy podejrzeć tylko wygląd bez funkcjonalności, możemy to zrobić bezpośrednio z poziomu Scene Buildera korzystając z opcji Preview -> Show Preview in Window (Ctrl + P).
 
@@ -263,7 +263,7 @@ Omówmy ten kod linijka po linijce:
 #. W linijce 9 widzimy, że nasza klasa Main rozszerza klasę Application. Oznacza to, że jest to główna klasa aplikacji napisanej w JavieFX i to od niej rozpocznie się działanie naszej aplikacji.
 #. Klasa Application posiada jedną abstrakcyjną metodę *start()*, którą musimy przesłonić (Override). Jako jej argument przekazany zostanie obiekt Stage, który zostanie utworzony przez wirtualną maszynę. **Stage** to okno naszej aplikacji.
 #. W wierszach 13-14 wczytujemy nasz widok za pomocą specjalnej klasy FXMLLoader i metody *load()*. Przetwarza ona plik XML i na podstawie zawartych w nim definicji tworzy obiekty, które będą odzwierciedlone w kodzie Javy.
-#. W 15 wierzu tworzymy obiekt **Scene**, który dodamy do naszego okna (Stage) w wierszu 18. Scene to klasa reprezentująca główny kontener z widokiem aplikacji, do któego możemy dodawać inne elementy takie jak layouty, czy konkretne kontrolki.
+#. W 15 wierszu tworzymy obiekt **Scene**, który dodamy do naszego okna (Stage) w wierszu 18. Scene to klasa reprezentująca główny kontener z widokiem aplikacji, do którego możemy dodawać inne elementy takie jak layouty, czy konkretne kontrolki.
 #. W 16 i 17 wierzu wczytujemy style CSS, które aplikujemy do naszej sceny. Ponieważ na tę chwilę plik *application.css* jest pusty, nie będzie to miało wpływu na wygląd naszej aplikacji.
 #. W metodzie *main()* wywołujemy metodę *launch()* ta z kolei odpowiada za cykl życia aplikacji JavaFX, czyli m.in. wywołanie metody *start()*.
 
@@ -305,7 +305,7 @@ Nadając fx:id pamiętaj, żeby były to znaczące nazwy, ponieważ będą to je
 .. image:: 06_fx/fxid2.png
     :align: center
 
-Teraz w klasie ustawionej jako fx:controller należy utworzyć zmienne odpowiadające odpowiednim typom kontrolek i nadać im nazwy zgodne z ustalonymi przed chwilą fx:id. Na szczęście nie trzeba tego robić ręcznie. Przejdź w Scene Builderze to sekcji **View -> Show sample controller skeleton** skopiuj przykładowy kod i wklej go do pliku EditorController w eclipse.
+Teraz w klasie ustawionej jako fx:controller należy utworzyć zmienne odpowiadające odpowiednim typom kontrolek i nadać im nazwy zgodne z ustalonymi przed chwilą fx:id. Na szczęście nie trzeba tego robić ręcznie. Przejdź w Scene Builderze do sekcji **View -> Show sample controller skeleton** skopiuj przykładowy kod i wklej go do pliku EditorController w eclipse.
 
 W JavieFX ogólnie przyjętą praktyką jest także implementowanie interfejsu **Initializable** przez klasę kontrolera. Interfejs ten wymusi zaimplementowanie metody initialize(), która zostanie wywołana w momencie uruchamiania aplikacji przez FXMLLoadera.
 
@@ -396,5 +396,3 @@ Adnotacja @FXML
 .. image:: 06_fx/end.png
     :align: center
 
-
-http://javafxports.org/page/What_is_JavaFXPorts

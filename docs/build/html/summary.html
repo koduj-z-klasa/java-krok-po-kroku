@@ -64,7 +64,7 @@
 <h2>Widok<a class="headerlink" href="#widok" title="Permalink to this headline">¶</a></h2>
 <p>Otwórz plik fxml w Scene builderze i odtwórz poniższą hierarchię layoutów i kontrolek uwzględniając także odpowiednie atrybuty fx:id.</p>
 <img alt="_images/sb_hierarchy.png" class="align-center" src="_images/sb_hierarchy.png" />
-<p>Jako nadrzędy layout wykorzystujemy VBox, ponieważ pozwala on ustawiać kontrolki i layouty w pojedynczej kolumnie. My potrzebujemy jedną kolumnę z dwoma wierszami - w jednym z nich umieszczamy podstawowe menu, a w drugim layout typu GridLayout.</p>
+<p>Jako nadrzędny layout wykorzystujemy VBox, ponieważ pozwala on ustawiać kontrolki i layouty w pojedynczej kolumnie. My potrzebujemy jedną kolumnę z dwoma wierszami - w jednym z nich umieszczamy podstawowe menu, a w drugim layout typu GridLayout.</p>
 <p>W Menu dostępne będą trzy opcje:</p>
 <ul class="simple">
 <li>New Game (nowa gra) - w menu File</li>
@@ -75,7 +75,7 @@
 <img alt="_images/add_column.png" class="align-center" src="_images/add_column.png" />
 <p>Problem jaki teraz się pojawia polega na tym, że przyciski są prostokątne, nie wykorzystują całej przestrzeni w GridPane a my chcielibyśmy, żeby były kwadratowe i nie było między nimi przerw.</p>
 <img alt="_images/size1.png" class="align-center" src="_images/size1.png" />
-<p>W tym celu zaznacz wszystkie przyciski w sekcji Document Hierarchy (np. z wciśniętym Shiftem) i przejdź do sekcji Layout po prawej stronie Scene Buildera. Tam ustaw porządany rozmiar przycisku za wprowadzając opcję Pref Width oraz Pref Height (np. na 100 px).</p>
+<p>W tym celu zaznacz wszystkie przyciski w sekcji Document Hierarchy (np. z wciśniętym Shiftem) i przejdź do sekcji Layout po prawej stronie Scene Buildera. Tam ustaw porządany rozmiar przycisku wprowadzając opcję Pref Width oraz Pref Height (np. na 100 px).</p>
 <img alt="_images/size2.png" class="align-center" src="_images/size2.png" />
 <p>Przyciski zajmują już całą przestrzeń, ale nadal nie mają ustalonego przez nas rozmiaru 100x100. Jest to spowodowane tym, że kolumny i wiersze w GridPane mają zdefiniowane różne rozmiary i mają one wyższy priorytet niż rozmiar przycisków. Kliknij w każdy wiersz i kolumnę oraz wiersz GridPane i ustaw ich rozmiar (Min i Pref Width/Height) na <em>USE_COMPUTED_SIZES</em>. W tej sytuacji wykorzystane zostaną wymiary węzłów potomnych.</p>
 <img alt="_images/size3.png" class="align-center" src="_images/size3.png" />
@@ -83,7 +83,14 @@
 <img alt="_images/size4.png" class="align-center" src="_images/size4.png" />
 <p>Dla lepszego ostatecznego wyglądu dodajmy jeszcze linie siatki w celu wyraźniejszego oddzielenia przycisków, a także zmieńmy wygląd kursora:</p>
 <img alt="_images/size5.png" class="align-center" src="_images/size5.png" />
-<p>Jeżeli nie zrobiłeś tego na etapie tworzenia projektu, to dodatkowo ustaw odpowiednią ścieżkę do klasy kontrolera, czyli application.TickTackToeController.</p>
+<p>Z przycisków możesz usunąć domyślny tekst &#8220;Button&#8221; klikając na każdy z nich dwukrotnie. Jeżeli nie zrobiłeś tego na etapie tworzenia projektu, to dodatkowo ustaw odpowiednią ścieżkę do klasy kontrolera, czyli application.TicTacToeController.</p>
+<p>Jeżeli chcesz, aby przyciski zawsze wypełniały całą dostępną przestrzeń, czyli np. powiększały się przy rozciąganiu okna musisz ustawić kilka rzeczy:</p>
+<ul class="simple">
+<li>właściwości VGrow i HGrow dla kolumn lub wierszy GridPane na wartość <em>ALWAYS</em> - w tym celu kliknij na daną kolumnę lub wiersz i w sekcji Layout ustaw odpowiednią wartość,</li>
+<li>właściwości VGrow i HGrow dla każdego przycisku ustawione na <em>ALWAYS</em> - zaznacz wszystkie przyciski i w sekcji Layout ustaw wartości HGrow i VGrow,</li>
+<li>ustawienie maxymalnego rozmiaru przycisków na <em>MAX_VALUE</em> - możesz je ustawić zaznaczając wszystkie przyciski i ustawiając w sekcji Layout właściwości Max Width i Max Height</li>
+</ul>
+<img alt="_images/but_lay.png" class="align-center" src="_images/but_lay.png" />
 <p>Ostatecznie nasz plik fxml powinien mieć następującą postać:</p>
 <p><em>plik TicTacToe.fxml</em></p>
 <div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
@@ -195,7 +202,27 @@
 107
 108
 109
-110</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 
 <span class="cp">&lt;?import javafx.scene.text.*?&gt;</span>
 <span class="cp">&lt;?import javafx.scene.control.*?&gt;</span>
@@ -204,7 +231,7 @@
 <span class="cp">&lt;?import javafx.scene.layout.GridPane?&gt;</span>
 
 <span class="nt">&lt;VBox</span> <span class="na">xmlns=</span><span class="s">&quot;http://javafx.com/javafx/8&quot;</span> <span class="na">xmlns:fx=</span><span class="s">&quot;http://javafx.com/fxml/1&quot;</span>
-    <span class="na">fx:controller=</span><span class="s">&quot;application.TickTackToeController&quot;</span><span class="nt">&gt;</span>
+    <span class="na">fx:controller=</span><span class="s">&quot;application.TicTacToeController&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;children&gt;</span>
         <span class="nt">&lt;MenuBar&gt;</span>
             <span class="nt">&lt;menus&gt;</span>
@@ -222,83 +249,103 @@
                 <span class="nt">&lt;/Menu&gt;</span>
             <span class="nt">&lt;/menus&gt;</span>
         <span class="nt">&lt;/MenuBar&gt;</span>
-        <span class="nt">&lt;GridPane</span> <span class="na">gridLinesVisible=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;GridPane</span> <span class="na">gridLinesVisible=</span><span class="s">&quot;true&quot;</span> <span class="na">VBox.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
             <span class="nt">&lt;columnConstraints&gt;</span>
-                <span class="nt">&lt;ColumnConstraints</span> <span class="nt">/&gt;</span>
-                <span class="nt">&lt;ColumnConstraints</span> <span class="nt">/&gt;</span>
-                <span class="nt">&lt;ColumnConstraints</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;ColumnConstraints</span> <span class="na">hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;ColumnConstraints</span> <span class="na">hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;ColumnConstraints</span> <span class="na">hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;/columnConstraints&gt;</span>
             <span class="nt">&lt;rowConstraints&gt;</span>
-                <span class="nt">&lt;RowConstraints</span> <span class="nt">/&gt;</span>
-                <span class="nt">&lt;RowConstraints</span> <span class="nt">/&gt;</span>
-                <span class="nt">&lt;RowConstraints</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;RowConstraints</span> <span class="na">vgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;RowConstraints</span> <span class="na">vgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;RowConstraints</span> <span class="na">vgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="nt">/&gt;</span>
             <span class="nt">&lt;/rowConstraints&gt;</span>
             <span class="nt">&lt;children&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button00&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span>
+                    <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button01&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button02&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button10&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span>
+                    <span class="na">GridPane.rowIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button11&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;1&quot;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span>
                     <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button12&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;1&quot;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span>
                     <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button20&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span>
+                    <span class="na">GridPane.rowIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span> <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button21&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;2&quot;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;1&quot;</span> <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span>
                     <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
                 <span class="nt">&lt;Button</span> <span class="na">fx:id=</span><span class="s">&quot;button22&quot;</span> <span class="na">contentDisplay=</span><span class="s">&quot;CENTER&quot;</span>
-                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span> <span class="na">text=</span><span class="s">&quot;X&quot;</span>
-                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;2&quot;</span>
+                    <span class="na">maxHeight=</span><span class="s">&quot;1.7976931348623157E308&quot;</span> <span class="na">maxWidth=</span><span class="s">&quot;1.7976931348623157E308&quot;</span>
+                    <span class="na">mnemonicParsing=</span><span class="s">&quot;false&quot;</span> <span class="na">prefHeight=</span><span class="s">&quot;100.0&quot;</span> <span class="na">prefWidth=</span><span class="s">&quot;100.0&quot;</span>
+                    <span class="na">GridPane.columnIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.halignment=</span><span class="s">&quot;CENTER&quot;</span>
+                    <span class="na">GridPane.hgrow=</span><span class="s">&quot;ALWAYS&quot;</span> <span class="na">GridPane.rowIndex=</span><span class="s">&quot;2&quot;</span> <span class="na">GridPane.valignment=</span><span class="s">&quot;CENTER&quot;</span>
                     <span class="na">GridPane.vgrow=</span><span class="s">&quot;ALWAYS&quot;</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;font&gt;</span>
-                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;48.0&quot;</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;Font</span> <span class="na">size=</span><span class="s">&quot;36.0&quot;</span> <span class="nt">/&gt;</span>
                     <span class="nt">&lt;/font&gt;</span>
                 <span class="nt">&lt;/Button&gt;</span>
             <span class="nt">&lt;/children&gt;</span>
@@ -699,7 +746,24 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
 180
 181
 182
-183</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">application</span><span class="o">;</span>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">package</span> <span class="n">application</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.ResourceBundle</span><span class="o">;</span>
@@ -766,6 +830,10 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
         <span class="n">addMenuAction</span><span class="o">();</span>
     <span class="o">}</span>
 
+    <span class="cm">/*</span>
+<span class="cm">     * metoda resetująca grę - tworzy nowy model i ustawia pusty tekst</span>
+<span class="cm">     * przycisków</span>
+<span class="cm">     */</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">newGame</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">model</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Model</span><span class="o">();</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">buttons</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
@@ -775,6 +843,9 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
         <span class="o">}</span>
     <span class="o">}</span>
 
+    <span class="cm">/*</span>
+<span class="cm">     * Dodanie akcji do przycisków na planszy</span>
+<span class="cm">     */</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">addButtonAction</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">buttons</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
             <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">buttons</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
@@ -799,6 +870,9 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
         <span class="o">}</span>
     <span class="o">}</span>
 
+    <span class="cm">/*</span>
+<span class="cm">     * Metoda dodająca akcje pod poszczególne elementy menu</span>
+<span class="cm">     */</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">addMenuAction</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">newGameMenu</span><span class="o">.</span><span class="na">setOnAction</span><span class="o">(</span><span class="k">new</span> <span class="n">EventHandler</span><span class="o">&lt;</span><span class="n">ActionEvent</span><span class="o">&gt;()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
@@ -825,7 +899,7 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
     <span class="o">}</span>
 
     <span class="cm">/**</span>
-<span class="cm">     * Aktualizujemy wygląd przycisków</span>
+<span class="cm">     * Aktualizujemy wygląd przycisków na podstawie modelu</span>
 <span class="cm">     */</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateView</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Model</span><span class="o">.</span><span class="na">SIZE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
@@ -839,6 +913,9 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
         <span class="o">}</span>
     <span class="o">}</span>
 
+    <span class="cm">/*</span>
+<span class="cm">     * wyświetlenie popupu z informacją o zwycięzcy</span>
+<span class="cm">     */</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">showWinnerPopup</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">String</span> <span class="n">winner</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">getWinner</span><span class="o">()</span> <span class="o">==</span> <span class="n">Model</span><span class="o">.</span><span class="na">X</span><span class="o">)</span> <span class="o">{</span>
@@ -859,6 +936,10 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
                 <span class="o">});</span>
     <span class="o">}</span>
 
+    <span class="cm">/*</span>
+<span class="cm">     * Metoda odpowiedzialna za utworzenie popupu z tekstem przekazanym jako</span>
+<span class="cm">     * argument</span>
+<span class="cm">     */</span>
     <span class="kd">private</span> <span class="n">Popup</span> <span class="nf">createPopup</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">TextArea</span> <span class="n">popupText</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextArea</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
         <span class="n">popupText</span><span class="o">.</span><span class="na">setPrefWidth</span><span class="o">(</span><span class="mi">200</span><span class="o">);</span>
@@ -884,9 +965,19 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
+<p>Wszystkie pola klasy oznaczone adnotacją &#64;FXML to przyciski zdefiniowane w pliku fxml. Oprócz tego utworzyliśmy zmienną reprezentującą nasz Model a także tablicę, do której przypiszemy wszystkie przyciski w celu ich wygodniejszym zarządzaniem i możliwością robienia tego w pętli. Praktycznie cały pozostały kod moglibyśmy umieścić w metodzie <em>initialize()</em>, jednak dobrą praktyką jest rozbijanie go na mniejsze i bardziej czytelne elementy. Dobrą zasadą, którą należy się kierować jest to, żeby dana metoda była odpowiedzialna tylko za jedną rzecz. Takim sposobem posiadamy zestaw metod:</p>
+<ul class="simple">
+<li><em>newGame()</em> - resetuje grę, czyli tworzy nowy model oraz czyści tekst na każdym przycisku</li>
+<li><em>addButtonAction()</em> - dodaje do przycisków na planszy obsługę zdarzeń. Dzięki temu, że buttony przypisaliśmy do dwuwymiarowej tablicy możemy to zrobić w wygodny sposób w pętli. Akcje polegają na tym, że po wciśnięciu dowolnego przycisku ustawiamy na nim tekst zgodny z aktualnym graczem (chyba, że dany przycisk był już wcześniej wciśnięty), a następnie sprawdzeniu, czy aktualny stan gry doprowadził do sytuacji, gdzie znamy już zwycięzcę.</li>
+<li><em>addMenuAction()</em> - podpięcie obsługi zdarzeń do 3 elementów menu. W przypadku opcji <em>New Game</em> po prostu wywołujemy metodę <em>newGame()</em>, dla opcji <em>Close</em> zamykamy program poprzez wywołanie metody <em>Platform.exit()</em>, a przy opcji <em>About</em> tworzymy nowy popup, z krótką informacją o programie.</li>
+<li><em>updateView()</em> jest metodą odpowiedzialną za aktualizację tego co jest wyświetlane na przyciskach na podstawie stanu gry zapisanego w obiekcie modelu.</li>
+<li><em>showWinnerPopup()</em> jest wywoływana w przypadku, gdy w grze znaleziono zwycięzcę i w takiej sytuacji wyświetlany jest popup z odpowiednią informacją</li>
+<li><em>createPopup()</em> odpowiada za tworzenie popupów z tekstem przekazanym jako argument. Wykorzystujemy do tego celu obiekt klasy Popup z odpowiednio ustawionym tekstem w obiekcie TextArea, w którym wyłączamy możliwość edycji dzięki metodzie setEditable(false). Istotnym elementem jest podpięcie zdarzenia kliknięcia na dany popup, który spowoduje jego zamknięcie oraz zresetowanie gry.</li>
+</ul>
 </div>
 <div class="section" id="gotowa-aplikacja">
 <h2>Gotowa aplikacja<a class="headerlink" href="#gotowa-aplikacja" title="Permalink to this headline">¶</a></h2>
+<p>Na koniec dobrze nam już znana klasa uruchomieniowa programu, w której tworzymy widok na podstawie definicji fxml, ustawiamy odpowiedni tytuł okna i wyświetlamy aplikację użytkownikowi.</p>
 <p><em>plik Main.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -947,6 +1038,7 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
+<img alt="_images/ttt.png" class="align-center" src="_images/ttt.png" />
 </div>
 </div>
 
@@ -1006,7 +1098,7 @@ Wiersz 10 to zmienna <em>activePlayer</em>, w której przechowywany będzie aktu
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Slawomir Ludwiczak.
+        &copy; Copyright 2014, Centrum Edukacji Obywatelskiej (http://www.ceo.org.pl/).
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>

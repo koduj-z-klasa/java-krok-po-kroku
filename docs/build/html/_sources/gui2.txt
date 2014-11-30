@@ -162,7 +162,7 @@ W metodzie *handle()* możemy zamieścić kod obsługi zdarzenia, czyli wywoła�
 
 **Porada**
 
-Pisanie kodu klasy anonimowej byłoby dosyć męczące, szczególnie biorą pod uwagę nagromadzenie nawiasów i zagnieżdżeń kodu. Na szczęście większość kodu można wygenerować półautomatycznie.
+Pisanie kodu klasy anonimowej byłoby dosyć męczące, szczególnie biorąc pod uwagę nagromadzenie nawiasów i zagnieżdżeń kodu. Na szczęście większość kodu można wygenerować półautomatycznie.
 
 Krok 1 - wpisz po prostu "clearButton.setOna..." i Ctrl+Spacja
 
@@ -255,7 +255,7 @@ Metodę *addEventFilter()* można wywołać na niemal dowolnym obiekcie JavyFX, 
 ----------
 Dodaj do programu następujące opcje:
 
-* Exit z menu File, któe powoduje zamknięcie aplikacji. Aplikację JavyFX można zakończyć wywołując metodę *Platform.exit()*
+* Exit z menu File, które powoduje zamknięcie aplikacji. Aplikację JavyFX można zakończyć wywołując metodę *Platform.exit()*
 * Big Letters / Small Letters w menu Edit - opcje powodujące podmianę tekstu na wielkie lub małe litery
 
 .. image:: 07_fx2/zad1.png

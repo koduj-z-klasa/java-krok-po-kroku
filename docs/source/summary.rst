@@ -25,7 +25,7 @@ Otwórz plik fxml w Scene builderze i odtwórz poniższą hierarchię layoutów 
 .. image:: 08_summary/sb_hierarchy.png
     :align: center
 
-Jako nadrzędy layout wykorzystujemy VBox, ponieważ pozwala on ustawiać kontrolki i layouty w pojedynczej kolumnie. My potrzebujemy jedną kolumnę z dwoma wierszami - w jednym z nich umieszczamy podstawowe menu, a w drugim layout typu GridLayout.
+Jako nadrzędny layout wykorzystujemy VBox, ponieważ pozwala on ustawiać kontrolki i layouty w pojedynczej kolumnie. My potrzebujemy jedną kolumnę z dwoma wierszami - w jednym z nich umieszczamy podstawowe menu, a w drugim layout typu GridLayout.
 
 W Menu dostępne będą trzy opcje:
 
@@ -43,7 +43,7 @@ Problem jaki teraz się pojawia polega na tym, że przyciski są prostokątne, n
 .. image:: 08_summary/size1.png
     :align: center
 
-W tym celu zaznacz wszystkie przyciski w sekcji Document Hierarchy (np. z wciśniętym Shiftem) i przejdź do sekcji Layout po prawej stronie Scene Buildera. Tam ustaw porządany rozmiar przycisku za wprowadzając opcję Pref Width oraz Pref Height (np. na 100 px).
+W tym celu zaznacz wszystkie przyciski w sekcji Document Hierarchy (np. z wciśniętym Shiftem) i przejdź do sekcji Layout po prawej stronie Scene Buildera. Tam ustaw porządany rozmiar przycisku wprowadzając opcję Pref Width oraz Pref Height (np. na 100 px).
 
 .. image:: 08_summary/size2.png
     :align: center
@@ -63,7 +63,17 @@ Dla lepszego ostatecznego wyglądu dodajmy jeszcze linie siatki w celu wyraźnie
 .. image:: 08_summary/size5.png
     :align: center
 
-Jeżeli nie zrobiłeś tego na etapie tworzenia projektu, to dodatkowo ustaw odpowiednią ścieżkę do klasy kontrolera, czyli application.TickTackToeController.
+Z przycisków możesz usunąć domyślny tekst "Button" klikając na każdy z nich dwukrotnie. Jeżeli nie zrobiłeś tego na etapie tworzenia projektu, to dodatkowo ustaw odpowiednią ścieżkę do klasy kontrolera, czyli application.TicTacToeController.
+
+Jeżeli chcesz, aby przyciski zawsze wypełniały całą dostępną przestrzeń, czyli np. powiększały się przy rozciąganiu okna musisz ustawić kilka rzeczy:
+
+* właściwości VGrow i HGrow dla kolumn lub wierszy GridPane na wartość *ALWAYS* - w tym celu kliknij na daną kolumnę lub wiersz i w sekcji Layout ustaw odpowiednią wartość,
+* właściwości VGrow i HGrow dla każdego przycisku ustawione na *ALWAYS* - zaznacz wszystkie przyciski i w sekcji Layout ustaw wartości HGrow i VGrow,
+* ustawienie maxymalnego rozmiaru przycisków na *MAX_VALUE* - możesz je ustawić zaznaczając wszystkie przyciski i ustawiając w sekcji Layout właściwości Max Width i Max Height
+
+.. image:: 08_summary/but_lay.png
+    :align: center
+
 
 Ostatecznie nasz plik fxml powinien mieć następującą postać:
 
@@ -81,7 +91,7 @@ Ostatecznie nasz plik fxml powinien mieć następującą postać:
     <?import javafx.scene.layout.GridPane?>
 
     <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="application.TickTackToeController">
+        fx:controller="application.TicTacToeController">
         <children>
             <MenuBar>
                 <menus>
@@ -99,83 +109,103 @@ Ostatecznie nasz plik fxml powinien mieć następującą postać:
                     </Menu>
                 </menus>
             </MenuBar>
-            <GridPane gridLinesVisible="true">
+            <GridPane gridLinesVisible="true" VBox.vgrow="ALWAYS">
                 <columnConstraints>
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                    <ColumnConstraints />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints hgrow="ALWAYS" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints />
-                    <RowConstraints />
-                    <RowConstraints />
+                    <RowConstraints vgrow="ALWAYS" />
+                    <RowConstraints vgrow="ALWAYS" />
+                    <RowConstraints vgrow="ALWAYS" />
                 </rowConstraints>
                 <children>
                     <Button fx:id="button00" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button01" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER"
+                        GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button02" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER"
+                        GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button10" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                        GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button11" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER"
                         GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button12" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER"
                         GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button20" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                        GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button21" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER"
                         GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                     <Button fx:id="button22" contentDisplay="CENTER"
-                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="X"
-                        GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"
+                        maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER"
                         GridPane.vgrow="ALWAYS">
                         <font>
-                            <Font size="48.0" />
+                            <Font size="36.0" />
                         </font>
                     </Button>
                 </children>
@@ -387,6 +417,10 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
             addMenuAction();
         }
 
+        /*
+         * metoda resetująca grę - tworzy nowy model i ustawia pusty tekst
+         * przycisków
+         */
         private void newGame() {
             model = new Model();
             for (int i = 0; i < buttons.length; i++) {
@@ -396,6 +430,9 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
             }
         }
 
+        /*
+         * Dodanie akcji do przycisków na planszy
+         */
         private void addButtonAction() {
             for (int i = 0; i < buttons.length; i++) {
                 for (int j = 0; j < buttons[i].length; j++) {
@@ -420,6 +457,9 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
             }
         }
 
+        /*
+         * Metoda dodająca akcje pod poszczególne elementy menu
+         */
         private void addMenuAction() {
             newGameMenu.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -446,7 +486,7 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
         }
 
         /**
-         * Aktualizujemy wygląd przycisków
+         * Aktualizujemy wygląd przycisków na podstawie modelu
          */
         private void updateView() {
             for (int i = 0; i < Model.SIZE; i++) {
@@ -460,6 +500,9 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
             }
         }
 
+        /*
+         * wyświetlenie popupu z informacją o zwycięzcy
+         */
         private void showWinnerPopup() {
             String winner = null;
             if (model.getWinner() == Model.X) {
@@ -480,6 +523,10 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
                     });
         }
 
+        /*
+         * Metoda odpowiedzialna za utworzenie popupu z tekstem przekazanym jako
+         * argument
+         */
         private Popup createPopup(String text) {
             TextArea popupText = new TextArea(text);
             popupText.setPrefWidth(200);
@@ -504,8 +551,19 @@ Klasa kontrolera pozwoli nam połączyć klasę Modelu z widokiem wcześniej zde
         }
     }
 
+Wszystkie pola klasy oznaczone adnotacją @FXML to przyciski zdefiniowane w pliku fxml. Oprócz tego utworzyliśmy zmienną reprezentującą nasz Model a także tablicę, do której przypiszemy wszystkie przyciski w celu ich wygodniejszym zarządzaniem i możliwością robienia tego w pętli. Praktycznie cały pozostały kod moglibyśmy umieścić w metodzie *initialize()*, jednak dobrą praktyką jest rozbijanie go na mniejsze i bardziej czytelne elementy. Dobrą zasadą, którą należy się kierować jest to, żeby dana metoda była odpowiedzialna tylko za jedną rzecz. Takim sposobem posiadamy zestaw metod:
+
+* *newGame()* - resetuje grę, czyli tworzy nowy model oraz czyści tekst na każdym przycisku
+* *addButtonAction()* - dodaje do przycisków na planszy obsługę zdarzeń. Dzięki temu, że buttony przypisaliśmy do dwuwymiarowej tablicy możemy to zrobić w wygodny sposób w pętli. Akcje polegają na tym, że po wciśnięciu dowolnego przycisku ustawiamy na nim tekst zgodny z aktualnym graczem (chyba, że dany przycisk był już wcześniej wciśnięty), a następnie sprawdzeniu, czy aktualny stan gry doprowadził do sytuacji, gdzie znamy już zwycięzcę.
+* *addMenuAction()* - podpięcie obsługi zdarzeń do 3 elementów menu. W przypadku opcji *New Game* po prostu wywołujemy metodę *newGame()*, dla opcji *Close* zamykamy program poprzez wywołanie metody *Platform.exit()*, a przy opcji *About* tworzymy nowy popup, z krótką informacją o programie.
+* *updateView()* jest metodą odpowiedzialną za aktualizację tego co jest wyświetlane na przyciskach na podstawie stanu gry zapisanego w obiekcie modelu.
+* *showWinnerPopup()* jest wywoływana w przypadku, gdy w grze znaleziono zwycięzcę i w takiej sytuacji wyświetlany jest popup z odpowiednią informacją
+* *createPopup()* odpowiada za tworzenie popupów z tekstem przekazanym jako argument. Wykorzystujemy do tego celu obiekt klasy Popup z odpowiednio ustawionym tekstem w obiekcie TextArea, w którym wyłączamy możliwość edycji dzięki metodzie setEditable(false). Istotnym elementem jest podpięcie zdarzenia kliknięcia na dany popup, który spowoduje jego zamknięcie oraz zresetowanie gry.
+
+
 Gotowa aplikacja
 ------------------
+Na koniec dobrze nam już znana klasa uruchomieniowa programu, w której tworzymy widok na podstawie definicji fxml, ustawiamy odpowiedni tytuł okna i wyświetlamy aplikację użytkownikowi.
 
 *plik Main.java*
 
@@ -542,12 +600,5 @@ Gotowa aplikacja
         }
     }
 
-
-
-
-
-
-
-
-
-
+.. image:: 08_summary/ttt.png
+    :align: center

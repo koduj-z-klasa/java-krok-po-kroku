@@ -2,6 +2,7 @@ Wprowadzenie do języka Java
 ============================
 
 W lekcji tej dowiesz się:
+
 * jak używać środowiska eclipse
 * co powstaje w wyniku kompilacji kodu źródłowego napisanego w języku Java
 * jak uruchamiać swoje programy
@@ -69,6 +70,8 @@ W naszym przypadku nazwą klasy jest **FirstClass**.
 
 W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:
 
+*plik FirstClass.java*
+
 .. code-block:: java
     :linenos:
 
@@ -81,19 +84,19 @@ W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy
     
     }
 
-W linii 1 widzimy definicję klasy. Klasę definiujemy za pomocą słowa kluczowego **class**, po którym następuje nazwa klasy. Eclipse automatycznie oznacza klasę jako publiczną za pomocą słowa kluczowego **public**, co najprościej można wytłumaczyć jako możliwość jej wykorzystania z dowolnego miejsca w naszym projekcie.
+W linii 1 widzimy definicję klasy. Klasę definiujemy za pomocą słowa kluczowego **class**, po którym następuje jej nazwa. Eclipse automatycznie oznacza ją jako publiczną za pomocą słowa kluczowego **public**, co najprościej można wytłumaczyć jako możliwość jej wykorzystania z dowolnego miejsca w naszym projekcie.
 
 W wierszu 3 widzimy zapis *public static void main(String[] args)*, czyli publiczną, statyczną metodę o nazwie **main**, która nie zwraca żadnego wyniku (void). Element umieszczony w nawiasie, czyli *String[] args* to argument metody main w postaci tablicy - więcej na ten temat powiemy w dalszej części lekcji.
 
 .. note::
     Zapamiętaj, że od metody main rozpoczyna się działanie każdej aplikacji napisanej w języku Java. Jeżeli nie zdefiniujesz takiej metody w swojej klasie, to nie będziesz w stanie uruchomić programu.
 
-Zauważ, że zarówno definicja klasy jak i metody rozpoczyna się i końcy nawiasami klamrowymi. Nawiasy klamrowe znacznie podnoszą czytelność kodu, szczególnie, gdy klasa składa się z kilkuset, czy nawet kilku tysięcy wierszy.
+Zauważ, że zarówno definicja klasy jak i metody rozpoczyna się i kończy nawiasami klamrowymi. Nawiasy klamrowe znacznie podnoszą czytelność kodu, szczególnie, gdy klasa składa się z kilkuset, czy nawet kilku tysięcy wierszy.
 
 W metodzie main znajduje się jeden wiersz komentarza poprzedzony znakiem podwójnego ukośnika.
 
 .. note::
-    Komentarze w języku Java można zapisywać na dwa sposoby. Jeżeli komentarz ma zajmować jedynie jeden wiersz poprzedź go znakiem podwójnego ukośnika. Jeżeli będzie dłuższy umieść komentarz w bloku /* komentarz */ Komentarze są pomijane w trakcie kompilacji programu i nie mają wpływu na działanie aplikacji.
+    Komentarze w języku Java można zapisywać na dwa sposoby. Jeżeli komentarz ma zajmować jedynie jeden wiersz, poprzedź go znakiem podwójnego ukośnika. Jeżeli będzie dłuższy umieść komentarz w bloku /* komentarz */ Komentarze są pomijane w trakcie kompilacji programu i nie mają wpływu na jego działanie.
 	
 Po komentarzu dopisaliśmy także linijkę o treści **System.out.print("Witaj Świecie");**, która wydrukuje na ekranie tekst podany w nawiasie, czyli Witaj Świecie.
 
@@ -298,8 +301,8 @@ Deklaracja i inicjalizacja tablic jest bardzo podobna do zwykłych zmiennych:
 .. code-block:: java
     :linenos:
     
-  int[] tab = new int[5];
-  String[] words = new String[10];
+    int[] tab = new int[5];
+    String[] words = new String[10];
 
 Powyżej zadeklarowano i utworzono tablicę 5 liczb całkowitych typu int, która może przechowywać 5 wartości oraz tablicę typu String, która może przechowywać 10 napisów.
 

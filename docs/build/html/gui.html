@@ -63,7 +63,7 @@
 <div class="section" id="javafx">
 <h2>JavaFX<a class="headerlink" href="#javafx" title="Permalink to this headline">¶</a></h2>
 <img alt="_images/javafx.png" class="align-center" src="_images/javafx.png" />
-<p>JavaFX jest technologią, która pozwala na tworzenie bogatych graficznie interfejsów użytkownika do aplikacji napisanych w Javie. W początkowym zamyśle miała to być technologia przeznaczona głównie do tworzenia tzw. Rich Internet Application, któe miałyby rywalizować z Adobe Flash, czy Microsoft Silverlight. Ostatecznie oprócz wspomnianej funkcji stała się także rekomendowaną biblioteką do tworzenia graficznego interfejsu użytkownika aplikacji desktopowych napisanych w języku Java. Trwają także prace nad tym, aby aplikacje napisane w JavieFX można portować na platformy Android oraz iOS (zasada write once run everywhere).</p>
+<p>JavaFX jest technologią, która pozwala na tworzenie bogatych graficznie interfejsów użytkownika do aplikacji napisanych w Javie. W początkowym zamyśle miała to być technologia przeznaczona głównie do tworzenia tzw. Rich Internet Application, które miałyby rywalizować z Adobe Flash, czy Microsoft Silverlight. Ostatecznie oprócz wspomnianej funkcji stała się także rekomendowaną biblioteką do tworzenia graficznego interfejsu użytkownika aplikacji desktopowych napisanych w języku Java. Trwają także prace nad tym, aby aplikacje napisane w JavieFX można portować na platformy Android oraz iOS (zasada write once run everywhere).</p>
 <p>Głównym narzędziem, który posłuży nam do budowania GUI (graphical user interface) będzie Scene Builder - oficjalne narzędzie rozwijane przez Oracle, które pozwala tworzyć interfejs użytkownika za pomocą przyjaznego edytora WYSIWYG.</p>
 </div>
 <div class="section" id="scene-builder-2-0-pierwszy-rzut-oka">
@@ -71,10 +71,10 @@
 <img alt="_images/scenebuilder1.png" class="align-center" src="_images/scenebuilder1.png" />
 <p>W Scene Builderze możemy wyróżnić kilka głównych obszarów roboczych, z których będziemy korzystali. Zgodnie z oznaczeniami na powyższym zrzucie ekranu są to:</p>
 <ol class="arabic simple">
-<li><strong>Library</strong> -</li>
-<li><strong>Document</strong> -</li>
-<li><strong>Podgląd</strong> -</li>
-<li><strong>Inspector</strong> -</li>
+<li><strong>Library</strong> - zestaw możliwych do wykorzystania kontrolek i layoutów</li>
+<li><strong>Document</strong> - podgląd pliku w postaci drzewa węzłów</li>
+<li><strong>Podgląd</strong> - główny obszar roboczy</li>
+<li><strong>Inspector</strong> - ustawianie właściwości poszczególnych kontrolek</li>
 </ol>
 <p><strong>Ćwiczenie</strong> <em>(10 minut)</em></p>
 <blockquote>
@@ -94,7 +94,7 @@
 <img alt="_images/fxproject.png" class="align-center" src="_images/fxproject.png" />
 <ul class="simple">
 <li>Main.java to główna klasa, od której rozpoczyna się działanie aplikacji.</li>
-<li>Sample.fxml zawiera definicję tego z jakich layoutów oraz kontrolek zkłada się widok naszej aplikacji - w skrócie jak wygląda</li>
+<li>Sample.fxml zawiera definicję tego z jakich layoutów oraz kontrolek składa się widok naszej aplikacji - w skrócie jak wygląda</li>
 <li>application.css to definicja stylów CSS dla naszej aplikacji. Z pewnością słyszałeś już o nich w przypadku stron internetowych</li>
 <li>SampleController.java to dodatkowa klasa, która występuje w architekturze MVC (Model View Controller)</li>
 </ul>
@@ -151,7 +151,7 @@
 <p>Jak widzisz etykiety w dolnej części aplikacji opakowane zostały w dodatkowy layout typu HBox.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Layouty przy tworzeniu graficznego interfejsu użytkownika służą do ustalenia pewnego porządku dodawanych do nich kontrolek. BorderPane pozwala ustawić elementy na krawędziach (góra, dół, lewo, prawo lub środek) natomiast HBox ustawia kontrolki w jednym wierszu jeden obok drugiego. Istnieje dużo więcej layoutów, któe możesz przejrzeć w sekcji containers Scene Buildera. Ikonki umieszczone przy poszczególnych z nich oraz nazwy bardzo dobrze opisują to w jaki sposób możemy je wykorzystać. Layouty mogą być także zagnieżdżane jeden w drugim tak jak w naszym przykładzie, gdzie HBox jest węzłem w layoucie typu BorderPane.</p>
+<p class="last">Layouty przy tworzeniu graficznego interfejsu użytkownika służą do ustalenia pewnego porządku dodawanych do nich kontrolek. BorderPane pozwala ustawić elementy na krawędziach (góra, dół, lewo, prawo lub środek) natomiast HBox ustawia kontrolki w jednym wierszu jeden obok drugiego. Istnieje dużo więcej layoutów, które możesz przejrzeć w sekcji containers Scene Buildera. Ikonki umieszczone przy poszczególnych z nich oraz nazwy bardzo dobrze opisują to w jaki sposób możemy je wykorzystać. Layouty mogą być także zagnieżdżane jeden w drugim tak jak w naszym przykładzie, gdzie HBox jest węzłem w layoucie typu BorderPane.</p>
 </div>
 <p>Problem jaki pojawia się w tym momencie to domyślne parametry kontrolek, które sprawiają, że aplikacja nie wygląda najlepiej:</p>
 <img alt="_images/view1.png" class="align-center" src="_images/view1.png" />
@@ -251,7 +251,7 @@
 <span class="nt">&lt;/BorderPane&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Jak widać każdy element, który dodaliśmy w Scene Builderze ma tutaj swoje odzwierciedlenie w postaci węxła XML. Widoczne są także ustawienia poszczególnych elementów, np. wysokość i szerokość TextArea postaci <em>TextArea prefHeight=&#8221;400.0&#8221; prefWidth=&#8221;500.0&#8221;</em>.</p>
+<p>Jak widać każdy element, który dodaliśmy w Scene Builderze ma tutaj swoje odzwierciedlenie w postaci węzła XML. Widoczne są także ustawienia poszczególnych elementów, np. wysokość i szerokość TextArea postaci <em>TextArea prefHeight=&#8221;400.0&#8221; prefWidth=&#8221;500.0&#8221;</em>.</p>
 <p>W tym momencie warto zobaczyć jak nasza aplikacja będzie wyglądała po uruchomieniu. Co ciekawe jeżeli chcemy podejrzeć tylko wygląd bez funkcjonalności, możemy to zrobić bezpośrednio z poziomu Scene Buildera korzystając z opcji Preview -&gt; Show Preview in Window (Ctrl + P).</p>
 <img alt="_images/preview.png" class="align-center" src="_images/preview.png" />
 <p>Jak widzisz widok aplikacji można więc definiować nawet nie znając języka Java.</p>
@@ -323,7 +323,7 @@
 <li>W linijce 9 widzimy, że nasza klasa Main rozszerza klasę Application. Oznacza to, że jest to główna klasa aplikacji napisanej w JavieFX i to od niej rozpocznie się działanie naszej aplikacji.</li>
 <li>Klasa Application posiada jedną abstrakcyjną metodę <em>start()</em>, którą musimy przesłonić (Override). Jako jej argument przekazany zostanie obiekt Stage, który zostanie utworzony przez wirtualną maszynę. <strong>Stage</strong> to okno naszej aplikacji.</li>
 <li>W wierszach 13-14 wczytujemy nasz widok za pomocą specjalnej klasy FXMLLoader i metody <em>load()</em>. Przetwarza ona plik XML i na podstawie zawartych w nim definicji tworzy obiekty, które będą odzwierciedlone w kodzie Javy.</li>
-<li>W 15 wierzu tworzymy obiekt <strong>Scene</strong>, który dodamy do naszego okna (Stage) w wierszu 18. Scene to klasa reprezentująca główny kontener z widokiem aplikacji, do któego możemy dodawać inne elementy takie jak layouty, czy konkretne kontrolki.</li>
+<li>W 15 wierszu tworzymy obiekt <strong>Scene</strong>, który dodamy do naszego okna (Stage) w wierszu 18. Scene to klasa reprezentująca główny kontener z widokiem aplikacji, do którego możemy dodawać inne elementy takie jak layouty, czy konkretne kontrolki.</li>
 <li>W 16 i 17 wierzu wczytujemy style CSS, które aplikujemy do naszej sceny. Ponieważ na tę chwilę plik <em>application.css</em> jest pusty, nie będzie to miało wpływu na wygląd naszej aplikacji.</li>
 <li>W metodzie <em>main()</em> wywołujemy metodę <em>launch()</em> ta z kolei odpowiada za cykl życia aplikacji JavaFX, czyli m.in. wywołanie metody <em>start()</em>.</li>
 </ol>
@@ -350,7 +350,7 @@
 <img alt="_images/fxid.png" class="align-center" src="_images/fxid.png" />
 <p>Nadając fx:id pamiętaj, żeby były to znaczące nazwy, ponieważ będą to jednocześnie nazwy zmiennych w kodzie Javy. fx:id ustawić klikając dwukrotnie obok danej kontrolki w sekcji Document Hierarchy lub wprowadzając ją w sekcji Code (prawe menu).</p>
 <img alt="_images/fxid2.png" class="align-center" src="_images/fxid2.png" />
-<p>Teraz w klasie ustawionej jako fx:controller należy utworzyć zmienne odpowiadające odpowiednim typom kontrolek i nadać im nazwy zgodne z ustalonymi przed chwilą fx:id. Na szczęście nie trzeba tego robić ręcznie. Przejdź w Scene Builderze to sekcji <strong>View -&gt; Show sample controller skeleton</strong> skopiuj przykładowy kod i wklej go do pliku EditorController w eclipse.</p>
+<p>Teraz w klasie ustawionej jako fx:controller należy utworzyć zmienne odpowiadające odpowiednim typom kontrolek i nadać im nazwy zgodne z ustalonymi przed chwilą fx:id. Na szczęście nie trzeba tego robić ręcznie. Przejdź w Scene Builderze do sekcji <strong>View -&gt; Show sample controller skeleton</strong> skopiuj przykładowy kod i wklej go do pliku EditorController w eclipse.</p>
 <p>W JavieFX ogólnie przyjętą praktyką jest także implementowanie interfejsu <strong>Initializable</strong> przez klasę kontrolera. Interfejs ten wymusi zaimplementowanie metody initialize(), która zostanie wywołana w momencie uruchamiania aplikacji przez FXMLLoadera.</p>
 <p><em>plik EditorController.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -486,7 +486,6 @@
 <p>W wierszach 30-32 ustawiamy teksty odpowiednich kontrolek za pomocą metod <em>setText()</em>. Analogicznie w celu odczytania tekstu, który wprowadzi użytkownik będziemy używali metody <em>getText()</em>, jednak tego nauczymy się już w kolejnej lekcji omawiając obsługę zdarzeń.</p>
 <p>Adnotacja &#64;FXML</p>
 <img alt="_images/end.png" class="align-center" src="_images/end.png" />
-<p><a class="reference external" href="http://javafxports.org/page/What_is_JavaFXPorts">http://javafxports.org/page/What_is_JavaFXPorts</a></p>
 </div>
 </div>
 
@@ -558,7 +557,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Slawomir Ludwiczak.
+        &copy; Copyright 2014, Centrum Edukacji Obywatelskiej (http://www.ceo.org.pl/).
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>

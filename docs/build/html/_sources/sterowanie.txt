@@ -23,8 +23,6 @@ Podstawową strukturą sterującą w większości języków programowania, w tym
 
 Ogólna konstrukcja bloku if wygląda następująco:
 
-*plik Main.java*
-
 .. code-block:: java
     :linenos:
 
@@ -37,6 +35,8 @@ Ogólna konstrukcja bloku if wygląda następująco:
 **Ćwiczenie** *(5 minut)*
 
     Zaimplementuj program, który służy do porównywania dwóch liczb całkowitych zgodny z przedstawionym wyżej diagramem. Wyświetl na ekranie komunikat o tym, która liczba jest większa od której. Liczby wczytaj do wcześniej zadeklarowanych zmiennych.
+
+*plik Main.java*
 
 .. code-block:: java
     :linenos:
@@ -321,6 +321,8 @@ W pętlach znajduje to takie zastosowanie, że możemy pominąć ręczne zwięks
 
     Przerób poprzedni przykład z wypełnianiem tablicy w taki sposób, aby wykorzystać operator inkrementacji. Dodatkowo wartości w tablicy wyświetl od końca wykorzystując dekrementację.
 
+*plik Loops1Increment.java*
+
 .. code-block:: java
     :linenos:
 
@@ -351,7 +353,7 @@ Pętla while nie zmieniła się znacząco, jedynie zamieniliśmy sposób zwięks
 
 Pętle for i for each
 ---------------------
-Pętle for i for each to dwa kolejne rodzaje pętli, które idealnie znajdują zastosowanie w przypadku kolekcji danych o znanych z góry rozmiarach, czyli np. pętlach. Ich specyficzna konstrukcja sprawia, że powinniśmy je stosować przede wszystkim w sytuacjach, gdy chcemy przeglądnąć całą kolekcję elementów.
+Pętle for i for each to dwa kolejne rodzaje pętli, które idealnie znajdują zastosowanie w przypadku kolekcji danych o znanych z góry rozmiarach, czyli np. tablicach. Ich specyficzna konstrukcja sprawia, że powinniśmy je stosować przede wszystkim w sytuacjach, gdy chcemy przeglądnąć całą kolekcję elementów.
 
 Schematyczna budowa pętli for:
 
