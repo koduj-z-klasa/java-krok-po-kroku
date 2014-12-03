@@ -47,7 +47,7 @@ W obszarze Project Explorer pojawi się nowo utworzony projekt:
 
 Widzimy tu folder **src**, w którym umieszczane będą pliki z kodem źródłowym, a także dołączoną wirtualną maszynę, na której nasz projekt będzie uruchamiany.
 
-Teraz należy utworzyć plik, w którym będziemy edytowali kod źródłowy. W dalszej częściu kursu będziemy mówili krótko o tworzeniu nowej **klasy**. Klasa jest pojęciem związanym z programowaniem obiektowym, które będzie głównym zagadnieniem kolejnej lekcji.
+Teraz należy utworzyć plik, w którym będziemy edytowali kod źródłowy. W dalszej częściu kursu będziemy mówili krótko o tworzeniu nowej **klasy**. Klasa jest pojęciem związanym z programowaniem obiektowym, które będzie głównym zagadnieniem kolejnej lekcji, na chwilę obecną przyjmijmy po prostu, że w klasie umieszczamy kod naszego programu.
 
 Kliknij prawym przyciskiem na folderze src i wybierz opcję **New -> Class**. Można także posłużyć się wygodnym skrótem i skorzystać z przycisku z symbolem C, który znajdziemy na górnym pasku nawigacyjnym.
 
@@ -68,7 +68,7 @@ W naszym przypadku nazwą klasy jest **FirstClass**.
     Zapamiętaj, że w Javie nazwy klas i wielkość używanych liter, mają znaczenie. "NazwaKlasy" i "nazwaKlasy" będą potraktowane jako dwa zupełnie różne elementy.
 
 
-W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:
+W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy, do którego dopisaliśmy także dodatkowy wiersz *System.out.print("Witaj Świecie!");* :
 
 *plik FirstClass.java*
 
@@ -312,7 +312,7 @@ W przypadku, gdy z góry znasz wartości, którymi chcesz uzupełnić tablicę, 
 
 Zauważ, że w takim przypadku nie jest konieczne określanie rozmiaru tablicy w nawiasach kwadratowych, ponieważ maszyna wirtualna wywnioskuje to sama na podstawie ilości podanych elementów.
 
-W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy go znali w dalszej części kodu. W takiej sytuacji możemy jednak skorzystać z wartości **length**, którą posiada każda tablica niezależnie od tego jakiego jest typu.
+W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy go znali w dalszej części kodu. W takiej sytuacji możemy jednak skorzystać z wartości **length**, którą posiada każda tablica niezależnie od tego jakiego jest typu. Poniżej przedstawiony jest kod tablicy liczy całkowitych o rozmiarze 5, jednak w przyszłości nauczymy się odbierać dane od użytkownika z klawiatury i wartość ta może być wcześniej nieznana. W takiej sytuacji w 2 wierszu możemy pobrać rozmiar tablicy poprzez właściwość *tab.length*.
 ::
   int[] tab = new int[5];
   int size = tab.length;
@@ -479,17 +479,15 @@ Napisz program, w którym utworzysz tablicę o rozmiarze NxN typu boolean (zał�
              * array[array.length-1] - indeks ostatniego wiersza
              * array[array.length - 1].length - 1 - indeks ostatniej kolumny w ostatnim wierszu
              */
-            System.out
-                    .println("Prawy dolny array[array.length-1][array[length-1].length-1] "
-                            + array[array.length - 1][array[array.length - 1].length - 1]);
+            System.out.println("Prawy dolny element: " + array[array.length - 1][array[array.length - 1].length - 1]);
         }
     }
 
 .. _grę w okręty: http://pl.wikipedia.org/wiki/Okr%C4%99ty
 
 
-Praca z eclipse - porady
--------------------------
+Dodatek 1 - praca z eclipse
+----------------------------
 Całkiem możliwe, że już na tym etapie zacząłeś zauważać, że pisanie powtarzającego się kodu (np. nazw zmiennych, czy powtarzanie co chwilę System.out.print()) potrafi doprowadzić do lekkiej frustracji i odbiera chęci do pisania kodu "bo przecież wiadomo jak to ma wyglądać".
 
 W tym miejscu pokażemy Ci kilka użytecznych skrótów, które w eclipse znacząco podnoszą efektywność pracy oraz oszczędzają Twój cenny czas.
@@ -533,5 +531,40 @@ Jeżeli w swoim kodzie chcesz zmienić nazwę zmiennej lub zauważyłeś błąd 
 
 .. image:: 01_wprowadzenie/refactor.png
     :align: center
+
+
+Dodatek 2 - wywołanie programu z argumentami
+---------------------------------------------
+Wróćmy jeszcze na chwilę do metody main i jej argumentów. Programy napisane w Javie najczęściej są pakowane docelowo do jednego archiwum w postaci pliku **.jar** (Java ARchive). Program taki możemy uruchomić z wiersza poleceń z odpowiednimi argumentami w postaci listy oddzielonej spacjami. Argumenty te utworzą tablicę typu String, a następnie zostaną przekazane jako argument metody *main()* - to właśnie **String[] args**, który powtarza się za każdym razem.
+
+Najczęściej argumenty wywołania są pomijane, jednak warto wiedzieć jak z nich korzystać. Utwórzmy zwykły pusty projekt z jedną klasą zawierającą metodę *main()*:
+
+*Struktura projektu*
+
+.. image:: 01_wprowadzenie/argtextproj.png
+    :align: center
+
+*plik ArgTest.java*
+
+.. code-block:: java
+    :linenos:
+
+    public class ArgTest {
+        public static void main(String[] args) {
+            System.out.println("Witaj " + args[0]);
+        }
+    }
+
+Widzimy tutaj prosty przykład bardzo podobny do naszego pierwszego "Hello World" jednak tym razem wyświetlamy tekst "Witaj" połączony z pierwszym elementem tablicy **args**. W jaki sposób przekazać ten argument do metody main? Kliknij prawym przyciskiem myszy na projekcie, wybierz opcję **Run As** -> **Run Configuration** a następnie w zakładce Arguments podaj np. swoje imię:
+
+.. image:: 01_wprowadzenie/argtestarg.png
+    :align: center
+
+Teraz wystarczy wybrać Apply oraz Run, a na ekranie zobaczymy, że argument został poprawnie przekazany:
+
+.. image:: 01_wprowadzenie/argtexttest.png
+    :align: center
+
+Jeżeli chcesz przekazać większą ilość argumentów, wystarczy, że wymienisz je po spacji, a następnie odwołasz się do nich po odpowiednich indeksach w kodzie Javy, tj. *args[0], args[1], args[2]* itd - tak jak w przypadku każdej innej tablicy.
 
 .. _Centrum Edukacji Obywatelskiej: http://www.ceo.org.pl/

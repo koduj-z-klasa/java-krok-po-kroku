@@ -40,6 +40,8 @@ Możliwe, że rzeczy, które wypisałeś są inne od pokazanych powyżej - to ba
 
     Napisz prosty program, w którym w zmiennych przechowasz informacje o 2 różnych produktach (np. Monitor Samsung Syncmaster za 700zł oraz Laptop HP Probook 450 za 3000zł). Wydrukuj następnie informacje o tych produktach na ekranie. Wykorzystaj różne typy danych do przechowywania nazw produktów a inne do przechowywania ceny.
 
+Przypomnijmy, że najpierw należy utworzyć nowy projekt poprzez menu File -> New -> Java Project, a następnie w folderze *src* dodać nową klasę np. korzystając z przycisku ze znakiem C na górnej belce nawigacyjnej. Nazwa klasy powinna być identyczna z nazwą pliku (eclipse zadba o to automatycznie) - w naszym przypadku będzie to plik Shop.java.
+
 *plik Shop.java*
 
 .. code-block:: java
@@ -81,7 +83,8 @@ Struktura projektu eclipse:
 .. image:: 02_obiekty/pcshop_eclipse_1.png
     :align: center
 
-Na podstawie takiej klasy możemy utworzyć **obiekt**. Obiekty zawsze będziemy tworzyli poprzez zapis **new NazwaKlasy();** przekazując w nawiasie ewentualne parametry (o tym za chwilę).
+Zauważ, że w klasie tej nie tworzymy po raz kolejny metody **main** - jest ona potrzebna tylko w jednej klasie w ramach całego projektu i to od niej rozpocznie się działanie programu. Pozostałe klasy będą miały natomiast za zadanie definicję nowego typu danych lub wydzielenie pewnych funkcjonalności (np. obliczeń, przetwarzania tekstu, pobierania danych z internetu itd.).
+Na podstawie dowolnej klasy możemy utworzyć **obiekt**. Obiekty zawsze będziemy tworzyli poprzez zapis **new NazwaKlasy();** przekazując w nawiasie ewentualne parametry (o tym za chwilę).
 
 .. note::
     Obiektem nazywamy konkretny egzemplarz danej klasy. Klasą nazwiemy "Produkt", ale obiektem " produkt laptop HP Probook 450 kosztujący 3000zł".

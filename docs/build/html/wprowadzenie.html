@@ -82,7 +82,7 @@
 <p>W obszarze Project Explorer pojawi się nowo utworzony projekt:</p>
 <img alt="_images/hello_world.png" class="align-center" src="_images/hello_world.png" />
 <p>Widzimy tu folder <strong>src</strong>, w którym umieszczane będą pliki z kodem źródłowym, a także dołączoną wirtualną maszynę, na której nasz projekt będzie uruchamiany.</p>
-<p>Teraz należy utworzyć plik, w którym będziemy edytowali kod źródłowy. W dalszej częściu kursu będziemy mówili krótko o tworzeniu nowej <strong>klasy</strong>. Klasa jest pojęciem związanym z programowaniem obiektowym, które będzie głównym zagadnieniem kolejnej lekcji.</p>
+<p>Teraz należy utworzyć plik, w którym będziemy edytowali kod źródłowy. W dalszej częściu kursu będziemy mówili krótko o tworzeniu nowej <strong>klasy</strong>. Klasa jest pojęciem związanym z programowaniem obiektowym, które będzie głównym zagadnieniem kolejnej lekcji, na chwilę obecną przyjmijmy po prostu, że w klasie umieszczamy kod naszego programu.</p>
 <p>Kliknij prawym przyciskiem na folderze src i wybierz opcję <strong>New -&gt; Class</strong>. Można także posłużyć się wygodnym skrótem i skorzystać z przycisku z symbolem C, który znajdziemy na górnym pasku nawigacyjnym.</p>
 <img alt="_images/new_class.png" class="align-center" src="_images/new_class.png" />
 <p>W kreatorze klasy wymagane jest podanie jedynie nazwy klasy. My jednak zaznaczymy także opcję przy <strong>public static void main(String[] args)</strong>.</p>
@@ -96,7 +96,7 @@
 <p class="first admonition-title">Attention</p>
 <p class="last">Zapamiętaj, że w Javie nazwy klas i wielkość używanych liter, mają znaczenie. &#8220;NazwaKlasy&#8221; i &#8220;nazwaKlasy&#8221; będą potraktowane jako dwa zupełnie różne elementy.</p>
 </div>
-<p>W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy:</p>
+<p>W utworzonej przez nas klasie został wygenerowany następujący kod źródłowy, do którego dopisaliśmy także dodatkowy wiersz <em>System.out.print(&#8220;Witaj Świecie!&#8221;);</em> :</p>
 <p><em>plik FirstClass.java</em></p>
 <div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -367,7 +367,7 @@ Podstawowym elementem, który pozwala rozwiązać ten problem w programowaniu s�
 </pre></div>
 </div>
 <p>Zauważ, że w takim przypadku nie jest konieczne określanie rozmiaru tablicy w nawiasach kwadratowych, ponieważ maszyna wirtualna wywnioskuje to sama na podstawie ilości podanych elementów.</p>
-<p>W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy go znali w dalszej części kodu. W takiej sytuacji możemy jednak skorzystać z wartości <strong>length</strong>, którą posiada każda tablica niezależnie od tego jakiego jest typu.</p>
+<p>W wielu przypadkach tablica będzie tworzona na podstawie rozmiaru, który użytkownik wprowadzi np. z klawiatury i nie będziemy go znali w dalszej części kodu. W takiej sytuacji możemy jednak skorzystać z wartości <strong>length</strong>, którą posiada każda tablica niezależnie od tego jakiego jest typu. Poniżej przedstawiony jest kod tablicy liczy całkowitych o rozmiarze 5, jednak w przyszłości nauczymy się odbierać dane od użytkownika z klawiatury i wartość ta może być wcześniej nieznana. W takiej sytuacji w 2 wierszu możemy pobrać rozmiar tablicy poprzez właściwość <em>tab.length</em>.</p>
 <div class="highlight-python"><div class="highlight"><pre>int[] tab = new int[5];
 int size = tab.length;
 System.out.print(size);
@@ -576,9 +576,7 @@ int[] w19 = new int[20];
 18
 19
 20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Matrix</span> <span class="o">{</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Matrix</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="c1">//rozmiar tablicy</span>
@@ -596,16 +594,14 @@ int[] w19 = new int[20];
 <span class="cm">         * array[array.length-1] - indeks ostatniego wiersza</span>
 <span class="cm">         * array[array.length - 1].length - 1 - indeks ostatniej kolumny w ostatnim wierszu</span>
 <span class="cm">         */</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span>
-                <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Prawy dolny array[array.length-1][array[length-1].length-1] &quot;</span>
-                        <span class="o">+</span> <span class="n">array</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">array</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Prawy dolny element: &quot;</span> <span class="o">+</span> <span class="n">array</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">array</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="praca-z-eclipse-porady">
-<h2>Praca z eclipse - porady<a class="headerlink" href="#praca-z-eclipse-porady" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dodatek-1-praca-z-eclipse">
+<h2>Dodatek 1 - praca z eclipse<a class="headerlink" href="#dodatek-1-praca-z-eclipse" title="Permalink to this headline">¶</a></h2>
 <p>Całkiem możliwe, że już na tym etapie zacząłeś zauważać, że pisanie powtarzającego się kodu (np. nazw zmiennych, czy powtarzanie co chwilę System.out.print()) potrafi doprowadzić do lekkiej frustracji i odbiera chęci do pisania kodu &#8220;bo przecież wiadomo jak to ma wyglądać&#8221;.</p>
 <p>W tym miejscu pokażemy Ci kilka użytecznych skrótów, które w eclipse znacząco podnoszą efektywność pracy oraz oszczędzają Twój cenny czas.</p>
 <div class="section" id="ctrl-spacja">
@@ -631,6 +627,30 @@ int[] w19 = new int[20];
 <img alt="_images/refactor.png" class="align-center" src="_images/refactor.png" />
 </div>
 </div>
+<div class="section" id="dodatek-2-wywolanie-programu-z-argumentami">
+<h2>Dodatek 2 - wywołanie programu z argumentami<a class="headerlink" href="#dodatek-2-wywolanie-programu-z-argumentami" title="Permalink to this headline">¶</a></h2>
+<p>Wróćmy jeszcze na chwilę do metody main i jej argumentów. Programy napisane w Javie najczęściej są pakowane docelowo do jednego archiwum w postaci pliku <strong>.jar</strong> (Java ARchive). Program taki możemy uruchomić z wiersza poleceń z odpowiednimi argumentami w postaci listy oddzielonej spacjami. Argumenty te utworzą tablicę typu String, a następnie zostaną przekazane jako argument metody <em>main()</em> - to właśnie <strong>String[] args</strong>, który powtarza się za każdym razem.</p>
+<p>Najczęściej argumenty wywołania są pomijane, jednak warto wiedzieć jak z nich korzystać. Utwórzmy zwykły pusty projekt z jedną klasą zawierającą metodę <em>main()</em>:</p>
+<p><em>Struktura projektu</em></p>
+<img alt="_images/argtextproj.png" class="align-center" src="_images/argtextproj.png" />
+<p><em>plik ArgTest.java</em></p>
+<div class="highlight-java"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArgTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Witaj &quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Widzimy tutaj prosty przykład bardzo podobny do naszego pierwszego &#8220;Hello World&#8221; jednak tym razem wyświetlamy tekst &#8220;Witaj&#8221; połączony z pierwszym elementem tablicy <strong>args</strong>. W jaki sposób przekazać ten argument do metody main? Kliknij prawym przyciskiem myszy na projekcie, wybierz opcję <strong>Run As</strong> -&gt; <strong>Run Configuration</strong> a następnie w zakładce Arguments podaj np. swoje imię:</p>
+<img alt="_images/argtestarg.png" class="align-center" src="_images/argtestarg.png" />
+<p>Teraz wystarczy wybrać Apply oraz Run, a na ekranie zobaczymy, że argument został poprawnie przekazany:</p>
+<img alt="_images/argtexttest.png" class="align-center" src="_images/argtexttest.png" />
+<p>Jeżeli chcesz przekazać większą ilość argumentów, wystarczy, że wymienisz je po spacji, a następnie odwołasz się do nich po odpowiednich indeksach w kodzie Javy, tj. <em>args[0], args[1], args[2]</em> itd - tak jak w przypadku każdej innej tablicy.</p>
+</div>
 </div>
 
 
@@ -649,12 +669,13 @@ int[] w19 = new int[20];
 <li><a class="reference internal" href="#operacje-arytmetyczne-i-logiczne">Operacje arytmetyczne i logiczne</a></li>
 <li><a class="reference internal" href="#tablice-jednowymiarowe">Tablice jednowymiarowe</a></li>
 <li><a class="reference internal" href="#tablice-wielowymiarowe">Tablice wielowymiarowe</a></li>
-<li><a class="reference internal" href="#praca-z-eclipse-porady">Praca z eclipse - porady</a><ul>
+<li><a class="reference internal" href="#dodatek-1-praca-z-eclipse">Dodatek 1 - praca z eclipse</a><ul>
 <li><a class="reference internal" href="#ctrl-spacja">CTRL + SPACJA</a></li>
 <li><a class="reference internal" href="#ctrl-1">CTRL + 1</a></li>
 <li><a class="reference internal" href="#alt-shift-r">Alt + Shift + R</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#dodatek-2-wywolanie-programu-z-argumentami">Dodatek 2 - wywołanie programu z argumentami</a></li>
 </ul>
 </li>
 </ul>
